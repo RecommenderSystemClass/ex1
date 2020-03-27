@@ -17,3 +17,5 @@ products = trainDataDF['business_id'].unique()
 K = 100000
 P = np.random.random((users.size,K))#not working!
 Q = np.random.random((K, products.size))
+
+##
