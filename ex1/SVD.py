@@ -41,7 +41,7 @@ for i in range(len(products)):
     # Q.append([random.random() for _ in range(K)])
     Q.append(np.random.rand(K))
 
-print("begin values"
+print("begin values: "
       + "bi[" + str(bi)
       + "]bu[" + str(bu)
       + "]K[" + str(K)

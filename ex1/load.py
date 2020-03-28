@@ -26,5 +26,5 @@ def load(path):
             break #TODO: DEBUG DEBUG DEBUG - FOR FAST TESTS ONLY
         chunksNum += 1
     took = time.time() - beginTime
-    print("chunksNum]" + str(chunksNum) + "]took[" + str(took) + "]data[" + str(data.count) + "]")
+    print("chunksNum[" + str(chunksNum) + "]took[" + str(took) + "]data[" + str(len(data)) + "]")
     return data
