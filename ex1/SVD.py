@@ -14,7 +14,7 @@ seed = 80
 random.seed(seed)
 
 trainData = './data/trainData.csv'
-trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
+#trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
 trainDataDF = load(trainData)
 
 users = trainDataDF['user_id'].unique()
@@ -84,12 +84,12 @@ def handleRatingLine(user_id, business_id, stars, idx):
     Eui = Rui - stars
     bu = bu + delta * (Eui - lam * bu)
     bi = bi + delta * (Eui - lam * bi)
+    print("handleRatingLine user_id[" + user_id + "]business_id[" + business_id + "]stars[" + str(stars) + "]idx[" + str(idx) + "]u[" + str(u) + "]i[" + str(i) +"]")
     Q[i] = Q[i] + delta * (Eui * P[u] - lam * Q[i])
     P[u] = P[u] + delta * (Eui * Q[i] - lam * P[u])
-    # print(user_id + " " + business_id + " " + str(stars) + " " + str(idx))
 
 
-actualRates = trainDataDF['stars']
+actualRates = trainDataDF['stars'].to_list()
 iterations = 0
 currentRMSE = 0
 lastRMSE = 0
