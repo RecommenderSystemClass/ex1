@@ -21,8 +21,12 @@ users = trainDataDF['user_id'].unique()
 products = trainDataDF['business_id'].unique()
 lUsers = list(users)
 lProducts = list(products)
-
 K = 100  # todo check values 100-500
+lam = 0.02  # regularization #todo: learn this value X validations
+delta = 0.005  # learning rate #todo: learn this value
+mu = trainDataDF['stars'].mean()
+bi = random.random()
+bu = random.random()
 
 # todo initialize P and Q with values [-1.5,1.5] and not just random
 # P = np.random.random((users.size,K))
@@ -37,14 +41,19 @@ for i in range(len(products)):
     # Q.append([random.random() for _ in range(K)])
     Q.append(np.random.rand(K))
 
-print("P[" + str(len(P)) + "]Q[" + str(len(P)) + "]")
+print("begin values"
+      + "bi[" + str(bi)
+      + "]bu[" + str(bu)
+      + "]K[" + str(K)
+      + "]lambda[" + str(lam)
+      + "]delta[" + str(delta)
+      + "]mu[" + str(mu)
+      + "]P len[" + str(len(P))
+      + "]Q len [" + str(len(Q))
+      + "]")
 
-lam = 0.02  # regularization #todo: learn this value X validations
-delta = 0.005  # learning rate #todo: learn this value
-mu = trainDataDF['stars'].mean()
-bi = random.random()
-bu = random.random()
 
+###########################################################
 
 def R(u, i):
     # print(str(u) + " " + str(i) + "  " + str(P[u]) + "  " + str(Q[i]))
@@ -62,10 +71,12 @@ def indexOfUser(user):
 def indexOfProduct(product):
     return lProducts.index(product)
 
-
+handleRatingLineCounter = 0
 def handleRatingLine(user_id, business_id, stars, idx):
     global bu
     global bi
+    global handleRatingLineCounter
+    handleRatingLineCounter +=1
     u = indexOfUser(user_id)
     i = indexOfProduct(business_id)
     Rui = R(u, i)
@@ -75,7 +86,7 @@ def handleRatingLine(user_id, business_id, stars, idx):
     bi = bi + delta * (Eui - lam * bi)
     Q[i] = Q[i] + delta * (Eui * P[u] - lam * Q[i])
     P[u] = P[u] + delta * (Eui * Q[i] - lam * P[u])
-    #print(user_id + " " + business_id + " " + str(stars) + " " + str(idx))
+    # print(user_id + " " + business_id + " " + str(stars) + " " + str(idx))
 
 
 actualRates = trainDataDF['stars']
@@ -88,6 +99,7 @@ while currentRMSE <= lastRMSE:
     iterations += 1
     currentCalculatedRates = []
     trainDataDF.apply(lambda x: handleRatingLine(x['user_id'], x['business_id'], x['stars'], x.name), axis=1)
+
     lastRMSE = currentRMSE
     currentRMSE = RMSE(currentCalculatedRates, actualRates)
     print("lastRMSE [" + str(lastRMSE)
