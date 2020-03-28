@@ -14,8 +14,10 @@ seed = 80
 random.seed(seed)
 
 trainData = './data/trainData.csv'
-#trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
+# trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
 trainDataDF = load(trainData)
+
+trainDataDF.isnull().values.any()  # todo: check validity of teh data
 
 users = trainDataDF['user_id'].unique()
 products = trainDataDF['business_id'].unique()
@@ -71,12 +73,15 @@ def indexOfUser(user):
 def indexOfProduct(product):
     return lProducts.index(product)
 
+
 handleRatingLineCounter = 0
+
+
 def handleRatingLine(user_id, business_id, stars, idx):
     global bu
     global bi
     global handleRatingLineCounter
-    handleRatingLineCounter +=1
+    handleRatingLineCounter += 1
     u = indexOfUser(user_id)
     i = indexOfProduct(business_id)
     Rui = R(u, i)
@@ -84,7 +89,7 @@ def handleRatingLine(user_id, business_id, stars, idx):
     Eui = Rui - stars
     bu = bu + delta * (Eui - lam * bu)
     bi = bi + delta * (Eui - lam * bi)
-    print("handleRatingLine user_id[" + user_id + "]business_id[" + business_id + "]stars[" + str(stars) + "]idx[" + str(idx) + "]u[" + str(u) + "]i[" + str(i) +"]")
+    print("handleRatingLine user_id[" + user_id + "]business_id[" + business_id + "]stars[" + str(stars) + "]idx[" + str(idx) + "]u[" + str(u) + "]i[" + str(i) + "]")
     Q[i] = Q[i] + delta * (Eui * P[u] - lam * Q[i])
     P[u] = P[u] + delta * (Eui * Q[i] - lam * P[u])
 
