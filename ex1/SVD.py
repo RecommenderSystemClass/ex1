@@ -29,12 +29,12 @@ K = 100  # todo check values 100-500
 # Q = np.random.random((K, products.size))
 P = []
 for i in range(len(users)):
-    #P.append([random.random() for _ in range(K)])
+    # P.append([random.random() for _ in range(K)])
     P.append(np.random.rand(K))
 
 Q = []
 for i in range(len(products)):
-    #Q.append([random.random() for _ in range(K)])
+    # Q.append([random.random() for _ in range(K)])
     Q.append(np.random.rand(K))
 
 print("P[" + str(len(P)) + "]Q[" + str(len(P)) + "]")
@@ -47,7 +47,7 @@ bu = random.random()
 
 
 def R(u, i):
-    #print(str(u) + " " + str(i) + "  " + str(P[u]) + "  " + str(Q[i]))
+    # print(str(u) + " " + str(i) + "  " + str(P[u]) + "  " + str(Q[i]))
     return mu + bi + bu + P[u].dot(Q[i])
 
 
@@ -69,14 +69,37 @@ def handleRatingLine(user_id, business_id, stars, idx):
     u = indexOfUser(user_id)
     i = indexOfProduct(business_id)
     Rui = R(u, i)
+    currentCalculatedRates.append(Rui)
     Eui = Rui - stars
     bu = bu + delta * (Eui - lam * bu)
     bi = bi + delta * (Eui - lam * bi)
     Q[i] = Q[i] + delta * (Eui * P[u] - lam * Q[i])
     P[u] = P[u] + delta * (Eui * Q[i] - lam * P[u])
-    print(user_id + " " + business_id + " " + str(stars) + " " + str(idx))
+    #print(user_id + " " + business_id + " " + str(stars) + " " + str(idx))
 
 
-trainDataDF.apply(lambda x: handleRatingLine(x['user_id'], x['business_id'], x['stars'], x.name), axis=1)
+actualRates = trainDataDF['stars']
+iterations = 0
+currentRMSE = 0
+lastRMSE = 0
+
+while currentRMSE <= lastRMSE:
+    # todo: keep last P and Q and use them -->keep the one with better error rate
+    iterations += 1
+    currentCalculatedRates = []
+    trainDataDF.apply(lambda x: handleRatingLine(x['user_id'], x['business_id'], x['stars'], x.name), axis=1)
+    lastRMSE = currentRMSE
+    currentRMSE = RMSE(currentCalculatedRates, actualRates)
+    print("lastRMSE [" + str(lastRMSE)
+          + "]currentRMSE[" + str(currentRMSE)
+          + "]iterations[" + str(iterations)
+          + "]bi[" + str(bi)
+          + "]bu[" + str(bu)
+          + "]K[" + str(K)
+          + "]lambda[" + str(lam)
+          + "]delta[" + str(delta)
+          + "]mu[" + str(mu) + "]")
+
+print(" ---- Done ---- ")
 
 exit(0)
