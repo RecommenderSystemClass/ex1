@@ -6,19 +6,22 @@ from builtins import print
 
 from RMSE import *
 from load import *
-import pandas as pd
 import numpy as np
 import random
 import sys
 import time
+
 import math
+import pandas as pd
 
 seed = 80
 random.seed(seed)
 
 trainData = './data/trainData.csv'
-#trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
+# trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
 trainDataDF = load(trainData)
+
+trainDataDF.isnull().values.any()  # todo: check validity of teh data
 
 users = trainDataDF['user_id'].unique()
 products = trainDataDF['business_id'].unique()
