@@ -2,9 +2,9 @@ import numpy as np
 import math
 
 def RMSE(x,y):
-    print("RMSE x["+str(len(x))+"]y["+str(len(y))+"]")
+    #print("RMSE x["+str(len(x))+"]y["+str(len(y))+"]")
     ret =  math.sqrt(np.square(np.subtract(x,y)).mean())
-    print("RMSE ret["+str(ret)+"]x["+str(len(x))+"]y["+str(len(y))+"]")
+    #print("RMSE ret["+str(ret)+"]x["+str(len(x))+"]y["+str(len(y))+"]")
     return ret
 
 #test RMSE
