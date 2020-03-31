@@ -47,10 +47,8 @@ for i in range(len(products)):
     # Q.append([random.random() for _ in range(K)])
     Q.append(np.random.rand(K))
 
+
 ###########################################################
-
-
-
 def E(u, i):
     return R(u, i)
 
@@ -61,6 +59,7 @@ def indexOfUser(user):
 
 def indexOfProduct(product):
     return lProducts.index(product)
+
 
 def R(u, i):
     # print(str(u) + " " + str(i) + "  " + str(P[u]) + "  " + str(Q[i]))
@@ -76,34 +75,34 @@ def handleRatingLine(user_id, business_id, stars, idx):
     u = indexOfUser(user_id)
     i = indexOfProduct(business_id)
     Rui = R(u, i)
-    # if(math.isnan(Rui)):
-    #     print("error")
-    #     return
+    if(math.isnan(Rui)):
+        print("error")
+        return
     currentCalculatedRates.append(Rui)
     Eui = stars - Rui
-    # if(math.isnan(Eui)):
-    #     print("error")
-    #     return
+    if(math.isnan(Eui)):
+        print("error")
+        return
     Bu[u] = Bu[u] + delta * (Eui - lam * Bu[u])
     Bi[i] = Bi[i] + delta * (Eui - lam * Bi[i])
     # print("handleRatingLine user_id[" + user_id + "]business_id[" + business_id + "]stars[" + str(stars) + "]idx[" + str(idx) + "]u[" + str(u) + "]i[" + str(i) +"]")
     newQi = Q[i] + delta * (Eui * P[u] - lam * Q[i])
     newPu = P[u] + delta * (Eui * Q[i] - lam * P[u])
-    # if (np.isnan(np.sum(newQi)) or np.isnan(np.sum(newPu))):
-    #     print("error")
-    #     return
+    if (np.isnan(np.sum(newQi)) or np.isnan(np.sum(newPu))):
+        print("error")
+        return
     P[u] = newPu
     Q[i] = newQi
 
 
 actualRates = trainDataDF['stars'].to_list()
 iterations = 0
-currentRMSE = sys.maxsize-1
+currentRMSE = sys.maxsize - 1
 lastRMSE = sys.maxsize
 
 beginTime = time.time()
 print("Beggining: "
-      + "avgBi[" + str(np.average(Bi))+ "]"
+      + "avgBi[" + str(np.average(Bi)) + "]"
       + "avgBu[" + str(np.average(Bu)) + "]"
       + "K[" + str(K) + "]"
       + "lambda[" + str(lam) + "]"
