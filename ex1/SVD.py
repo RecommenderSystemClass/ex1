@@ -1,7 +1,7 @@
 # Alex Danieli 317618718
 # Gil Shamay 033076324
 
-# requirments pythin3 x64, pandas, numpy
+# requirments python3 x64, pandas, numpy
 from builtins import print
 
 from RMSE import *
