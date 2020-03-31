@@ -82,7 +82,7 @@ def handleRatingLine(user_id, business_id, stars, idx):
     u = indexOfUser(user_id)
     i = indexOfProduct(business_id)
     Rui = R(u, i)
-    currentCalculatedRates.append(Rui)
+    currentCalculatedRates.append(Rui)#todo: this will not be needed when calculating RMSE will be calc on validaiton set
     Eui = stars - Rui
     newQi = Q[i] + delta * (Eui * P[u] - lam * Q[i])
     newPu = P[u] + delta * (Eui * Q[i] - lam * P[u])
