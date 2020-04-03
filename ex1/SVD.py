@@ -17,9 +17,10 @@ import pickle
 seed = 80
 random.seed(seed)
 # todo: add print to file
-# trainData = './data/trainData.csv'
 trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
 testData = "D:/BGU/RS/EXs/ex1/ex1/data/testData.csv"  # used this line for console debug
+trainData = './data/trainData.csv'
+testData = './data/testData.csv'
 trainDataDF_all = load(trainData)
 trainDataDF_all.isnull().values.any()  # check validity of the data
 
