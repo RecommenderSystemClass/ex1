@@ -19,8 +19,9 @@ random.seed(seed)
 
 # trainData = './data/trainData.csv'
 trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
+testData = "D:/BGU/RS/EXs/ex1/ex1/data/testData.csv"  # used this line for console debug
 trainDataDF_all = load(trainData)
-trainDataDF_all.isnull().values.any()  # todo: check validity of the data
+trainDataDF_all.isnull().values.any()  # check validity of the data
 
 # split train data to train and validations - take 30% of the users
 # then select 30% of the samples of those users to be the train data and all teh rest is teh test data
@@ -66,19 +67,15 @@ for product in products:
     Q[product] = (np.random.rand(K) * 0.5 - 0.25)
     Bi[product] = np.random.rand() * 0.5 - 0.25
 
-with open('.\data\P.dump', 'wb') as fp:
-    pickle.dump(P, fp)
-
-with open('.\data\P.dump', 'rb') as fp:
-    PP = pickle.load(fp)
-
 
 ###########################################################
 def E(u, i):
-    return R(u, i)
+    return calculateSingleRate(u, i)
 
 
-def R(u, i):
+def calculateSingleRate(ratingLine):
+    u = ratingLine['user_id']
+    i = ratingLine['business_id']
     return mu + Bi[i] + Bu[u] + P[u].dot(Q[i])
 
 
@@ -87,9 +84,7 @@ def handleRatingLine(user_id, business_id, stars):
     p = P[user_id]
     bu = Bu[user_id]
     bi = Bi[business_id]
-    Rui = mu + bi + bu + p.dot(q)
-    currentCalculatedRates.append(
-        Rui)  # todo: this will not be needed when calculating RMSE will be calc on validaiton set
+    Rui = mu + bi + bu + p.dot(q)  # R(u, i)
     Eui = stars - Rui
     Q[business_id] = q + delta * (Eui * p - lam * q)
     P[user_id] = p + delta * (Eui * q - lam * p)
@@ -97,7 +92,7 @@ def handleRatingLine(user_id, business_id, stars):
     Bi[business_id] = bi + delta * (Eui - lam * bi)
 
 
-actualRates = trainDataDF['stars'].to_list()
+actualRates = validationDataDF['stars'].to_list()
 iterations = 0
 currentRMSE = sys.maxsize - 1
 lastRMSE = sys.maxsize
@@ -114,19 +109,24 @@ print("Beggining: "
 
 lastP = []
 lastQ = []
+
+
+def predictRates(newDataFrame):
+    return newDataFrame.apply(calculateSingleRate, axis=1).tolist()
+
+
 while currentRMSE < lastRMSE:
     iterationBeginTime = time.time()
     iterations += 1
-    currentCalculatedRates = []
     # keep last P and Q and use them -->keep the one with better error rate
     lastP = P
     lastQ = Q
 
     trainDataDF.apply(lambda x: handleRatingLine(x['user_id'], x['business_id'], x['stars']), axis=1)
+    currentCalculatedRates = predictRates(validationDataDF)
     lastRMSE = currentRMSE
-    # todo: run Predict on the validation set and get RMSE
-    # todo: add additional methion, other then RMSE
-    # currentRMSE = RMSE(currentCalculatedRates, actualRates)
+    # todo: add additional method, other then RMSE
+    currentRMSE = RMSE(currentCalculatedRates, actualRates)
     print("lastRMSE [" + str(lastRMSE) + "]"
           + "currentRMSE[" + str(currentRMSE) + "]"
           + "iterations[" + str(iterations) + "]"
@@ -134,10 +134,39 @@ while currentRMSE < lastRMSE:
           + "SecBegin[" + str(time.time() - beginTime) + "]"
           )
 
-# todo: use lastP and lastQ to predictRating
+P = lastP
+Q = lastQ
 
-# todo: load test data
-# todo: run predict on test and calc RMSE
+
+class mySvd:
+    def __init__(mysillyobject,
+                 p,
+                 q,
+                 Bu,
+                 Bi,
+                 mu):
+        mysillyobject.p = p
+        mysillyobject.q = q
+        mysillyobject.Bi = Bi
+        mysillyobject.Bu = Bu
+        mysillyobject.mu = mu
+
+
+mySvdSave = mySvd(P, Q, Bu, Bi, mu)
+filePath = '.\data\K' + str(K) + '_lam' + str(lam) + '_delta' + str(delta) + '.dump'
+with open(filePath, 'wb') as fp:
+    pickle.dump(mySvdSave, fp)
+
+mySvdload = None
+with open(filePath, 'rb') as fp:
+    mySvdload = pickle.load(fp)
+
+testDataDF = load(testData)
+# todo: clean test data - remove all entries with new users or product (no cold start)
+calculatedTestRates = predictRates(testDataDF)
+actuaTestRaes = testDataDF['stars'].to_list()
+testRMSE = RMSE(actuaTestRaes, calculatedTestRates)
+print("RMSE on test[" + str(testRMSE) + "]")
+
 print(" ---- Done ---- ")
-
 exit(0)
