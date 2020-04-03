@@ -69,8 +69,6 @@ for product in products:
 
 
 ###########################################################
-def E(u, i):
-    return calculateSingleRate(u, i)
 
 
 def calculateSingleRate(ratingLine):
@@ -79,7 +77,10 @@ def calculateSingleRate(ratingLine):
     return mu + Bi[i] + Bu[u] + P[u].dot(Q[i])
 
 
-def handleRatingLine(user_id, business_id, stars):
+def handleRatingLine(ratingLine):
+    user_id = ratingLine['user_id']
+    business_id = ratingLine['business_id']
+    stars = ratingLine['stars']
     q = Q[business_id]
     p = P[user_id]
     bu = Bu[user_id]
@@ -121,8 +122,7 @@ while currentRMSE < lastRMSE:
     # keep last P and Q and use them -->keep the one with better error rate
     lastP = P
     lastQ = Q
-
-    trainDataDF.apply(lambda x: handleRatingLine(x['user_id'], x['business_id'], x['stars']), axis=1)
+    trainDataDF.apply(handleRatingLine, axis=1)
     currentCalculatedRates = predictRates(validationDataDF)
     lastRMSE = currentRMSE
     # todo: add additional method, other then RMSE
@@ -144,15 +144,17 @@ class mySvd:
                  q,
                  Bu,
                  Bi,
-                 mu):
+                 mu,
+                 rmse):
         mysillyobject.p = p
         mysillyobject.q = q
         mysillyobject.Bi = Bi
         mysillyobject.Bu = Bu
         mysillyobject.mu = mu
+        mysillyobject.rmse = rmse
 
 
-mySvdSave = mySvd(P, Q, Bu, Bi, mu)
+mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastRMSE)
 filePath = '.\data\K' + str(K) + '_lam' + str(lam) + '_delta' + str(delta) + '.dump'
 with open(filePath, 'wb') as fp:
     pickle.dump(mySvdSave, fp)
