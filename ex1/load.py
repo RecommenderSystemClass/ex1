@@ -22,9 +22,9 @@ def load(path):
 
         if (chunksNum % 10 == 0):
             took = time.time() - beginTime
-            print(str(chunksNum) + " " + str(took))
+            #print(str(chunksNum) + " " + str(took))
             break #TODO: DEBUG DEBUG DEBUG - FOR FAST TESTS ONLY
         chunksNum += 1
     took = time.time() - beginTime
-    print("chunksNum[" + str(chunksNum) + "]took[" + str(took) + "]data[" + str(len(data)) + "]")
+    print("LOAD: chunksNum[" + str(chunksNum) + "]took[" + str(took) + "]data[" + str(len(data)) + "]")
     return data

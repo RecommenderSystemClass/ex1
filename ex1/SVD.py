@@ -16,7 +16,7 @@ import pickle
 
 seed = 80
 random.seed(seed)
-
+# todo: add print to file
 # trainData = './data/trainData.csv'
 trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
 testData = "D:/BGU/RS/EXs/ex1/ex1/data/testData.csv"  # used this line for console debug
@@ -136,6 +136,7 @@ while currentRMSE < lastRMSE:
 
 P = lastP
 Q = lastQ
+learningTime = time.time() - beginTime
 
 
 class mySvd:
@@ -159,16 +160,48 @@ filePath = '.\data\K' + str(K) + '_lam' + str(lam) + '_delta' + str(delta) + '.d
 with open(filePath, 'wb') as fp:
     pickle.dump(mySvdSave, fp)
 
-mySvdload = None
-with open(filePath, 'rb') as fp:
-    mySvdload = pickle.load(fp)
+# mySvdload = None
+# with open(filePath, 'rb') as fp:
+#     mySvdload = pickle.load(fp)
 
-testDataDF = load(testData)
-# todo: clean test data - remove all entries with new users or product (no cold start)
+# load test data
+testDataDF_orig = load(testData)
+# clean test data - remove all entries with new users or product (no cold start)
+testDataDF = testDataDF_orig.loc[testDataDF_orig['user_id'].isin(trainUsers)]
+testDataDF = testDataDF.loc[testDataDF['business_id'].isin(trainProducts)]
+testDataFilteredOut = testDataDF_orig.drop(testDataDF.index)
+missingProducts = testDataFilteredOut['business_id'].unique()
+missingUsers = testDataFilteredOut['user_id'].unique()
+
+
+
+predictBeginTime = time.time()
 calculatedTestRates = predictRates(testDataDF)
+PredictTime = time.time() - predictBeginTime
 actuaTestRaes = testDataDF['stars'].to_list()
 testRMSE = RMSE(actuaTestRaes, calculatedTestRates)
-print("RMSE on test[" + str(testRMSE) + "]")
+
+print("********************************************************")
+print("SVD "
+      + "RMSE on Test[" + str(testRMSE) + "]"
+      + "RMSE on Train[" + str(lastRMSE) + "]"
+      + "learningTime[" + str(learningTime) + "]"
+      + "PredictTime[" + str(PredictTime) + "]"
+      + "K[" + str(K) + "]"
+      + "lambda[" + str(lam) + "]"
+      + "delta[" + str(delta) + "]"
+      + "mu[" + str(mu) + "]"
+      + "users[" + str(len(P)) + "]"
+      + "trainAndValidaiton Size[" + str(len(trainDataDF_all)) + "]"
+      + "train Size[" + str(len(trainDataDF)) + "]"
+      + "validation Size[" + str(len(validationDataDF)) + "]"
+      + "test Orig Size[" + str(len(testDataDF_orig)) + "]"
+      + "Test Size[" + str(len(testDataDF)) + "]"
+      + "missingUsers[" + str(len(missingUsers)) + "]"
+      + "missingProducts[" + str(len(missingProducts)) + "]"
+      )
+print("********************************************************")
+
 
 print(" ---- Done ---- ")
 exit(0)
