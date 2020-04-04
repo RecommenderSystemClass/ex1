@@ -15,6 +15,7 @@ import pandas as pd
 import pickle
 
 seed = 80
+SVDpp = True  # SVD++
 random.seed(seed)
 # todo: add print to file
 trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
@@ -41,8 +42,6 @@ trainDataDF = trainDataDF.sample(frac=1).reset_index(drop=True)  # shuffle train
 trainProducts = trainDataDF['business_id'].unique()
 trainUsers = trainDataDF['user_id'].unique()
 
-
-
 # load test data
 testDataDF_orig = load(testData)
 # clean test data - remove all entries with new users or product (no cold start)
@@ -65,36 +64,42 @@ for product in trainProducts:
     indexProducts += 1
 BInitialValuePlusMinusIntervals = [0.1]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
 PQInitialValuePlusMinusIntervals = [0.1]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
-YInitialValuePlusMinusInterval = 0.1
-Ks = [100]  # [100, 200, 300, 400, 500]
-lams = [0.07]      # [0.01, 0.02, 0.05, 0.07]    # regularization
-deltas = [0.05]    # [0.01, 0.02, 0.05, 0.07]   # learning rate
+YInitialValuePlusMinusInterval = 0.01
+Ks = [300]  # [100, 200, 300, 400, 500]
+lams = [0.05]  # [0.01, 0.02, 0.05, 0.07]    # regularization
+deltas = [0.05]  # [0.01, 0.02, 0.05, 0.07]   # learning rate
 mu = trainDataDF['stars'].mean()
 
 for K in Ks:
     for PQInitialValuePlusMinusInterval in PQInitialValuePlusMinusIntervals:
         for BInitialValuePlusMinusInterval in BInitialValuePlusMinusIntervals:
             for lam in lams:
+                lam2 = lam  # used for SVD++; can get a different value then lam
                 for delta in deltas:
                     Bu = {}
                     Bi = {}
-                    Yi = {}
+                    Yu = {}
+                    RuMi1_2 = {}
                     P = {}
                     for user in users:
-                        P[user] = (np.random.rand(K) * (PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
-                        Bu[user] = np.random.rand() * (BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
-                        ###SVD++
-                        AllRatedDoneByTheUserInTrain = trainDataDF.loc[trainDataDF['user_id'] == user]
-                        productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
-                        Yi[user] = np.random.rand(len(productsRatedByTheUser)) * (YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
+                        P[user] = (np.random.rand(K) * (
+                                PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
+                        Bu[user] = np.random.rand() * (
+                                BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
+                        if (SVDpp):
+                            AllRatedDoneByTheUserInTrain = trainDataDF.loc[trainDataDF['user_id'] == user]
+                            productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
+                            Yu[user] = np.random.rand(len(productsRatedByTheUser), K) * (
+                                    YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
+                            RuMi1_2[user] = pow(len(Yu[user]), 0.5)
 
                     Q = {}
                     for product in products:
                         Q[product] = (
                                 np.random.rand(K) * (
-                                    PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
+                                PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
                         Bi[product] = np.random.rand() * (
-                                    BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
+                                BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
 
 
                     ###########################################################
@@ -102,7 +107,13 @@ for K in Ks:
                     def calculateSingleRate(ratingLine):
                         u = ratingLine['user_id']
                         i = ratingLine['business_id']
-                        return mu + Bi[i] + Bu[u] + P[u].dot(Q[i])
+                        if (not SVDpp):
+                            return mu + Bi[i] + Bu[u] + P[u].dot(Q[i])
+                        else:
+                            RuMi1_2u = RuMi1_2[u]
+                            y = Yu[u]
+                            sigmaYu = np.sum(y, axis=0)
+                            return mu + Bi[i] + Bu[u] + Q[i].dot(P[u] + RuMi1_2u * sigmaYu)
 
 
                     def handleRatingLine(ratingLine):
@@ -113,12 +124,29 @@ for K in Ks:
                         p = P[user_id]
                         bu = Bu[user_id]
                         bi = Bi[business_id]
-                        Rui = mu + bi + bu + p.dot(q)  # R(u, i)
+                        Rui = None
+                        y = None
+                        RuMi1_2u = None
+                        sigmaYu = None
+                        if (not SVDpp):
+                            Rui = mu + bi + bu + p.dot(q)  # R(u, i)
+                        else:
+                            y = Yu[user]
+                            RuMi1_2u = RuMi1_2[user]
+                            sigmaYu = np.sum(y, axis=0)
+                            Rui = mu + bi + bu + q.dot(p + RuMi1_2u * sigmaYu)
+
                         Eui = stars - Rui
-                        Q[business_id] = q + delta * (Eui * p - lam * q)
-                        P[user_id] = p + delta * (Eui * q - lam * p)
                         Bu[user_id] = bu + delta * (Eui - lam * bu)
                         Bi[business_id] = bi + delta * (Eui - lam * bi)
+                        if (not SVDpp):
+                            Q[business_id] = q + delta * (Eui * p - lam * q)
+                            P[user_id] = p + delta * (Eui * q - lam * p)
+                        else:
+                            Q[business_id] = q + delta * (Eui * (p + RuMi1_2u * sigmaYu) - lam2 * q)
+                            P[user_id] = p + delta * (Eui * q - lam2 * p)
+                            ERuMi1_2u = Eui * RuMi1_2u
+                            Yu[user] = [Yj + delta * (ERuMi1_2u * q - lam2 * Yj) for Yj in y]
 
 
                     actualRates = validationDataDF['stars'].to_list()
@@ -136,6 +164,7 @@ for K in Ks:
                           + "mu[" + str(mu) + "]"
                           + "P len[" + str(len(P)) + "]"
                           + "Q len [" + str(len(Q)) + "]"
+                          + "SVDpp[" + str(SVDpp) + "]"
                           )
 
                     lastP = []
@@ -146,6 +175,7 @@ for K in Ks:
                         return newDataFrame.apply(calculateSingleRate, axis=1).tolist()
 
 
+                    deltaOrig = delta
                     while currentRMSE < lastRMSE:
                         iterationBeginTime = time.time()
                         iterations += 1
@@ -153,6 +183,8 @@ for K in Ks:
                         lastP = P
                         lastQ = Q
                         trainDataDF.apply(handleRatingLine, axis=1)
+                        if (SVDpp):
+                            delta = delta * 0.9
                         currentCalculatedRates = predictRates(validationDataDF)
                         lastRMSE = currentRMSE
                         # todo: add additional method, other then RMSE
@@ -162,8 +194,10 @@ for K in Ks:
                               + "iterations[" + str(iterations) + "]"
                               + "SecIter[" + str(time.time() - iterationBeginTime) + "]"
                               + "SecBegin[" + str(time.time() - beginTime) + "]"
+                              + "SVDpp[" + str(SVDpp) + "]"
                               )
 
+                    delta = deltaOrig
                     P = lastP
                     Q = lastQ
                     learningTime = time.time() - beginTime
@@ -176,13 +210,16 @@ for K in Ks:
                                      Bu,
                                      Bi,
                                      mu,
-                                     rmse):
+                                     rmse,
+                                     Yu):
                             mysillyobject.p = p
                             mysillyobject.q = q
                             mysillyobject.Bi = Bi
                             mysillyobject.Bu = Bu
                             mysillyobject.mu = mu
                             mysillyobject.rmse = rmse
+                            if(SVDpp):
+                                mysillyobject.Yu = Yu
 
 
                     predictBeginTime = time.time()
@@ -192,12 +229,14 @@ for K in Ks:
                     testRMSE = RMSE(actuaTestRaes, calculatedTestRates)
 
                     mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastRMSE)
-                    filePath = '.\data\K' + str(K) \
-                               + '_lam' + str(lam) \
-                               + '_delta' + str(delta) \
-                               + '_PQ' + str(PQInitialValuePlusMinusInterval) \
-                               + '_B' + str(BInitialValuePlusMinusInterval) \
-                               + '_RMSE' + str(testRMSE) \
+                    filePath = '.\data\K_' + str(K) \
+                               + '_lam_' + str(lam) \
+                               + '_delta_' + str(delta) \
+                               + '_PQ_' + str(PQInitialValuePlusMinusInterval) \
+                               + '_B_' + str(BInitialValuePlusMinusInterval) \
+                               + '_SVDpp_' + str(SVDpp) \
+                               + '_Y_' + str(YInitialValuePlusMinusInterval) + \
+                               + '_RMSE_' + str(testRMSE) \
                                + '.dump'
 
                     with open(filePath, 'wb') as fp:
@@ -228,6 +267,8 @@ for K in Ks:
                           + "missingUsers[" + str(len(missingUsers)) + "]"
                           + "missingProducts[" + str(len(missingProducts)) + "]"
                           + "learn iterations[" + str(iterations) + "]"
+                          + "SVDpp[" + str(SVDpp) + "]"
+                          + "YInitialValuePlusMinusInterval[" + str(YInitialValuePlusMinusInterval) + "]"
                           )
                     print("********************************************************")
 
