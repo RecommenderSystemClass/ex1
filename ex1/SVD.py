@@ -41,6 +41,8 @@ trainDataDF = trainDataDF.sample(frac=1).reset_index(drop=True)  # shuffle train
 trainProducts = trainDataDF['business_id'].unique()
 trainUsers = trainDataDF['user_id'].unique()
 
+
+
 # load test data
 testDataDF_orig = load(testData)
 # clean test data - remove all entries with new users or product (no cold start)
@@ -63,6 +65,7 @@ for product in trainProducts:
     indexProducts += 1
 BInitialValuePlusMinusIntervals = [0.1]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
 PQInitialValuePlusMinusIntervals = [0.1]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
+YInitialValuePlusMinusInterval = 0.1
 Ks = [100]  # [100, 200, 300, 400, 500]
 lams = [0.07]      # [0.01, 0.02, 0.05, 0.07]    # regularization
 deltas = [0.05]    # [0.01, 0.02, 0.05, 0.07]   # learning rate
@@ -75,12 +78,15 @@ for K in Ks:
                 for delta in deltas:
                     Bu = {}
                     Bi = {}
+                    Yi = {}
                     P = {}
                     for user in users:
-                        P[user] = (np.random.rand(K) * (
-                                    PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
-                        Bu[user] = np.random.rand() * (
-                                    BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
+                        P[user] = (np.random.rand(K) * (PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
+                        Bu[user] = np.random.rand() * (BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
+                        ###SVD++
+                        AllRatedDoneByTheUserInTrain = trainDataDF.loc[trainDataDF['user_id'] == user]
+                        productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
+                        Yi[user] = np.random.rand(len(productsRatedByTheUser)) * (YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
 
                     Q = {}
                     for product in products:
