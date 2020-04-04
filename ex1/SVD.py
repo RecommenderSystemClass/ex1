@@ -2,6 +2,8 @@
 # Gil Shamay 033076324
 
 # requirments python3 x64, pandas, numpy
+
+
 from builtins import print
 
 from RMSE import *
@@ -15,9 +17,19 @@ import pandas as pd
 import pickle
 
 seed = 80
-SVDpp = True  # SVD++
 random.seed(seed)
-# todo: add print to file
+
+#################################
+# Parameters
+SVDpp = True  # SVD++
+Ks = [300]  # [100, 200, 300, 400, 500]
+deltas = [0.05]  # [0.01, 0.02, 0.05, 0.07]   # learning rate
+lams = [0.05]  # [0.01, 0.02, 0.05, 0.07]    # regularization
+BInitialValuePlusMinusIntervals = [0.001]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
+PQInitialValuePlusMinusIntervals = [0.001]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
+YInitialValuePlusMinusInterval = 0.001
+#################################
+
 trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
 testData = "D:/BGU/RS/EXs/ex1/ex1/data/testData.csv"  # used this line for console debug
 trainData = './data/trainData.csv'
@@ -62,12 +74,7 @@ trainProductsDic = {}
 for product in trainProducts:
     trainProductsDic[product] = indexProducts
     indexProducts += 1
-BInitialValuePlusMinusIntervals = [0.1]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
-PQInitialValuePlusMinusIntervals = [0.1]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
-YInitialValuePlusMinusInterval = 0.01
-Ks = [300]  # [100, 200, 300, 400, 500]
-lams = [0.05]  # [0.01, 0.02, 0.05, 0.07]    # regularization
-deltas = [0.05]  # [0.01, 0.02, 0.05, 0.07]   # learning rate
+
 mu = trainDataDF['stars'].mean()
 
 for K in Ks:
@@ -218,8 +225,7 @@ for K in Ks:
                             mysillyobject.Bu = Bu
                             mysillyobject.mu = mu
                             mysillyobject.rmse = rmse
-                            if(SVDpp):
-                                mysillyobject.Yu = Yu
+                            mysillyobject.Yu = Yu
 
 
                     predictBeginTime = time.time()
@@ -228,14 +234,14 @@ for K in Ks:
                     actuaTestRaes = testDataDF['stars'].to_list()
                     testRMSE = RMSE(actuaTestRaes, calculatedTestRates)
 
-                    mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastRMSE)
+                    mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastRMSE, Yu)
                     filePath = '.\data\K_' + str(K) \
                                + '_lam_' + str(lam) \
                                + '_delta_' + str(delta) \
                                + '_PQ_' + str(PQInitialValuePlusMinusInterval) \
                                + '_B_' + str(BInitialValuePlusMinusInterval) \
                                + '_SVDpp_' + str(SVDpp) \
-                               + '_Y_' + str(YInitialValuePlusMinusInterval) + \
+                               + '_Y_' + str(YInitialValuePlusMinusInterval) \
                                + '_RMSE_' + str(testRMSE) \
                                + '.dump'
 
