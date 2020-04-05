@@ -34,7 +34,13 @@ testData = "D:/BGU/RS/EXs/ex1/ex1/data/testData.csv"  # used this line for conso
 trainData = './data/trainData.csv'
 testData = './data/testData.csv'
 trainDataDF_all = load(trainData)
+
+len1 = len(trainDataDF_all)
+
 trainDataDF_all.isnull().values.any()  # check validity of the data
+trainDataDF_all = trainDataDF_all.dropna()
+
+len2 = len(trainDataDF_all)
 
 # split train data to train and validations - take 30% of the users
 # then select 30% of the samples of those users to be the train data and all teh rest is teh test data
@@ -105,9 +111,6 @@ for K in Ks:
                             # productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
                             # numOfUserRates = len(productsRatedByTheUser)
                             numOfUserRates = usersNumberOfRatesDic[user]
-                            if (np.isnan(numOfUserRates)):
-                                numOfUserRates = 1  # not clear whythis happen
-                                print("user[" + user + "]has nan value")
                             Yu[user] = np.random.rand(numOfUserRates, K) * (
                                     YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
                             RuMi1_2[user] = pow(numOfUserRates, -0.5)
