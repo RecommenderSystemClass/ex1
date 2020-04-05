@@ -106,6 +106,9 @@ for K in Ks:
                             # productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
                             # numOfUserRates = len(productsRatedByTheUser)
                             numOfUserRates = usersNumberOfRatesDic[user]
+                            if(np.isnan(numOfUserRates)):
+                                numOfUserRates = 1 #not clear whythis happen
+                                print("user["+user+"]has nan value")
                             Yu[user] = np.random.rand(numOfUserRates, K) * (
                                         YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
                             RuMi1_2[user] = pow(numOfUserRates, -0.5)
