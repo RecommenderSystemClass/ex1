@@ -56,7 +56,11 @@ trainUsers = trainDataDF['user_id'].unique()
 
 # load test data
 testDataDF_orig = load(testData)
-# clean test data - remove all entries with new users or product (no cold start)
+# clean test and validaiton data - remove all entries with new users or product (no cold start)
+
+validationDataDF = validationDataDF.loc[validationDataDF['user_id'].isin(trainUsers)]
+validationDataDF = validationDataDF.loc[validationDataDF['business_id'].isin(trainProducts)]
+
 testDataDF = testDataDF_orig.loc[testDataDF_orig['user_id'].isin(trainUsers)]
 testDataDF = testDataDF.loc[testDataDF['business_id'].isin(trainProducts)]
 testDataFilteredOut = testDataDF_orig.drop(testDataDF.index)
@@ -83,12 +87,14 @@ for K in Ks:
             for lam in lams:
                 lam2 = lam  # used for SVD++; can get a different value then lam
                 for delta in deltas:
+                    t1 = time.time()
                     Bu = {}
                     Bi = {}
                     Yu = {}
                     RuMi1_2 = {}
                     P = {}
-                    for user in users:
+                    # for user in trainUsers:
+                    def applyOnUser(user):
                         P[user] = (np.random.rand(K) * (
                                 PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
                         Bu[user] = np.random.rand() * (
@@ -98,18 +104,22 @@ for K in Ks:
                             productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
                             numOfUserRates = len(productsRatedByTheUser)
                             Yu[user] = np.random.rand(numOfUserRates, K) * (
-                                    YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
+                                        YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
                             RuMi1_2[user] = pow(numOfUserRates, -0.5)
 
+                    applyFunOnAllUsers = np.vectorize(applyOnUser)
+                    applyFunOnAllUsers(trainUsers)
+                    print("users init took[" + str(time.time() - t1) + "]")
+
                     Q = {}
+                    t1 = time.time()
                     for product in products:
                         Q[product] = (
                                 np.random.rand(K) * (
                                 PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
                         Bi[product] = np.random.rand() * (
                                 BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
-
-
+                    print("items init took[" + str(time.time() - t1) + "]")
                     ###########################################################
 
                     def calculateSingleRate(ratingLine):
