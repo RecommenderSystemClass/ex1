@@ -22,12 +22,12 @@ random.seed(seed)
 #################################
 # Parameters
 SVDpp = True  # SVD++
-Ks = [300]  # [100, 200, 300, 400, 500]
+Ks = [100]  # [100, 200, 300, 400, 500]
 deltas = [0.05]  # [0.01, 0.02, 0.05, 0.07]   # learning rate
 lams = [0.05]  # [0.01, 0.02, 0.05, 0.07]    # regularization
-BInitialValuePlusMinusIntervals = [0.001]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
-PQInitialValuePlusMinusIntervals = [0.001]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
-YInitialValuePlusMinusInterval = 0.001
+BInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
+PQInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
+YInitialValuePlusMinusInterval = 0.01
 #################################
 
 trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
@@ -96,9 +96,10 @@ for K in Ks:
                         if (SVDpp):
                             AllRatedDoneByTheUserInTrain = trainDataDF.loc[trainDataDF['user_id'] == user]
                             productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
-                            Yu[user] = np.random.rand(len(productsRatedByTheUser), K) * (
+                            numOfUserRates = len(productsRatedByTheUser)
+                            Yu[user] = np.random.rand(numOfUserRates, K) * (
                                     YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
-                            RuMi1_2[user] = pow(len(Yu[user]), 0.5)
+                            RuMi1_2[user] = pow(numOfUserRates, -0.5)
 
                     Q = {}
                     for product in products:
