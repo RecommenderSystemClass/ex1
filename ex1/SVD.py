@@ -4,10 +4,7 @@
 # requirments python3 x64, pandas, numpy
 
 
-from builtins import
-
-print
-
+from builtins import print
 from RMSE import *
 from load import *
 import numpy as np
