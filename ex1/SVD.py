@@ -93,22 +93,26 @@ for K in Ks:
                     Yu = {}
                     RuMi1_2 = {}
                     P = {}
-                    # for user in trainUsers:
-                    def applyOnUser(user):
+                    usersNumberOfRates = trainDataDF['user_id'].value_counts()
+                    usersNumberOfRatesDic = usersNumberOfRates.to_dict()
+
+                    for user in trainUsers:
                         P[user] = (np.random.rand(K) * (
                                 PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
                         Bu[user] = np.random.rand() * (
                                 BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
                         if (SVDpp):
-                            AllRatedDoneByTheUserInTrain = trainDataDF.loc[trainDataDF['user_id'] == user]
-                            productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
-                            numOfUserRates = len(productsRatedByTheUser)
+                            # AllRatedDoneByTheUserInTrain = trainDataDF.loc[trainDataDF['user_id'] == user]
+                            # productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
+                            # numOfUserRates = len(productsRatedByTheUser)
+                            numOfUserRates = usersNumberOfRatesDic[user]
                             Yu[user] = np.random.rand(numOfUserRates, K) * (
                                         YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
                             RuMi1_2[user] = pow(numOfUserRates, -0.5)
 
-                    applyFunOnAllUsers = np.vectorize(applyOnUser)
-                    applyFunOnAllUsers(trainUsers)
+                    #def applyOnUser(user):
+                    # applyFunOnAllUsers = np.vectorize(applyOnUser)
+                    # applyFunOnAllUsers(trainUsers)
                     print("users init took[" + str(time.time() - t1) + "]")
 
                     Q = {}
