@@ -1,3 +1,6 @@
+# Alex Danieli 317618718
+# Gil Shamay 033076324
+
 import csv
 import time
 import pandas as pd
@@ -20,10 +23,10 @@ def load(path):
         else:
             data = data.append(dataChunk, ignore_index=True)
 
-        if (chunksNum % 10 == 0):
+        if (chunksNum % 10 == 3):
             took = time.time() - beginTime
             #print(str(chunksNum) + " " + str(took))
-            #break #TODO: DEBUG DEBUG DEBUG - FOR FAST TESTS ONLY
+            break #TODO: DEBUG DEBUG DEBUG - FOR FAST TESTS ONLY
         chunksNum += 1
     took = time.time() - beginTime
     print("LOAD: chunksNum[" + str(chunksNum) + "]took[" + str(took) + "]data[" + str(len(data)) + "]")
