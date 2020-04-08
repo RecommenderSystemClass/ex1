@@ -1,6 +1,6 @@
 # Alex Danieli 317618718
 # Gil Shamay 033076324
-#Root Mean Squared Error (RMSE) is perhaps the most popular metric used
+# Root Mean Squared Error (RMSE) is perhaps the most popular metric used
 # in evaluating accuracy of predicted ratings. The system generates predicted ratings
 # rui for a test set T of user-item pairs (u,i) for which the true ratings rui are known.
 # Typically, rui are known because they are hidden in an offline experiment, or because

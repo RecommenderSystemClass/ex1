@@ -1,7 +1,7 @@
 # Alex Danieli 317618718
 # Gil Shamay 033076324
 
-#Mean Absolute Error (MAE) is a popular alternative, given by
+# Mean Absolute Error (MAE) is a popular alternative, given by
 # MEA = (1/num of user-item pairs ) * sum of all absolute Errors
 # Compared to MAE, RMSE disproportionately penalizes large errors, so that,
 # given a test set with four hidden items
