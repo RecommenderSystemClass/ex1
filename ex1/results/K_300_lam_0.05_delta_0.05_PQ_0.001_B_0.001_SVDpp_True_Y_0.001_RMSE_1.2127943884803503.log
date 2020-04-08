@@ -1,0 +1,14 @@
+LOAD: chunksNum[211]took[38.103726863861084]data[4209336]
+LOAD: chunksNum[53]took[7.573306083679199]data[1052334]
+users init took[35.508408069610596]
+items init took[9.882632732391357]
+Beggining: K[300]lambda[0.05]delta[0.05]PQInitialInterval[+-0.001]BInitialInterval[+-0.001]mu[3.728189265066223]P len[1112848]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2299146808786257]iterations[1]SecIter[499.2910325527191]SecBegin[499.29203248023987]SVDpp[True]
+lastRMSE [1.2299146808786257]currentRMSE[1.2160077204449142]iterations[2]SecIter[856.0610749721527]SecBegin[1355.3531074523926]SVDpp[True]
+lastRMSE [1.2160077204449142]currentRMSE[1.2119887372461717]iterations[3]SecIter[344.4287073612213]SecBegin[1699.7838139533997]SVDpp[True]
+lastRMSE [1.2119887372461717]currentRMSE[1.2110417587198021]iterations[4]SecIter[291.79146671295166]SecBegin[1991.5752806663513]SVDpp[True]
+lastRMSE [1.2110417587198021]currentRMSE[1.211304028998513]iterations[5]SecIter[289.7772533893585]SecBegin[2281.35253405571]SVDpp[True]
+********************************************************
+SVD RMSE on Test[1.2127943884803503]RMSE on Train[1.2110417587198021]learningTime[2281.35253405571]PredictTime[199.1116681098938]K[300]lambda[0.05]delta[0.05]mu[3.728189265066223]PQInitialInterval[+-0.001]BInitialInterval[+-0.001]users[1112848]trainAndValidaiton Size[4209334]train Size[3830522]validation Size[306973]test Orig Size[1052334]Test Size[879253]missingUsers[159939]missingProducts[63911]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.001]
+********************************************************
+ ---- Done ---- 

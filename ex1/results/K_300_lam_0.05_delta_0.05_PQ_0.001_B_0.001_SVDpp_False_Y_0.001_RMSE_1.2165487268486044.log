@@ -1,0 +1,13 @@
+LOAD: chunksNum[211]took[70.86032509803772]data[4209336]
+LOAD: chunksNum[53]took[9.949869155883789]data[1052334]
+users init took[11.186948299407959]
+items init took[1.734264612197876]
+Beggining: K[300]lambda[0.05]delta[0.05]PQInitialInterval[+-0.001]BInitialInterval[+-0.001]mu[3.727601155314331]P len[1112376]Q len [174282]SVDpp[False]
+lastRMSE [9223372036854775806]currentRMSE[1.2276525737942492]iterations[1]SecIter[202.94968152046204]SecBegin[202.94968152046204]SVDpp[False]
+lastRMSE [1.2276525737942492]currentRMSE[1.215040839727594]iterations[2]SecIter[197.52798652648926]SecBegin[400.4776680469513]SVDpp[False]
+lastRMSE [1.215040839727594]currentRMSE[1.2130346109494354]iterations[3]SecIter[222.0610008239746]SecBegin[622.5386688709259]SVDpp[False]
+lastRMSE [1.2130346109494354]currentRMSE[1.2145634372803331]iterations[4]SecIter[199.3827052116394]SecBegin[821.9243745803833]SVDpp[False]
+********************************************************
+SVD RMSE on Test[1.2165487268486044]RMSE on Train[1.2130346109494354]learningTime[821.9243745803833]PredictTime[21.424768924713135]K[300]lambda[0.05]delta[0.05]mu[3.727601155314331]PQInitialInterval[+-0.001]BInitialInterval[+-0.001]users[1112376]trainAndValidaiton Size[4209334]train Size[3827876]validation Size[309010]test Orig Size[1052334]Test Size[879304]missingUsers[159923]missingProducts[63878]learn iterations[4]SVDpp[False]YInitialValuePlusMinusInterval[0.001]
+********************************************************
+ ---- Done ---- 
