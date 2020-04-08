@@ -15169,3 +15169,4 @@ venv/share/jupyter/nbextensions/jupyter-js-widgets/extension.js.map
 venv/share/man/man1/ipython.1.gz
 *.dump
 *.pyc
+*.log
