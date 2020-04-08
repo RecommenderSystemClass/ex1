@@ -275,16 +275,6 @@ for K in Ks:
                                + '_RMSE_' + str(testRMSE)\
                                + '_host_' + socket.gethostname()
 
-                    printToFile(filePath + ".log")
-
-                    # mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastRMSE, Yu)
-                    # with open(filePath + ".dump", 'wb') as fp:
-                    #     pickle.dump(mySvdSave, fp)
-
-                    # mySvdload = None
-                    # with open(filePath, 'rb') as fp:
-                    #     mySvdload = pickle.load(fp)
-
                     printDebug("********************************************************")
                     printDebug("SVD "
                                + "RMSE on Test[" + str(testRMSE) + "]"
@@ -310,6 +300,14 @@ for K in Ks:
                                + "YInitialValuePlusMinusInterval[" + str(YInitialValuePlusMinusInterval) + "]"
                                )
                     printDebug("********************************************************")
+                    printToFile(filePath + ".log")
+                    # mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastRMSE, Yu)
+                    # with open(filePath + ".dump", 'wb') as fp:
+                    #     pickle.dump(mySvdSave, fp)
+
+                    # mySvdload = None
+                    # with open(filePath, 'rb') as fp:
+                    #     mySvdload = pickle.load(fp)
 
 
 class SVD:
