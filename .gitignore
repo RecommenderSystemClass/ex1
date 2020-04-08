@@ -1,0 +1,8 @@
+
+*.pyc
+.idea/ex1.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+ex1/data/testData.csv
+ex1/data/trainData.csv
