@@ -1,0 +1,12 @@
+C:\Users\gshamay\Documents\BGU\RS\ex1\ex1>C:\Users\gshamay\AppData\Local\Programs\Python\Python37\python.exe SVD.py
+LOAD: chunksNum[211]took[39.05219531059265]data[4209336]
+LOAD: chunksNum[53]took[7.406611919403076]data[1052334]
+Beggining: K[100]lambda[0.05]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.7272620997550523]P len[1176856]Q len [174283]SVDpp[False]
+lastRMSE [9223372036854775806]currentRMSE[1.2846924053791469]iterations[1]SecIter[175.7720251083374]SecBegin[175.7720251083374]SVDpp[False]
+lastRMSE [1.2846924053791469]currentRMSE[1.2705804840661692]iterations[2]SecIter[174.19907808303833]SecBegin[349.9721038341522]SVDpp[False]
+lastRMSE [1.2705804840661692]currentRMSE[1.2671242115010684]iterations[3]SecIter[170.2323079109192]SecBegin[520.2044117450714]SVDpp[False]
+lastRMSE [1.2671242115010684]currentRMSE[1.2672545004480242]iterations[4]SecIter[171.27840328216553]SecBegin[691.4828150272369]SVDpp[False]
+********************************************************
+SVD RMSE on Test[1.2162939047047703]RMSE on Train[1.2671242115010684]learningTime[691.4828150272369]PredictTime[19.851665019989014]K[100]lambda[0.05]delta[0.05]mu[3.7272620997550523]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1176856]trainAndValidaiton Size[4209336]train Size[3832249]validation Size[377087]test Orig Size[1052334]Test Size[879077]missingUsers[160036]missingProducts[63986]learn iterations[4]SVDpp[False]YInitialValuePlusMinusInterval[0.01]
+********************************************************
+ ---- Done ----
