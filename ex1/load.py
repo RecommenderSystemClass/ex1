@@ -1,6 +1,7 @@
 # Alex Danieli 317618718
 # Gil Shamay 033076324
 
+from printDebug import *
 import csv
 import time
 import pandas as pd
@@ -29,5 +30,5 @@ def load(path):
             break #TODO: DEBUG DEBUG DEBUG - FOR FAST TESTS ONLY
         chunksNum += 1
     took = time.time() - beginTime
-    print("LOAD: chunksNum[" + str(chunksNum) + "]took[" + str(took) + "]data[" + str(len(data)) + "]")
+    printDebug("LOAD: chunksNum[" + str(chunksNum) + "]took[" + str(took) + "]data[" + str(len(data)) + "]")
     return data

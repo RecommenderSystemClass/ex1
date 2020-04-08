@@ -10,6 +10,7 @@
 from builtins import print
 from RMSE import *
 from MAE import *
+from printDebug import *
 from load import *
 import numpy as np
 import random
@@ -18,10 +19,10 @@ import time
 import math
 import pandas as pd
 import pickle
+import socket
 
 seed = 80
 random.seed(seed)
-
 #################################
 # Parameters
 SVDpp = False  # SVD++
@@ -37,6 +38,10 @@ trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for con
 testData = "D:/BGU/RS/EXs/ex1/ex1/data/testData.csv"  # used this line for console debug
 trainData = './data/trainData.csv'
 testData = './data/testData.csv'
+
+################################
+
+
 trainDataDF_all = load(trainData)
 
 len1 = len(trainDataDF_all)
@@ -122,7 +127,7 @@ for K in Ks:
                     # def applyOnUser(user):
                     # applyFunOnAllUsers = np.vectorize(applyOnUser)
                     # applyFunOnAllUsers(trainUsers)
-                    print("users init took[" + str(time.time() - t1) + "]")
+                    printDebug("users init took[" + str(time.time() - t1) + "]")
 
                     Q = {}
                     t1 = time.time()
@@ -132,7 +137,7 @@ for K in Ks:
                                 PQInitialValuePlusMinusInterval * 2) - PQInitialValuePlusMinusInterval)
                         Bi[product] = np.random.rand() * (
                                 BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
-                    print("items init took[" + str(time.time() - t1) + "]")
+                    printDebug("items init took[" + str(time.time() - t1) + "]")
 
 
                     ###########################################################
@@ -188,17 +193,17 @@ for K in Ks:
                     lastRMSE = sys.maxsize
 
                     beginTime = time.time()
-                    print("Beggining: "
-                          + "K[" + str(K) + "]"
-                          + "lambda[" + str(lam) + "]"
-                          + "delta[" + str(delta) + "]"
-                          + "PQInitialInterval[+-" + str(PQInitialValuePlusMinusInterval) + "]"
-                          + "BInitialInterval[+-" + str(BInitialValuePlusMinusInterval) + "]"
-                          + "mu[" + str(mu) + "]"
-                          + "P len[" + str(len(P)) + "]"
-                          + "Q len [" + str(len(Q)) + "]"
-                          + "SVDpp[" + str(SVDpp) + "]"
-                          )
+                    printDebug("Beggining: "
+                               + "K[" + str(K) + "]"
+                               + "lambda[" + str(lam) + "]"
+                               + "delta[" + str(delta) + "]"
+                               + "PQInitialInterval[+-" + str(PQInitialValuePlusMinusInterval) + "]"
+                               + "BInitialInterval[+-" + str(BInitialValuePlusMinusInterval) + "]"
+                               + "mu[" + str(mu) + "]"
+                               + "P len[" + str(len(P)) + "]"
+                               + "Q len [" + str(len(Q)) + "]"
+                               + "SVDpp[" + str(SVDpp) + "]"
+                               )
 
                     lastP = []
                     lastQ = []
@@ -222,13 +227,13 @@ for K in Ks:
                         lastRMSE = currentRMSE
                         # todo: add additional method, other then RMSE
                         currentRMSE = RMSE(currentCalculatedRates, actualRates)
-                        print("lastRMSE [" + str(lastRMSE) + "]"
-                              + "currentRMSE[" + str(currentRMSE) + "]"
-                              + "iterations[" + str(iterations) + "]"
-                              + "SecIter[" + str(time.time() - iterationBeginTime) + "]"
-                              + "SecBegin[" + str(time.time() - beginTime) + "]"
-                              + "SVDpp[" + str(SVDpp) + "]"
-                              )
+                        printDebug("lastRMSE [" + str(lastRMSE) + "]"
+                                   + "currentRMSE[" + str(currentRMSE) + "]"
+                                   + "iterations[" + str(iterations) + "]"
+                                   + "SecIter[" + str(time.time() - iterationBeginTime) + "]"
+                                   + "SecBegin[" + str(time.time() - beginTime) + "]"
+                                   + "SVDpp[" + str(SVDpp) + "]"
+                                   )
 
                     delta = deltaOrig
                     P = lastP
@@ -260,59 +265,60 @@ for K in Ks:
                     actuaTestRaes = testDataDF['stars'].to_list()
                     testRMSE = RMSE(actuaTestRaes, calculatedTestRates)
 
-                    mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastRMSE, Yu)
-                    filePath = '.\data\K_' + str(K) \
+                    filePath = '.\\results\K_' + str(K) \
                                + '_lam_' + str(lam) \
                                + '_delta_' + str(delta) \
                                + '_PQ_' + str(PQInitialValuePlusMinusInterval) \
                                + '_B_' + str(BInitialValuePlusMinusInterval) \
                                + '_SVDpp_' + str(SVDpp) \
                                + '_Y_' + str(YInitialValuePlusMinusInterval) \
-                               + '_RMSE_' + str(testRMSE) \
-                               + '.dump'
+                               + '_RMSE_' + str(testRMSE)\
+                               + '_host_' + socket.gethostname()
 
-                    with open(filePath, 'wb') as fp:
-                        pickle.dump(mySvdSave, fp)
+                    printToFile(filePath + ".log")
+
+                    # mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastRMSE, Yu)
+                    # with open(filePath + ".dump", 'wb') as fp:
+                    #     pickle.dump(mySvdSave, fp)
 
                     # mySvdload = None
                     # with open(filePath, 'rb') as fp:
                     #     mySvdload = pickle.load(fp)
 
-                    print("********************************************************")
-                    print("SVD "
-                          + "RMSE on Test[" + str(testRMSE) + "]"
-                          + "RMSE on Train[" + str(lastRMSE) + "]"
-                          + "learningTime[" + str(learningTime) + "]"
-                          + "PredictTime[" + str(PredictTime) + "]"
-                          + "K[" + str(K) + "]"
-                          + "lambda[" + str(lam) + "]"
-                          + "delta[" + str(delta) + "]"
-                          + "mu[" + str(mu) + "]"
-                          + "PQInitialInterval[+-" + str(PQInitialValuePlusMinusInterval) + "]"
-                          + "BInitialInterval[+-" + str(BInitialValuePlusMinusInterval) + "]"
-                          + "users[" + str(len(P)) + "]"
-                          + "trainAndValidaiton Size[" + str(len(trainDataDF_all)) + "]"
-                          + "train Size[" + str(len(trainDataDF)) + "]"
-                          + "validation Size[" + str(len(validationDataDF)) + "]"
-                          + "test Orig Size[" + str(len(testDataDF_orig)) + "]"
-                          + "Test Size[" + str(len(testDataDF)) + "]"
-                          + "missingUsers[" + str(len(missingUsers)) + "]"
-                          + "missingProducts[" + str(len(missingProducts)) + "]"
-                          + "learn iterations[" + str(iterations) + "]"
-                          + "SVDpp[" + str(SVDpp) + "]"
-                          + "YInitialValuePlusMinusInterval[" + str(YInitialValuePlusMinusInterval) + "]"
-                          )
-                    print("********************************************************")
+                    printDebug("********************************************************")
+                    printDebug("SVD "
+                               + "RMSE on Test[" + str(testRMSE) + "]"
+                               + "RMSE on Train[" + str(lastRMSE) + "]"
+                               + "learningTime[" + str(learningTime) + "]"
+                               + "PredictTime[" + str(PredictTime) + "]"
+                               + "K[" + str(K) + "]"
+                               + "lambda[" + str(lam) + "]"
+                               + "delta[" + str(delta) + "]"
+                               + "mu[" + str(mu) + "]"
+                               + "PQInitialInterval[+-" + str(PQInitialValuePlusMinusInterval) + "]"
+                               + "BInitialInterval[+-" + str(BInitialValuePlusMinusInterval) + "]"
+                               + "users[" + str(len(P)) + "]"
+                               + "trainAndValidaiton Size[" + str(len(trainDataDF_all)) + "]"
+                               + "train Size[" + str(len(trainDataDF)) + "]"
+                               + "validation Size[" + str(len(validationDataDF)) + "]"
+                               + "test Orig Size[" + str(len(testDataDF_orig)) + "]"
+                               + "Test Size[" + str(len(testDataDF)) + "]"
+                               + "missingUsers[" + str(len(missingUsers)) + "]"
+                               + "missingProducts[" + str(len(missingProducts)) + "]"
+                               + "learn iterations[" + str(iterations) + "]"
+                               + "SVDpp[" + str(SVDpp) + "]"
+                               + "YInitialValuePlusMinusInterval[" + str(YInitialValuePlusMinusInterval) + "]"
+                               )
+                    printDebug("********************************************************")
+
 
 class SVD:
-    def __init__(this,TrainingDataFrame, parameter,SVDpp,ErrorMethod):
+    def __init__(this, TrainingDataFrame, parameter, SVDpp, ErrorMethod):
         this.SVDpp = SVDpp
 
     def PredictRating(this):
-        print("PredictRating++")
+        printDebug("PredictRating++")
 
 
-
-
-print(" ---- Done ---- ")
+printDebug(" ---- Done ---- ")
 exit(0)
