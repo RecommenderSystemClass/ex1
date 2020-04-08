@@ -1,11 +1,15 @@
 # Alex Danieli 317618718
 # Gil Shamay 033076324
 
-# requirments python3 x64, pandas, numpy
-
+# requirements:
+#   python3 x64,
+#   pandas,
+#   numpy,
+#   surprise
 
 from builtins import print
 from RMSE import *
+from MAE import *
 from load import *
 import numpy as np
 import random
@@ -20,7 +24,7 @@ random.seed(seed)
 
 #################################
 # Parameters
-SVDpp = True  # SVD++
+SVDpp = False  # SVD++
 Ks = [100]  # [100, 200, 300, 400, 500]
 deltas = [0.05]  # [0.01, 0.02, 0.05, 0.07]   # learning rate
 lams = [0.05]  # [0.01, 0.02, 0.05, 0.07]    # regularization
@@ -299,6 +303,16 @@ for K in Ks:
                           + "YInitialValuePlusMinusInterval[" + str(YInitialValuePlusMinusInterval) + "]"
                           )
                     print("********************************************************")
+
+class SVD:
+    def __init__(this,TrainingDataFrame, parameter,SVDpp,ErrorMethod):
+        this.SVDpp = SVDpp
+
+    def PredictRating(this):
+        print("PredictRating++")
+
+
+
 
 print(" ---- Done ---- ")
 exit(0)
