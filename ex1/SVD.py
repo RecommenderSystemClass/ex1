@@ -25,13 +25,20 @@ seed = 80
 random.seed(seed)
 #################################
 # Parameters
-SVDppOptions = [True]  # SVD++
-Ks = [400]  # [100, 200, 300, 400, 500]
-deltas = [0.03, 0.04, 0.05, 0.06, 0.07]   # learning rate
-lams = [0.03, 0.04, 0.05, 0.06, 0.07]    # regularization
+SVDppOptions = [False]  # SVD++
+Ks = [100]  # [100, 200, 300, 400, 500]
+deltas = [0.03]  # [0.03, 0.04, 0.05, 0.06, 0.07]  # learning rate
+lams = [0.07]  # [0.03, 0.04, 0.05, 0.06, 0.07]  # regularization
 BInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
 PQInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
 YInitialValuePlusMinusInterval = 0.01
+errorCalculation = 'RMSE'
+errorCalculation = 'MAE'
+errorMethod = None
+if (errorCalculation == 'RMSE'):
+    errorMethod = RMSE
+else:
+    errorMethod = MAE
 #################################
 
 trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
@@ -190,8 +197,8 @@ for SVDpp in SVDppOptions:
 
                         actualRates = validationDataDF['stars'].to_list()
                         iterations = 0
-                        currentRMSE = sys.maxsize - 1
-                        lastRMSE = sys.maxsize
+                        currentError = sys.maxsize - 1
+                        lastError = sys.maxsize
 
                         beginTime = time.time()
                         printDebug("Beggining: "
@@ -215,7 +222,7 @@ for SVDpp in SVDppOptions:
 
 
                         deltaOrig = delta
-                        while currentRMSE < lastRMSE:
+                        while currentError < lastError:
                             iterationBeginTime = time.time()
                             iterations += 1
                             # keep last P and Q and use them -->keep the one with better error rate
@@ -225,32 +232,34 @@ for SVDpp in SVDppOptions:
                             if (SVDpp):
                                 delta = delta * 0.9
                             currentCalculatedRates = predictRates(validationDataDF)
-                            lastRMSE = currentRMSE
-                            # todo: add additional method, other then RMSE
-                            currentRMSE = RMSE(currentCalculatedRates, actualRates)
-                            printDebug("lastRMSE [" + str(lastRMSE) + "]"
-                                       + "currentRMSE[" + str(currentRMSE) + "]"
+                            lastError = currentError
+                            currentError = errorMethod(currentCalculatedRates, actualRates)
+                            printDebug("last" + errorCalculation + "[" + str(lastError) + "]"
+                                       + "current" + errorCalculation + "[" + str(currentError) + "]"
                                        + "iterations[" + str(iterations) + "]"
                                        + "SecIter[" + str(time.time() - iterationBeginTime) + "]"
                                        + "SecBegin[" + str(time.time() - beginTime) + "]"
                                        + "SVDpp[" + str(SVDpp) + "]"
                                        )
+                            ########   End Of learn   ########
 
                         delta = deltaOrig
                         P = lastP
                         Q = lastQ
                         learningTime = time.time() - beginTime
+                        ########   End Of Model Build   ########
 
+                        ########   Predict on Test   ########
                         predictBeginTime = time.time()
                         calculatedTestRates = predictRates(testDataDF)
                         PredictTime = time.time() - predictBeginTime
                         actuaTestRaes = testDataDF['stars'].to_list()
-                        testRMSE = RMSE(actuaTestRaes, calculatedTestRates)
+                        testError = errorMethod(actuaTestRaes, calculatedTestRates)
 
                         printDebug("********************************************************")
                         strFinalResult = ("SVD "
-                                          + "RMSE on Train[" + str(lastRMSE) + "]"
-                                          + "RMSE on Test[" + str(testRMSE) + "]"
+                                          + errorCalculation + " on Train[" + str(lastError) + "]"
+                                          + errorCalculation + " on Test[" + str(testError) + "]"
                                           + "K[" + str(K) + "]"
                                           + "lambda[" + str(lam) + "]"
                                           + "delta[" + str(delta) + "]"
@@ -275,8 +284,8 @@ for SVDpp in SVDppOptions:
                         printDebug(strFinalResult)
                         printDebug("********************************************************")
 
-                        fileBaseName = "RMSETrain[" + str("%.5f" % lastRMSE) + "]" \
-                                       + "RMSETest[" + str("%.5f" % testRMSE) + "]" \
+                        fileBaseName = errorCalculation + "Train[" + str("%.5f" % lastError) + "]" \
+                                       + errorCalculation + "Test[" + str("%.5f" % testError) + "]" \
                                        + "K[" + str(K) + "]" \
                                        + "lambda[" + str(lam) + "]" \
                                        + "delta[" + str(delta) + "]" \
@@ -307,7 +316,7 @@ for SVDpp in SVDppOptions:
                         #         mysillyobject.rmse = rmse
                         #         mysillyobject.Yu = Yu
 
-                        # mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastRMSE, Yu)
+                        # mySvdSave = mySvd(P, Q, Bu, Bi, mu, lastError, Yu)
                         # with open(filePath + ".dump", 'wb') as fp:
                         #     pickle.dump(mySvdSave, fp)
 
