@@ -47,9 +47,11 @@ trainData = './data/trainData.csv'
 testData = './data/testData.csv'
 
 ################################
-
+# Load Data
 
 trainDataDF_all = load(trainData)
+################################
+# Clean Data
 
 len1 = len(trainDataDF_all)
 
@@ -57,7 +59,10 @@ trainDataDF_all.isnull().values.any()  # check validity of the data
 trainDataDF_all = trainDataDF_all.dropna()
 
 len2 = len(trainDataDF_all)
+print("removed [" + str(len2 - len1) + "]null data entries")
 
+################################
+# Split train / validation
 # split train data to train and validations - take 30% of the users
 # then select 30% of the samples of those users to be the train data and all teh rest is teh test data
 products = trainDataDF_all['business_id'].unique()
@@ -68,15 +73,18 @@ train_users, validation_users = users[:userSplit], users[userSplit:]
 validationUsersData = trainDataDF_all.loc[trainDataDF_all['user_id'].isin(validation_users)]
 validationDataDF = validationUsersData.sample(
     frac=0.3,  # take 30% of the data of the usres we selected for training
-    random_state=seed)  # todo: Should we take here 30% of the product that the validations users use or 30% randomally  ?
+    random_state=seed)  # we take here 30% of the validaitons users ratings randomally
 trainDataDF = trainDataDF_all.drop(validationDataDF.index)
 trainDataDF = trainDataDF.sample(frac=1).reset_index(drop=True)  # shuffle train Data #todo: Check if really needed
 
 trainProducts = trainDataDF['business_id'].unique()
 trainUsers = trainDataDF['user_id'].unique()
 
+################################
 # load test data
 testDataDF_orig = load(testData)
+
+################################
 # clean test and validaiton data - remove all entries with new users or product (no cold start)
 
 validationDataDF = validationDataDF.loc[validationDataDF['user_id'].isin(trainUsers)]
@@ -87,18 +95,7 @@ testDataDF = testDataDF.loc[testDataDF['business_id'].isin(trainProducts)]
 testDataFilteredOut = testDataDF_orig.drop(testDataDF.index)
 missingProducts = testDataFilteredOut['business_id'].unique()
 missingUsers = testDataFilteredOut['user_id'].unique()
-
-indexUsers = 0
-trainUsersDic = {}
-for user in trainUsers:
-    trainUsersDic[user] = indexUsers
-    indexUsers += 1
-
-indexProducts = 0
-trainProductsDic = {}
-for product in trainProducts:
-    trainProductsDic[product] = indexProducts
-    indexProducts += 1
+################################
 
 mu = trainDataDF['stars'].mean()
 
