@@ -26,7 +26,7 @@ random.seed(seed)
 #################################
 # Parameters
 SVDppOptions = [False]  # SVD++
-Ks = [100]  # [100, 200, 300, 400, 500]
+Ks = [400]  # [100, 200, 300, 400, 500]
 deltas = [0.03]  # [0.03, 0.04, 0.05, 0.06, 0.07]  # learning rate
 lams = [0.07]  # [0.03, 0.04, 0.05, 0.06, 0.07]  # regularization
 BInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
@@ -254,12 +254,15 @@ for SVDpp in SVDppOptions:
                         calculatedTestRates = predictRates(testDataDF)
                         PredictTime = time.time() - predictBeginTime
                         actuaTestRaes = testDataDF['stars'].to_list()
-                        testError = errorMethod(actuaTestRaes, calculatedTestRates)
+
+                        testRMSE = RMSE(actuaTestRaes, calculatedTestRates)
+                        testMAE = MAE(actuaTestRaes, calculatedTestRates)
 
                         printDebug("********************************************************")
                         strFinalResult = ("SVD "
-                                          + errorCalculation + " on Train[" + str(lastError) + "]"
-                                          + errorCalculation + " on Test[" + str(testError) + "]"
+                                          + errorCalculation + "OnTrain[" + str(lastError) + "]"
+                                          + "RMSEOnTest[" + str(testRMSE) + "]"
+                                          + "MAEOnTest[" + str(testMAE) + "]"
                                           + "K[" + str(K) + "]"
                                           + "lambda[" + str(lam) + "]"
                                           + "delta[" + str(delta) + "]"
@@ -285,7 +288,8 @@ for SVDpp in SVDppOptions:
                         printDebug("********************************************************")
 
                         fileBaseName = errorCalculation + "Train[" + str("%.5f" % lastError) + "]" \
-                                       + errorCalculation + "Test[" + str("%.5f" % testError) + "]" \
+                                       + "RMSEOnTest[" + str(testRMSE) + "]" \
+                                       + "MAEOnTest[" + str(testMAE) + "]" \
                                        + "K[" + str(K) + "]" \
                                        + "lambda[" + str(lam) + "]" \
                                        + "delta[" + str(delta) + "]" \
