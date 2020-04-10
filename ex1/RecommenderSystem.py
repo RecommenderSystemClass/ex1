@@ -1,64 +1,79 @@
 import time
 import numpy as np
 import pandas as pd
-from nltk.stem.porter import PorterStemmer
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, f1_score
+from category_encoders import TargetEncoder
+#nltk.download('vader_lexicon')
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from sklearn.linear_model import ElasticNet
+from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 
 
-def read_dataset(path, size):
-    dataset = pd.read_csv(path)
-    dataset = dataset.dropna()
-    dataset = dataset[:size]
-    x_train, x_test, y_train, y_test = train_test_split(dataset.text, dataset.stars, test_size=0.10)
-    return x_train, x_test, y_train, y_test
+def read_dataset(path, size=None):
+    df = pd.read_csv(path)
+    df = df.dropna()
+    if (size is not None):
+        df = df[:size]
+    return df
 
 
-def create_bow(x_train, x_test):
-    stemmer = PorterStemmer()
-    analyzer = CountVectorizer().build_analyzer()
-
-    def stemmed_words(doc):
-        return (stemmer.stem(w) for w in analyzer(doc))
-
-    stem_vectorizer = CountVectorizer(analyzer=stemmed_words, max_df=0.8, max_features=1000)
-    all = pd.concat([x_train, x_test])
-    bow = stem_vectorizer.fit_transform(all).toarray()
-    size_of_train = len(x_train)
-    vectorized_x_train = bow[:size_of_train, :]
-    vectorized_x_test = bow[size_of_train:, :]
-    return vectorized_x_train, vectorized_x_test
+def score_to_sentiment(score):
+    if score >= 0.3:
+        return 'positive'
+    elif score <= -0.3:
+        return 'negative'
+    return 'neutral'
 
 
-def train_classifier(x_train, training_labels):
-    print("Train Doc2Vec on training set")
-    model = RandomForestClassifier(n_jobs=4, verbose=3)
+def extract_sentiment(row, analyzer):
+    all_scores = analyzer.polarity_scores(row['text'])
+    score = all_scores['compound']
+    return score_to_sentiment(score)
+
+
+def prepare_data(df):
+    analyzer = SentimentIntensityAnalyzer()
+    df['sentiment'] = df.apply(lambda row: extract_sentiment(row, analyzer), axis = 1)
+    df['neutral'] = np.where(df['sentiment'] != 'negative', 1, 0)
+    df['positive'] = np.where(df['sentiment'] == 'positive', 1, 0)
+    df['text_size'] = df.apply(lambda row: len(row['text']), axis = 1)
+    return df
+
+
+def train_classifier(x_train, training_labels, alph, l1_r):
+    print("Train ElasticNet with alpha = " + str(alph) + " and l1_ratio = " + str(l1_r))
+    model = ElasticNet(alpha=alph, l1_ratio=l1_r)
     model.fit(x_train, np.array(training_labels))
     training_predictions = model.predict(x_train)
-    print('Training predicted classes: {}'.format(np.unique(training_predictions)))
-    print('Training accuracy: {}'.format(accuracy_score(training_labels, training_predictions)))
-    print('Training F1 score: {}'.format(f1_score(training_labels, training_predictions, average='weighted')))
+    print("Model coefficients are: " + str(model.coef_))
+    print("Model intercept is: " + str(model.intercept_))
+    print('Training RMSE score: {}'.format(mean_squared_error(training_labels, training_predictions, squared=False)))
     return model
 
 
 def test_classifier(classifier, x_test, testing_labels):
-    print("Train Doc2Vec on testing set")
+    print("Test ElasticNet")
     testing_predictions = classifier.predict(x_test)
-    hist1, bins1 = np.histogram(testing_predictions, bins=np.linspace(1, 5, 6))
-    print('Predictions: ' + str(bins1) + ' are ' + str(hist1))
-    hist2, bins2 = np.histogram(testing_labels, bins=np.linspace(1, 5, 6))
-    print('Labels: ' + str(bins2) + ' are ' + str(hist2))
-    print('Testing predicted classes: {}'.format(np.unique(testing_predictions)))
-    print('Testing accuracy: {}'.format(accuracy_score(testing_labels, testing_predictions)))
-    print('Testing F1 score: {}'.format(f1_score(testing_labels, testing_predictions, average='weighted')))
+    print('Testing RMSE score: {}'.format(mean_squared_error(testing_labels, testing_predictions, squared=False)))
+
+
+def apply_target_encoder(x_train, x_test, y_train, column, smoothing_param):
+    encoder = TargetEncoder(cols=[column], return_df=True, smoothing=smoothing_param)
+    x_train = encoder.fit_transform(x_train, y_train)
+    x_test = encoder.transform(x_test)
+    return x_train, x_test
 
 
 beginTime = time.time()
-x_train, x_test, y_train, y_test = read_dataset('trainData.csv', 200000)
-vectorized_x_train, vectorized_x_test = create_bow(x_train, x_test)
-classifier = train_classifier(vectorized_x_train, y_train)
-test_classifier(classifier, vectorized_x_test, y_test)
-took = time.time() - beginTime
-print("time=" + str(took))
+df = read_dataset('trainData.csv')
+x = df[['user_id', 'text']]
+y = df['stars']
+x = prepare_data(x)
+print("time=" + str(time.time() - beginTime))
+x_train, x_test, y_train, y_test = train_test_split(x[['neutral', 'positive', 'text_size', 'user_id']], y, test_size=0.10)
+x_train, x_test = apply_target_encoder(x_train, x_test, y_train, 'user_id', 1)
+for alph in (0.1, 1, 10):
+    for l1_r in (0.1, 0.5, 0.9):
+        classifier = train_classifier(x_train, y_train, alph, l1_r)
+        test_classifier(classifier, x_test, y_test)
+print("time=" + str(time.time() - beginTime))
