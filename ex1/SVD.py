@@ -25,10 +25,10 @@ seed = 80
 random.seed(seed)
 #################################
 # Parameters
-SVDppOptions = [False, True]  # SVD++
-Ks = [100]  # [100, 200, 300, 400, 500]
-deltas = [0.05]  # [0.02, 0.03, 0.04, 0.05, 0.06, 0.07]   # learning rate
-lams = [0.05]  # [0.02, 0.03, 0.04, 0.05, 0.06, 0.07]    # regularization
+SVDppOptions = [True]  # SVD++
+Ks = [400]  # [100, 200, 300, 400, 500]
+deltas = [0.03, 0.04, 0.05, 0.06, 0.07]   # learning rate
+lams = [0.03, 0.04, 0.05, 0.06, 0.07]    # regularization
 BInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
 PQInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
 YInitialValuePlusMinusInterval = 0.01
