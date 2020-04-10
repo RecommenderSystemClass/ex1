@@ -25,22 +25,27 @@ seed = 80
 random.seed(seed)
 #################################
 # Parameters
+
 SVDppOptions = [False]  # SVD++
 Ks = [400]  # [100, 200, 300, 400, 500]
 deltas = [0.03]  # [0.03, 0.04, 0.05, 0.06, 0.07]  # learning rate
 lams = [0.07]  # [0.03, 0.04, 0.05, 0.06, 0.07]  # regularization
 BInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
 PQInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
-YInitialValuePlusMinusInterval = 0.01
+YInitialValueInterval = 0.01
 errorCalculation = 'RMSE'
-errorCalculation = 'MAE'
+#errorCalculation = 'MAE'
+#################################
+#setting the error Method
+
 errorMethod = None
 if (errorCalculation == 'RMSE'):
     errorMethod = RMSE
 else:
     errorMethod = MAE
-#################################
 
+#################################
+# The Data
 trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
 testData = "D:/BGU/RS/EXs/ex1/ex1/data/testData.csv"  # used this line for console debug
 trainData = './data/trainData.csv'
@@ -54,15 +59,14 @@ trainDataDF_all = load(trainData)
 # Clean Data
 
 len1 = len(trainDataDF_all)
-
 trainDataDF_all.isnull().values.any()  # check validity of the data
 trainDataDF_all = trainDataDF_all.dropna()
-
 len2 = len(trainDataDF_all)
 print("removed [" + str(len2 - len1) + "]null data entries")
 
 ################################
 # Split train / validation
+
 # split train data to train and validations - take 30% of the users
 # then select 30% of the samples of those users to be the train data and all teh rest is teh test data
 products = trainDataDF_all['business_id'].unique()
@@ -97,7 +101,6 @@ missingProducts = testDataFilteredOut['business_id'].unique()
 missingUsers = testDataFilteredOut['user_id'].unique()
 ################################
 
-mu = trainDataDF['stars'].mean()
 
 for SVDpp in SVDppOptions:
     for K in Ks:
@@ -106,6 +109,7 @@ for SVDpp in SVDppOptions:
                 for lam in lams:
                     lam2 = lam  # used for SVD++; can get a different value then lam
                     for delta in deltas:
+                        mu = trainDataDF['stars'].mean()
                         t1 = time.time()
                         Bu = {}
                         Bi = {}
@@ -113,7 +117,7 @@ for SVDpp in SVDppOptions:
                         RuMi1_2 = {}
                         P = {}
                         usersNumberOfRates = trainDataDF['user_id'].value_counts()
-                        usersNumberOfRatesDic = usersNumberOfRates.to_dict()
+                        usersNumberOfRatesDic = usersNumberOfRates.to_dict()  # calculate this once - it is used many times
 
                         for user in trainUsers:
                             P[user] = (np.random.rand(K) * (
@@ -121,19 +125,12 @@ for SVDpp in SVDppOptions:
                             Bu[user] = np.random.rand() * (
                                     BInitialValuePlusMinusInterval * 2) - BInitialValuePlusMinusInterval
                             if (SVDpp):
-                                # AllRatedDoneByTheUserInTrain = trainDataDF.loc[trainDataDF['user_id'] == user]
-                                # productsRatedByTheUser = AllRatedDoneByTheUserInTrain['business_id'].unique()
-                                # numOfUserRates = len(productsRatedByTheUser)
                                 numOfUserRates = usersNumberOfRatesDic[user]
                                 Yu[user] = np.random.rand(numOfUserRates, K) * (
-                                        YInitialValuePlusMinusInterval * 2) - YInitialValuePlusMinusInterval
+                                        YInitialValueInterval * 2) - YInitialValueInterval
                                 RuMi1_2[user] = pow(numOfUserRates, -0.5)
 
-                        # def applyOnUser(user):
-                        # applyFunOnAllUsers = np.vectorize(applyOnUser)
-                        # applyFunOnAllUsers(trainUsers)
                         printDebug("users init took[" + str(time.time() - t1) + "]")
-
                         Q = {}
                         t1 = time.time()
                         for product in products:
@@ -172,7 +169,7 @@ for SVDpp in SVDppOptions:
                             RuMi1_2u = None
                             sigmaYu = None
                             if (not SVDpp):
-                                Rui = mu + bi + bu + p.dot(q)  # R(u, i)
+                                Rui = mu + bi + bu + p.dot(q)
                             else:
                                 y = Yu[user]
                                 RuMi1_2u = RuMi1_2[user]
@@ -278,7 +275,7 @@ for SVDpp in SVDppOptions:
                                           + "missingProducts[" + str(len(missingProducts)) + "]"
                                           + "learn iterations[" + str(iterations) + "]"
                                           + "SVDpp[" + str(SVDpp) + "]"
-                                          + "YInitialValuePlusMinusInterval[" + str(YInitialValuePlusMinusInterval) + "]"
+                                          + "YInitialValuePlusMinusInterval[" + str(YInitialValueInterval) + "]"
                                           + 'host[' + socket.gethostname() + "]"
                                           )
                         printDebug(strFinalResult)
@@ -295,7 +292,7 @@ for SVDpp in SVDppOptions:
                                        + "PQ[" + str(PQInitialValuePlusMinusInterval) + "]" \
                                        + "B[" + str(BInitialValuePlusMinusInterval) + "]" \
                                        + "SVDpp[" + str(SVDpp) + "]" \
-                                       + "Y[" + str(YInitialValuePlusMinusInterval) + "]" \
+                                       + "Y[" + str(YInitialValueInterval) + "]" \
                                        + 'host[' + socket.gethostname() + "]"
 
                         printToFile(".\\results\\" + fileBaseName + ".log")
