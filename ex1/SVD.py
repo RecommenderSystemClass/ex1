@@ -29,6 +29,7 @@ random.seed(seed)
 #   for example -  use accuracy of 10000 for 4 digits accuracy results 0.xxxx
 #   runtime can be very long in some cases if we don't use it and stop the algorithm in some acceptable accuracy
 accuracy = 0  # 10000
+# accuracy = 10000
 
 
 #################################

@@ -31,10 +31,10 @@ seed = 80
 random.seed(seed)
 #################################
 # Parameters
-SVDppOptions = [False]  # SVD++
-Ks = [100]  # 400 # [100, 200, 300, 400, 500]
-deltas = [0.05]  # 0.03 # [0.03, 0.04, 0.05, 0.06, 0.07]  # learning rate
-lams = [0.05]  # 0.07 # [0.03, 0.04, 0.05, 0.06, 0.07]  # regularization
+SVDppOptions = [True]  # SVD++
+Ks = [400]  # 400 # [100, 200, 300, 400, 500]
+deltas = [0.03]  # 0.03 # [0.03, 0.04, 0.05, 0.06, 0.07]  # learning rate
+lams = [0.07]  # 0.07 # [0.03, 0.04, 0.05, 0.06, 0.07]  # regularization
 errorCalculation = 'RMSE'  # select the error calculation method used to build the SVD / SVD++ model with
 # errorCalculation = 'MAE'
 ensamble = True
