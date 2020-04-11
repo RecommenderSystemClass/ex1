@@ -24,6 +24,8 @@ import socket
 seed = 80
 random.seed(seed)
 
+accuracy = 10000
+
 
 #################################
 
@@ -148,8 +150,8 @@ class SVD:
 
         actualRates = validationDataDF['stars'].to_list()
         iterations = 0
-        currentError = sys.maxsize - 1
-        lastError = sys.maxsize
+        lastError = sys.maxsize / (accuracy * 10)  # avoid overflow in the while
+        currentError = lastError - 0.1
 
         beginTime = time.time()
         printDebug("Beggining: "
@@ -168,7 +170,7 @@ class SVD:
         lastQ = []
 
         deltaOrig = delta
-        while currentError < lastError:
+        while int(currentError * accuracy) < int(lastError * accuracy):  # reduce runtime - accuracy of X dig
             iterationBeginTime = time.time()
             iterations += 1
             # keep last P and Q and use them -->keep the one with better error rate
@@ -195,4 +197,3 @@ class SVD:
         this.iterations = iterations
         this.learningTime = time.time() - beginTime
         printDebug("########   End Of Model Build   ########")
-
