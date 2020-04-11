@@ -24,7 +24,11 @@ import socket
 seed = 80
 random.seed(seed)
 
-accuracy = 10000
+# accuracy - a variable to reduce runtime (for a trade off between runtime and accuracy)
+#   if accuracy is > 0
+#   for example -  use accuracy of 10000 for 4 digits accuracy results 0.xxxx
+#   runtime can be very long in some cases if we don't use it and stop the algorithm in some acceptable accuracy
+accuracy = 0  # 10000
 
 
 #################################
@@ -150,7 +154,9 @@ class SVD:
 
         actualRates = validationDataDF['stars'].to_list()
         iterations = 0
-        lastError = sys.maxsize / (accuracy * 10)  # avoid overflow in the while
+        lastError = sys.maxsize
+        if (accuracy > 0):
+            lastError = sys.maxsize / (accuracy * 10)  # avoid overflow in the while
         currentError = lastError - 0.1
 
         beginTime = time.time()
@@ -170,7 +176,9 @@ class SVD:
         lastQ = []
 
         deltaOrig = delta
-        while int(currentError * accuracy) < int(lastError * accuracy):  # reduce runtime - accuracy of X dig
+        while (accuracy > 0) and (int(currentError * accuracy) < int(lastError * accuracy)) \
+                or ((accuracy <= 0) and (currentError < lastError)):
+
             iterationBeginTime = time.time()
             iterations += 1
             # keep last P and Q and use them -->keep the one with better error rate
@@ -196,4 +204,4 @@ class SVD:
         this.lastError = lastError
         this.iterations = iterations
         this.learningTime = time.time() - beginTime
-        printDebug("########   End Of Model Build   ########")
+        printDebug("########   End Of SVD Model Build   ########")

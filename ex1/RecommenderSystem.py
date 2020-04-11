@@ -15,10 +15,15 @@ from load import *
 
 
 def prepare_data():
-    df_train = load('trainData.csv')
+    df_train = load('./data/trainData.csv')
     df_train = df_train.dropna()
-    df_test = load('testData.csv')
+    df_test = load('./data/testData.csv')
     df_test = df_test.dropna()
+    x, y_train, y_test = prepareDataForSemantic(df_train, df_test)
+    return x, y_train, y_test
+
+
+def prepareDataForSemantic(df_train, df_test):
     x_train = df_train[['user_id', 'text']]
     y_train = df_train['stars']
     x_test = df_test[['user_id', 'text']]
@@ -86,6 +91,7 @@ def apply_target_encoder(x_train, x_test, y_train, column, smoothing_param):
 
 beginTime = time.time()
 x, y_train, y_test = prepare_data()
+###########################
 x = extract_features(x)
 x_train, x_test = split_and_reduce(x)
 x_train, x_test = apply_target_encoder(x_train, x_test, y_train, 'user_id', 1)

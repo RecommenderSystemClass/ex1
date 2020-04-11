@@ -5,7 +5,11 @@
 #   python3 x64,
 #   pandas,
 #   numpy,
-#   surprise
+#   surprise,
+#   nltk,
+#   sklearn,
+#   category-encoders
+
 
 from builtins import print
 from RMSE import *
@@ -13,6 +17,7 @@ from MAE import *
 from printDebug import *
 from load import *
 from SVD import *
+from RecommenderSystem import *
 import numpy as np
 import random
 import time
@@ -30,67 +35,78 @@ SVDppOptions = [False]  # SVD++
 Ks = [100]  # 400 # [100, 200, 300, 400, 500]
 deltas = [0.05]  # 0.03 # [0.03, 0.04, 0.05, 0.06, 0.07]  # learning rate
 lams = [0.05]  # 0.07 # [0.03, 0.04, 0.05, 0.06, 0.07]  # regularization
-errorCalculation = 'RMSE'
+errorCalculation = 'RMSE'  # select the error calculation method used to build the SVD / SVD++ model with
 # errorCalculation = 'MAE'
+ensamble = True
 
+# initial random values range for the different matrix
 BInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
 PQInitialValuePlusMinusIntervals = [0.01]  # [0.005, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1]
 YInitialValueInterval = 0.01
 
 #################################
 # The Data
-trainData = "D:/BGU/RS/EXs/ex1/ex1/data/trainData.csv"  # used this line for console debug
-testData = "D:/BGU/RS/EXs/ex1/ex1/data/testData.csv"  # used this line for console debug
 trainData = './data/trainData.csv'
 testData = './data/testData.csv'
 
+
 ################################
-# Load Data
+# Helpers
+################################
+def cleanDataFromNulls(data):
+    len1 = len(data)
+    data.isnull().values.any()  # check validity of the data
+    data = data.dropna()
+    len2 = len(data)
+    print("removed [" + str(len2 - len1) + "]null data entries")
+    return data
+
+
+def splitTrainValidation(trainDataDF_all):
+    #   split train data to train and validations - take 30% of the users
+    #   then select 30% of the samples of those users to be the train data and all teh rest is teh test data
+    users = trainDataDF_all['user_id'].unique()
+    np.random.shuffle(users)
+    userSplit = int(len(users) * 0.7)
+    validation_users = users[userSplit:]
+    validationUsersData = trainDataDF_all.loc[trainDataDF_all['user_id'].isin(validation_users)]
+    validationDataDF = validationUsersData.sample(
+        frac=0.3,  # take 30% of the data of the usres we selected for training
+        random_state=seed)  # we take here 30% of the validaitons users ratings randomally
+    trainDataDF = trainDataDF_all.drop(validationDataDF.index)
+    trainDataDF = trainDataDF.sample(frac=1).reset_index(drop=True)  # shuffle train Data #todo: Check if really needed
+    trainProducts = trainDataDF['business_id'].unique()
+    trainUsers = trainDataDF['user_id'].unique()
+    # Clean validations from cold start
+    validationDataDF, missingProducts, missingUsers = cleanColdStarts(trainProducts, trainUsers, validationDataDF)
+    return validationDataDF, trainDataDF, trainProducts, trainUsers
+
+
+def cleanColdStarts(trainProducts, trainUsers, data_orig):
+    # clean validaiton data - remove all entries with new users or product (no cold start)
+    retData = data_orig.loc[data_orig['user_id'].isin(trainUsers)]
+    retData = retData.loc[retData['business_id'].isin(trainProducts)]
+    dataFilteredOut = data_orig.drop(retData.index)
+    missingProducts = dataFilteredOut['business_id'].unique()
+    missingUsers = dataFilteredOut['user_id'].unique()
+    return retData, missingProducts, missingUsers
+
+
+################################
+# load train data
 trainDataDF_all = load(trainData)
-################################
-
-# Clean Data
-len1 = len(trainDataDF_all)
-trainDataDF_all.isnull().values.any()  # check validity of the data
-trainDataDF_all = trainDataDF_all.dropna()
-len2 = len(trainDataDF_all)
-print("removed [" + str(len2 - len1) + "]null data entries")
-
-################################
-# Split train / validation
-#   split train data to train and validations - take 30% of the users
-#   then select 30% of the samples of those users to be the train data and all teh rest is teh test data
-products = trainDataDF_all['business_id'].unique()
-users = trainDataDF_all['user_id'].unique()
-np.random.shuffle(users)
-userSplit = int(len(users) * 0.7)
-train_users, validation_users = users[:userSplit], users[userSplit:]
-validationUsersData = trainDataDF_all.loc[trainDataDF_all['user_id'].isin(validation_users)]
-validationDataDF = validationUsersData.sample(
-    frac=0.3,  # take 30% of the data of the usres we selected for training
-    random_state=seed)  # we take here 30% of the validaitons users ratings randomally
-trainDataDF = trainDataDF_all.drop(validationDataDF.index)
-trainDataDF = trainDataDF.sample(frac=1).reset_index(drop=True)  # shuffle train Data #todo: Check if really needed
-
-trainProducts = trainDataDF['business_id'].unique()
-trainUsers = trainDataDF['user_id'].unique()
-
+trainDataDF_all = cleanDataFromNulls(trainDataDF_all)
+validationDataDF, trainDataDF, trainProducts, trainUsers = splitTrainValidation(trainDataDF_all)
 ################################
 # load test data
 testDataDF_orig = load(testData)
-
-################################
-# clean test and validaiton data - remove all entries with new users or product (no cold start)
-validationDataDF = validationDataDF.loc[validationDataDF['user_id'].isin(trainUsers)]
-validationDataDF = validationDataDF.loc[validationDataDF['business_id'].isin(trainProducts)]
-testDataDF = testDataDF_orig.loc[testDataDF_orig['user_id'].isin(trainUsers)]
-testDataDF = testDataDF.loc[testDataDF['business_id'].isin(trainProducts)]
-testDataFilteredOut = testDataDF_orig.drop(testDataDF.index)
-missingProducts = testDataFilteredOut['business_id'].unique()
-missingUsers = testDataFilteredOut['user_id'].unique()
-
+# Clean test from cold start
+testDataDF, missingProducts, missingUsers = cleanColdStarts(trainProducts, trainUsers, testDataDF_orig)
 ################################
 # run
+# We add an option to run a few options - to have multiple parameters tests
+# this was used to select the best lambda, Dalta and K
+# (we also tried a few different ranges for the P, Q, Y random values matrix
 for SVDpp in SVDppOptions:
     for K in Ks:
         for PQInitialValuePlusMinusInterval in PQInitialValuePlusMinusIntervals:
@@ -114,16 +130,47 @@ for SVDpp in SVDppOptions:
                                     lam2,  # = 0.07
                                     YInitialValueInterval  # = 0.01
                                     )
-                        ### sentiment ##
-                        ### ensamble ##
-                        ########   Predict on Test   ########
+
+                        ########   Predict SVD/SVD++ on Test   ########
                         predictBeginTime = time.time()
                         calculatedTestRates = mySvd.predictRates(testDataDF)
                         PredictTime = time.time() - predictBeginTime
-                        ######## Calc Error  ########
+
+                        if (ensamble):
+                            ### sentiment prediciton
+                            # build Sentiment Predictor using the same tarin data
+                            x, y_train, y_test = prepareDataForSemantic(trainDataDF_all, testDataDF)
+                            x = extract_features(x)
+                            x_train, x_test = split_and_reduce(x)
+                            x_train, x_test = apply_target_encoder(x_train, x_test, y_train, 'user_id', 1)
+                            classifier = train_classifier(x_train, y_train)
+                            ########   Predict using the semantic Predictor on Test   ########
+                            sentimentModelRatesPrediction = classifier.predict(x_test)
+
+                            ### Ensamble
+                            ensamblePrediciton = (sentimentModelRatesPrediction + calculatedTestRates) / 2
+
+                        ######## Calc Errors  ########
                         actuaTestRaes = testDataDF['stars'].to_list()
                         testRMSE = RMSE(actuaTestRaes, calculatedTestRates)
                         testMAE = MAE(actuaTestRaes, calculatedTestRates)
+
+                        testSentimentRMSE = None
+                        testSentimentMAE = None
+                        testEnsambleRMSE = None
+                        testEnsambleMAE = None
+                        ensambleStringResults = ""
+
+                        if (ensamble):
+                            testSentimentRMSE = RMSE(actuaTestRaes, sentimentModelRatesPrediction)
+                            testSentimentMAE = MAE(actuaTestRaes, sentimentModelRatesPrediction)
+                            testEnsambleRMSE = RMSE(actuaTestRaes, ensamblePrediciton)
+                            testEnsambleMAE = MAE(actuaTestRaes, ensamblePrediciton)
+                            ensambleStringResults = "testSentimentRMSE[" + str(testSentimentRMSE) + "]" \
+                                                    + "testSentimentMAE[" + str(testSentimentMAE) + "]" \
+                                                    + "testEnsambleRMSE[" + str(testEnsambleRMSE) + "]" \
+                                                    + "testEnsambleMAE[" + str(testEnsambleMAE) + "]"
+
                         ########Print results and save log to file  ########
                         printDebug("********************************************************")
                         strFinalResult = ("SVD "
@@ -150,6 +197,7 @@ for SVDpp in SVDppOptions:
                                           + "SVDpp[" + str(SVDpp) + "]"
                                           + "YInitialValuePlusMinusInterval[" + str(YInitialValueInterval) + "]"
                                           + 'host[' + socket.gethostname() + "]"
+                                          + ensambleStringResults
                                           )
                         printDebug(strFinalResult)
                         printDebug("********************************************************")
@@ -165,15 +213,16 @@ for SVDpp in SVDppOptions:
                                        + "B[" + str(BInitialValuePlusMinusInterval) + "]" \
                                        + "SVDpp[" + str(SVDpp) + "]" \
                                        + "Y[" + str(YInitialValueInterval) + "]" \
+                                       + ensambleStringResults \
                                        + 'host[' + socket.gethostname() + "]"
                         printToFile(".\\results\\" + fileBaseName + ".log")
                         ##########################################
-                        # Save the Model to be reused
+                        # Save the Model to be reused if needed
                         # dumpFileFullPath = ".\\dumps\\" + fileBaseName + ".dump"
                         # with open(dumpFileFullPath, 'wb') as fp:
                         #     pickle.dump(mySvd, fp)
                         ##########################################
-                        # Load the Model to be reused
+                        # Load the Model to be reused - sample code
                         # mySvdload = None
                         # with open(dumpFileFullPath, 'rb') as fp:
                         #     mySvdload = pickle.load(fp)
