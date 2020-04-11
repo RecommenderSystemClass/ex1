@@ -1,0 +1,942 @@
+Microsoft Windows [Version 10.0.17134.1365]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\gshamay.DALET>C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1\runDevGilsLt.bat
+
+C:\Users\gshamay.DALET>cd C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>C:\pycharmEnv\pythin37x64Env\Scripts\python.exe SVD.py
+LOAD: chunksNum[211]took[43.052135705947876]data[4209336]
+LOAD: chunksNum[53]took[8.6210196018219]data[1052334]
+users init took[10.584871053695679]
+items init took[1.2602722644805908]
+Beggining: K[200]lambda[0.03]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.7271536185355414]P len[1112556]Q len [174282]SVDpp[False]
+lastRMSE [9223372036854775806]currentRMSE[1.2383134605310382]iterations[1]SecIter[228.63439106941223]SecBegin[228.63439106941223]SVDpp[False]
+Traceback (most recent call last):
+  File "SVD.py", line 224, in <module>
+    trainDataDF.apply(handleRatingLine, axis=1)
+  File "C:\pycharmEnv\pythin37x64Env\lib\site-packages\pandas\core\frame.py", line 6878, in apply
+    return op.get_result()
+  File "C:\pycharmEnv\pythin37x64Env\lib\site-packages\pandas\core\apply.py", line 186, in get_result
+    return self.apply_standard()
+  File "C:\pycharmEnv\pythin37x64Env\lib\site-packages\pandas\core\apply.py", line 296, in apply_standard
+    values, self.f, axis=self.axis, dummy=dummy, labels=labels
+  File "pandas\_libs\reduction.pyx", line 620, in pandas._libs.reduction.compute_reduction
+  File "pandas\_libs\reduction.pyx", line 128, in pandas._libs.reduction.Reducer.get_result
+  File "SVD.py", line 183, in handleRatingLine
+    P[user_id] = p + delta * (Eui * q - lam * p)
+KeyboardInterrupt
+^CTerminate batch job (Y/N)?
+Terminate batch job (Y/N)?
+Terminate batch job (Y/N)? y
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1\runDevGilsLt.bat
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>cd C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>C:\pycharmEnv\pythin37x64Env\Scripts\python.exe SVD.py
+LOAD: chunksNum[211]took[42.04475283622742]data[4209336]
+LOAD: chunksNum[53]took[8.330010652542114]data[1052334]
+users init took[25.434308528900146]
+items init took[1.2412843704223633]
+Beggining: K[200]lambda[0.03]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2414277314099373]iterations[1]SecIter[336.4946999549866]SecBegin[336.4946999549866]SVDpp[True]
+lastRMSE [1.2414277314099373]currentRMSE[1.222562837459739]iterations[2]SecIter[330.10334634780884]SecBegin[666.5980463027954]SVDpp[True]
+lastRMSE [1.222562837459739]currentRMSE[1.214840886583689]iterations[3]SecIter[326.0466890335083]SecBegin[992.6457340717316]SVDpp[True]
+lastRMSE [1.214840886583689]currentRMSE[1.211059771854577]iterations[4]SecIter[326.73828887939453]SecBegin[1319.385020017624]SVDpp[True]
+lastRMSE [1.211059771854577]currentRMSE[1.2090769654022184]iterations[5]SecIter[326.5853765010834]SecBegin[1645.9713957309723]SVDpp[True]
+lastRMSE [1.2090769654022184]currentRMSE[1.2080579532754245]iterations[6]SecIter[327.66375517845154]SecBegin[1973.636151790619]SVDpp[True]
+lastRMSE [1.2080579532754245]currentRMSE[1.2076459297349174]iterations[7]SecIter[327.81366777420044]SecBegin[2301.4498195648193]SVDpp[True]
+lastRMSE [1.2076459297349174]currentRMSE[1.2076370862854813]iterations[8]SecIter[327.8876235485077]SecBegin[2629.338442325592]SVDpp[True]
+lastRMSE [1.2076370862854813]currentRMSE[1.2078796411447994]iterations[9]SecIter[326.6453425884247]SecBegin[2955.9847841262817]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2076370862854813]RMSE on Test[1.2080297508446631]K[200]lambda[0.03]delta[0.03]mu[3.727890002184941]learningTime[2955.9847841262817]PredictTime[126.83074831962585]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[9]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[45.25586223602295]
+items init took[3.8028054237365723]
+Beggining: K[200]lambda[0.03]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2344266451155057]iterations[1]SecIter[370.9902403354645]SecBegin[435.6815676689148]SVDpp[True]
+lastRMSE [1.2344266451155057]currentRMSE[1.2184269082298456]iterations[2]SecIter[331.35062313079834]SecBegin[767.0341894626617]SVDpp[True]
+lastRMSE [1.2184269082298456]currentRMSE[1.2127843730385017]iterations[3]SecIter[335.26836371421814]SecBegin[1102.3025531768799]SVDpp[True]
+lastRMSE [1.2127843730385017]currentRMSE[1.2104668018953963]iterations[4]SecIter[331.32463788986206]SecBegin[1433.6281907558441]SVDpp[True]
+lastRMSE [1.2104668018953963]currentRMSE[1.2096011573692982]iterations[5]SecIter[331.3866038322449]SecBegin[1765.0157945156097]SVDpp[True]
+lastRMSE [1.2096011573692982]currentRMSE[1.2096366358950024]iterations[6]SecIter[330.6490294933319]SecBegin[2095.665823698044]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2096011573692982]RMSE on Test[1.2097229106600353]K[200]lambda[0.03]delta[0.04]mu[3.727890002184941]learningTime[2095.665823698044]PredictTime[199.97451829910278]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[6]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[62.021273374557495]
+items init took[3.412027597427368]
+Beggining: K[200]lambda[0.03]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2306658537376631]iterations[1]SecIter[367.3308951854706]SecBegin[452.9370288848877]SVDpp[True]
+lastRMSE [1.2306658537376631]currentRMSE[1.217263657129249]iterations[2]SecIter[338.97821950912476]SecBegin[791.9162473678589]SVDpp[True]
+lastRMSE [1.217263657129249]currentRMSE[1.2131741796777507]iterations[3]SecIter[334.913076877594]SecBegin[1126.83132314682]SVDpp[True]
+lastRMSE [1.2131741796777507]currentRMSE[1.2118060901764047]iterations[4]SecIter[335.26536417007446]SecBegin[1462.0986859798431]SVDpp[True]
+lastRMSE [1.2118060901764047]currentRMSE[1.212008060718773]iterations[5]SecIter[335.86501812934875]SecBegin[1797.9647014141083]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2118060901764047]RMSE on Test[1.212340204079156]K[200]lambda[0.03]delta[0.05]mu[3.727890002184941]learningTime[1797.9657020568848]PredictTime[208.04588055610657]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[75.22954893112183]
+items init took[2.8324391841888428]
+Beggining: K[200]lambda[0.03]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2290435233836112]iterations[1]SecIter[361.88698840141296]SecBegin[438.3558225631714]SVDpp[True]
+lastRMSE [1.2290435233836112]currentRMSE[1.2178945863747308]iterations[2]SecIter[335.8910005092621]SecBegin[774.2478091716766]SVDpp[True]
+lastRMSE [1.2178945863747308]currentRMSE[1.2149962986629166]iterations[3]SecIter[335.05749893188477]SecBegin[1109.3053081035614]SVDpp[True]
+lastRMSE [1.2149962986629166]currentRMSE[1.214813127549256]iterations[4]SecIter[333.44041991233826]SecBegin[1442.7467274665833]SVDpp[True]
+lastRMSE [1.214813127549256]currentRMSE[1.2159057009040157]iterations[5]SecIter[332.5719037055969]SecBegin[1775.3196313381195]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.214813127549256]RMSE on Test[1.216166078040132]K[200]lambda[0.03]delta[0.06]mu[3.727890002184941]learningTime[1775.3216280937195]PredictTime[211.27199244499207]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[79.11030769348145]
+items init took[4.354485034942627]
+Beggining: K[200]lambda[0.03]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2288840282304494]iterations[1]SecIter[395.9649267196655]SecBegin[499.01427960395813]SVDpp[True]
+lastRMSE [1.2288840282304494]currentRMSE[1.2196239828527276]iterations[2]SecIter[337.337153673172]SecBegin[836.3544318675995]SVDpp[True]
+lastRMSE [1.2196239828527276]currentRMSE[1.2177449872456163]iterations[3]SecIter[336.06789994239807]SecBegin[1172.4233298301697]SVDpp[True]
+lastRMSE [1.2177449872456163]currentRMSE[1.2183939389685927]iterations[4]SecIter[336.16235613822937]SecBegin[1508.585685968399]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2177449872456163]RMSE on Test[1.2186931636056002]K[200]lambda[0.03]delta[0.07]mu[3.727890002184941]learningTime[1508.5876853466034]PredictTime[272.1617715358734]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[90.49963855743408]
+items init took[3.7009477615356445]
+Beggining: K[200]lambda[0.04]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2414892710156569]iterations[1]SecIter[413.69970059394836]SecBegin[574.3209195137024]SVDpp[True]
+lastRMSE [1.2414892710156569]currentRMSE[1.2226178356650461]iterations[2]SecIter[336.1268663406372]SecBegin[910.4497697353363]SVDpp[True]
+lastRMSE [1.2226178356650461]currentRMSE[1.214932900586221]iterations[3]SecIter[336.57760739326477]SecBegin[1247.027377128601]SVDpp[True]
+lastRMSE [1.214932900586221]currentRMSE[1.211229982409117]iterations[4]SecIter[336.2228090763092]SecBegin[1583.2501862049103]SVDpp[True]
+lastRMSE [1.211229982409117]currentRMSE[1.2093472171605097]iterations[5]SecIter[336.2907712459564]SecBegin[1919.5419571399689]SVDpp[True]
+lastRMSE [1.2093472171605097]currentRMSE[1.2083966736327398]iterations[6]SecIter[336.3517360687256]SecBegin[2255.8946928977966]SVDpp[True]
+lastRMSE [1.2083966736327398]currentRMSE[1.2079626216245645]iterations[7]SecIter[336.741525888443]SecBegin[2592.6372179985046]SVDpp[True]
+lastRMSE [1.2079626216245645]currentRMSE[1.207842107115976]iterations[8]SecIter[337.07432079315186]SecBegin[2929.7135236263275]SVDpp[True]
+lastRMSE [1.207842107115976]currentRMSE[1.2079284533823225]iterations[9]SecIter[337.8238859176636]SecBegin[3267.538407087326]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.207842107115976]RMSE on Test[1.2077855957840062]K[200]lambda[0.04]delta[0.03]mu[3.727890002184941]learningTime[3267.538407087326]PredictTime[284.68718218803406]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[9]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[93.08825922012329]
+items init took[1.762354850769043]
+Beggining: K[200]lambda[0.04]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2344631223445877]iterations[1]SecIter[470.0898234844208]SecBegin[538.762279510498]SVDpp[True]
+lastRMSE [1.2344631223445877]currentRMSE[1.2184226805180545]iterations[2]SecIter[335.7940573692322]SecBegin[874.5593204498291]SVDpp[True]
+lastRMSE [1.2184226805180545]currentRMSE[1.2128147344840225]iterations[3]SecIter[335.7920596599579]SecBegin[1210.351380109787]SVDpp[True]
+lastRMSE [1.2128147344840225]currentRMSE[1.2106232811113655]iterations[4]SecIter[337.0043613910675]SecBegin[1547.3557415008545]SVDpp[True]
+lastRMSE [1.2106232811113655]currentRMSE[1.2098139334344864]iterations[5]SecIter[334.3538889884949]SecBegin[1881.7106294631958]SVDpp[True]
+lastRMSE [1.2098139334344864]currentRMSE[1.2096684078772317]iterations[6]SecIter[334.4343686103821]SecBegin[2216.145997285843]SVDpp[True]
+lastRMSE [1.2096684078772317]currentRMSE[1.209954012981708]iterations[7]SecIter[336.4801821708679]SecBegin[2552.626179456711]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2096684078772317]RMSE on Test[1.2099128048838548]K[200]lambda[0.04]delta[0.04]mu[3.727890002184941]learningTime[2552.6281797885895]PredictTime[178.97264647483826]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[7]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[73.85434460639954]
+items init took[3.8947503566741943]
+Beggining: K[200]lambda[0.04]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2306536821657554]iterations[1]SecIter[407.4893796443939]SecBegin[598.6591060161591]SVDpp[True]
+lastRMSE [1.2306536821657554]currentRMSE[1.2172005700784587]iterations[2]SecIter[337.0973060131073]SecBegin[935.7614085674286]SVDpp[True]
+lastRMSE [1.2172005700784587]currentRMSE[1.213284967283179]iterations[3]SecIter[335.62415623664856]SecBegin[1271.3855648040771]SVDpp[True]
+lastRMSE [1.213284967283179]currentRMSE[1.2121077752832867]iterations[4]SecIter[335.81803035736084]SecBegin[1607.2055938243866]SVDpp[True]
+lastRMSE [1.2121077752832867]currentRMSE[1.2120047821879514]iterations[5]SecIter[334.4008798599243]SecBegin[1941.6084728240967]SVDpp[True]
+lastRMSE [1.2120047821879514]currentRMSE[1.2126230243679572]iterations[6]SecIter[334.97205662727356]SecBegin[2276.5815274715424]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2120047821879514]RMSE on Test[1.2126161522197276]K[200]lambda[0.04]delta[0.05]mu[3.727890002184941]learningTime[2276.5825283527374]PredictTime[329.76074838638306]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[6]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[88.2351381778717]
+items init took[1.3762195110321045]
+Beggining: K[200]lambda[0.04]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2289548391311111]iterations[1]SecIter[434.36882424354553]SecBegin[477.59182381629944]SVDpp[True]
+lastRMSE [1.2289548391311111]currentRMSE[1.2177953211533028]iterations[2]SecIter[334.54477858543396]SecBegin[812.1445972919464]SVDpp[True]
+lastRMSE [1.2177953211533028]currentRMSE[1.2150666385772684]iterations[3]SecIter[336.8104784488678]SecBegin[1148.9560749530792]SVDpp[True]
+lastRMSE [1.2150666385772684]currentRMSE[1.2144245245036203]iterations[4]SecIter[335.3213400840759]SecBegin[1484.2774150371552]SVDpp[True]
+lastRMSE [1.2144245245036203]currentRMSE[1.2150260341177583]iterations[5]SecIter[333.94211316108704]SecBegin[1818.22052693367]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2144245245036203]RMSE on Test[1.215207963984788]K[200]lambda[0.04]delta[0.06]mu[3.727890002184941]learningTime[1818.22052693367]PredictTime[211.63676691055298]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[85.70898604393005]
+items init took[7.672478199005127]
+Beggining: K[200]lambda[0.04]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2287931440907127]iterations[1]SecIter[423.44160747528076]SecBegin[542.418231010437]SVDpp[True]
+lastRMSE [1.2287931440907127]currentRMSE[1.219606748529057]iterations[2]SecIter[336.96837973594666]SecBegin[879.3956050872803]SVDpp[True]
+lastRMSE [1.219606748529057]currentRMSE[1.2176598209688076]iterations[3]SecIter[336.8994200229645]SecBegin[1216.2960245609283]SVDpp[True]
+lastRMSE [1.2176598209688076]currentRMSE[1.217721852735596]iterations[4]SecIter[336.04491353034973]SecBegin[1552.340938091278]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2176598209688076]RMSE on Test[1.2175251461302814]K[200]lambda[0.04]delta[0.07]mu[3.727890002184941]learningTime[1552.340938091278]PredictTime[257.75113463401794]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[80.89927458763123]
+items init took[4.5433948040008545]
+Beggining: K[200]lambda[0.05]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.241529784409018]iterations[1]SecIter[422.90956926345825]SecBegin[546.0703866481781]SVDpp[True]
+lastRMSE [1.241529784409018]currentRMSE[1.2226088522614327]iterations[2]SecIter[338.6683990955353]SecBegin[884.7467801570892]SVDpp[True]
+lastRMSE [1.2226088522614327]currentRMSE[1.2148817472733673]iterations[3]SecIter[336.8774325847626]SecBegin[1221.6252126693726]SVDpp[True]
+lastRMSE [1.2148817472733673]currentRMSE[1.2111498945455816]iterations[4]SecIter[335.7840647697449]SecBegin[1557.4102745056152]SVDpp[True]
+lastRMSE [1.2111498945455816]currentRMSE[1.2092573693851543]iterations[5]SecIter[338.53947257995605]SecBegin[1895.9497470855713]SVDpp[True]
+lastRMSE [1.2092573693851543]currentRMSE[1.2083166781471648]iterations[6]SecIter[350.3976471424103]SecBegin[2246.3483934402466]SVDpp[True]
+lastRMSE [1.2083166781471648]currentRMSE[1.2078986296283338]iterations[7]SecIter[337.25819182395935]SecBegin[2583.606585264206]SVDpp[True]
+lastRMSE [1.2078986296283338]currentRMSE[1.2077772231264219]iterations[8]SecIter[336.3007638454437]SecBegin[2919.9073491096497]SVDpp[True]
+lastRMSE [1.2077772231264219]currentRMSE[1.2078295615923205]iterations[9]SecIter[336.68054842948914]SecBegin[3256.587897539139]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2077772231264219]RMSE on Test[1.207790463223013]K[200]lambda[0.05]delta[0.03]mu[3.727890002184941]learningTime[3256.587897539139]PredictTime[161.5257089138031]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[9]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[70.43032193183899]
+items init took[2.764404535293579]
+Beggining: K[200]lambda[0.05]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2344857719974085]iterations[1]SecIter[372.3790605068207]SecBegin[471.5224390029907]SVDpp[True]
+lastRMSE [1.2344857719974085]currentRMSE[1.2183820411108102]iterations[2]SecIter[340.13553738594055]SecBegin[811.6659867763519]SVDpp[True]
+lastRMSE [1.2183820411108102]currentRMSE[1.2127289378917818]iterations[3]SecIter[338.38054847717285]SecBegin[1150.0485482215881]SVDpp[True]
+lastRMSE [1.2127289378917818]currentRMSE[1.2105423390506749]iterations[4]SecIter[337.95182752609253]SecBegin[1488.0013754367828]SVDpp[True]
+lastRMSE [1.2105423390506749]currentRMSE[1.2097980462996027]iterations[5]SecIter[338.064279794693]SecBegin[1826.0666418075562]SVDpp[True]
+lastRMSE [1.2097980462996027]currentRMSE[1.2096990162766805]iterations[6]SecIter[338.5414869785309]SecBegin[2164.609128475189]SVDpp[True]
+lastRMSE [1.2096990162766805]currentRMSE[1.2099188835446801]iterations[7]SecIter[338.12071442604065]SecBegin[2502.72984290123]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2096990162766805]RMSE on Test[1.20982320438196]K[200]lambda[0.05]delta[0.04]mu[3.727890002184941]learningTime[2502.730842590332]PredictTime[173.54476690292358]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[7]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[68.78427267074585]
+items init took[1.744978666305542]
+Beggining: K[200]lambda[0.05]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2306249783235854]iterations[1]SecIter[344.9292883872986]SecBegin[367.1074786186218]SVDpp[True]
+lastRMSE [1.2306249783235854]currentRMSE[1.217091796480495]iterations[2]SecIter[338.5444700717926]SecBegin[705.652948141098]SVDpp[True]
+lastRMSE [1.217091796480495]currentRMSE[1.2131684959495446]iterations[3]SecIter[338.4575321674347]SecBegin[1044.1114807128906]SVDpp[True]
+lastRMSE [1.2131684959495446]currentRMSE[1.2121156704955165]iterations[4]SecIter[337.87085795402527]SecBegin[1381.983324766159]SVDpp[True]
+lastRMSE [1.2121156704955165]currentRMSE[1.2120515929605518]iterations[5]SecIter[336.0469274520874]SecBegin[1718.0312514305115]SVDpp[True]
+lastRMSE [1.2120515929605518]currentRMSE[1.2124635569372417]iterations[6]SecIter[337.7059414386749]SecBegin[2055.7391912937164]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2120515929605518]RMSE on Test[1.2122679039845428]K[200]lambda[0.05]delta[0.05]mu[3.727890002184941]learningTime[2055.7391912937164]PredictTime[144.37761330604553]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[6]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[57.29690718650818]
+items init took[2.8433573246002197]
+Beggining: K[200]lambda[0.05]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2288944075270052]iterations[1]SecIter[355.7652645111084]SecBegin[384.3547508716583]SVDpp[True]
+lastRMSE [1.2288944075270052]currentRMSE[1.2176590955833972]iterations[2]SecIter[339.267053604126]SecBegin[723.6228034496307]SVDpp[True]
+lastRMSE [1.2176590955833972]currentRMSE[1.2150949027511408]iterations[3]SecIter[337.62000346183777]SecBegin[1061.2428069114685]SVDpp[True]
+lastRMSE [1.2150949027511408]currentRMSE[1.214698441030733]iterations[4]SecIter[338.43954610824585]SecBegin[1399.6833510398865]SVDpp[True]
+lastRMSE [1.214698441030733]currentRMSE[1.2150680031366634]iterations[5]SecIter[336.65554571151733]SecBegin[1736.3408949375153]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.214698441030733]RMSE on Test[1.2147700991166215]K[200]lambda[0.05]delta[0.06]mu[3.727890002184941]learningTime[1736.3408949375153]PredictTime[178.3469944000244]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[61.575435161590576]
+items init took[2.292675256729126]
+Beggining: K[200]lambda[0.05]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2286860989625374]iterations[1]SecIter[360.30490255355835]SecBegin[406.0694715976715]SVDpp[True]
+lastRMSE [1.2286860989625374]currentRMSE[1.2194653753292193]iterations[2]SecIter[340.3814101219177]SecBegin[746.4528789520264]SVDpp[True]
+lastRMSE [1.2194653753292193]currentRMSE[1.217781096222519]iterations[3]SecIter[340.9800636768341]SecBegin[1087.4339411258698]SVDpp[True]
+lastRMSE [1.217781096222519]currentRMSE[1.217550346508361]iterations[4]SecIter[340.80016827583313]SecBegin[1428.2351076602936]SVDpp[True]
+lastRMSE [1.217550346508361]currentRMSE[1.2182629793360362]iterations[5]SecIter[338.81031560897827]SecBegin[1767.0464220046997]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.217550346508361]RMSE on Test[1.2181543859339488]K[200]lambda[0.05]delta[0.07]mu[3.727890002184941]learningTime[1767.047422170639]PredictTime[169.18791437149048]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[60.069565296173096]
+items init took[2.340649366378784]
+Beggining: K[200]lambda[0.06]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2416170812725646]iterations[1]SecIter[352.1607596874237]SecBegin[362.23680806159973]SVDpp[True]
+lastRMSE [1.2416170812725646]currentRMSE[1.222655097889074]iterations[2]SecIter[341.1759521961212]SecBegin[703.4137446880341]SVDpp[True]
+lastRMSE [1.222655097889074]currentRMSE[1.2148860306141163]iterations[3]SecIter[340.57129764556885]SecBegin[1043.985042333603]SVDpp[True]
+lastRMSE [1.2148860306141163]currentRMSE[1.211118030249875]iterations[4]SecIter[339.2970359325409]SecBegin[1383.2830784320831]SVDpp[True]
+lastRMSE [1.211118030249875]currentRMSE[1.2091985166631343]iterations[5]SecIter[340.36941361427307]SecBegin[1723.654491186142]SVDpp[True]
+lastRMSE [1.2091985166631343]currentRMSE[1.2082427502478101]iterations[6]SecIter[339.8367245197296]SecBegin[2063.493215560913]SVDpp[True]
+lastRMSE [1.2082427502478101]currentRMSE[1.2078227365874856]iterations[7]SecIter[339.60285902023315]SecBegin[2403.0960745811462]SVDpp[True]
+lastRMSE [1.2078227365874856]currentRMSE[1.207710136967571]iterations[8]SecIter[338.98721575737]SecBegin[2742.084287881851]SVDpp[True]
+lastRMSE [1.207710136967571]currentRMSE[1.207775640722769]iterations[9]SecIter[340.09457635879517]SecBegin[3082.180861234665]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.207710136967571]RMSE on Test[1.2076744312353969]K[200]lambda[0.06]delta[0.03]mu[3.727890002184941]learningTime[3082.181860923767]PredictTime[192.47385454177856]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[9]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[70.32138395309448]
+items init took[2.9283082485198975]
+Beggining: K[200]lambda[0.06]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2345248990933484]iterations[1]SecIter[366.0985686779022]SecBegin[417.70077872276306]SVDpp[True]
+lastRMSE [1.2345248990933484]currentRMSE[1.218356345729449]iterations[2]SecIter[339.0381853580475]SecBegin[756.7409625053406]SVDpp[True]
+lastRMSE [1.218356345729449]currentRMSE[1.21264860432793]iterations[3]SecIter[340.9390866756439]SecBegin[1097.682047843933]SVDpp[True]
+lastRMSE [1.21264860432793]currentRMSE[1.2104305388541483]iterations[4]SecIter[339.98064041137695]SecBegin[1437.6636877059937]SVDpp[True]
+lastRMSE [1.2104305388541483]currentRMSE[1.2096943102864313]iterations[5]SecIter[339.338009595871]SecBegin[1777.0027134418488]SVDpp[True]
+lastRMSE [1.2096943102864313]currentRMSE[1.2096425096745849]iterations[6]SecIter[338.75533413887024]SecBegin[2115.7590477466583]SVDpp[True]
+lastRMSE [1.2096425096745849]currentRMSE[1.209911654918461]iterations[7]SecIter[339.5738754272461]SecBegin[2455.333922624588]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2096425096745849]RMSE on Test[1.209780614048606]K[200]lambda[0.06]delta[0.04]mu[3.727890002184941]learningTime[2455.3359208106995]PredictTime[209.33541822433472]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[7]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[73.59449315071106]
+items init took[4.563364267349243]
+Beggining: K[200]lambda[0.06]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2306451189839278]iterations[1]SecIter[370.7819368839264]SecBegin[412.20601415634155]SVDpp[True]
+lastRMSE [1.2306451189839278]currentRMSE[1.217025645629353]iterations[2]SecIter[338.709374666214]SecBegin[750.9193866252899]SVDpp[True]
+lastRMSE [1.217025645629353]currentRMSE[1.2130515942449902]iterations[3]SecIter[338.7793343067169]SecBegin[1089.700719833374]SVDpp[True]
+lastRMSE [1.2130515942449902]currentRMSE[1.2120393741933995]iterations[4]SecIter[340.1125645637512]SecBegin[1429.8142836093903]SVDpp[True]
+lastRMSE [1.2120393741933995]currentRMSE[1.2121116367249565]iterations[5]SecIter[339.3390111923218]SecBegin[1769.154294013977]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2120393741933995]RMSE on Test[1.2119725133774302]K[200]lambda[0.06]delta[0.05]mu[3.727890002184941]learningTime[1769.1552937030792]PredictTime[188.41018152236938]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[72.25437068939209]
+items init took[3.9856977462768555]
+Beggining: K[200]lambda[0.06]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2288694279115253]iterations[1]SecIter[412.6661276817322]SecBegin[507.113578081131]SVDpp[True]
+lastRMSE [1.2288694279115253]currentRMSE[1.217539565792778]iterations[2]SecIter[345.35453820228577]SecBegin[852.4721138477325]SVDpp[True]
+lastRMSE [1.217539565792778]currentRMSE[1.214974571761477]iterations[3]SecIter[345.27657985687256]SecBegin[1197.748693704605]SVDpp[True]
+lastRMSE [1.214974571761477]currentRMSE[1.2147379984612883]iterations[4]SecIter[343.95034766197205]SecBegin[1541.6990413665771]SVDpp[True]
+lastRMSE [1.2147379984612883]currentRMSE[1.2151090759560585]iterations[5]SecIter[343.95434522628784]SecBegin[1885.653386592865]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2147379984612883]RMSE on Test[1.2149718063633108]K[200]lambda[0.06]delta[0.06]mu[3.727890002184941]learningTime[1885.653386592865]PredictTime[166.7487347126007]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[95.29294872283936]
+items init took[3.3690555095672607]
+Beggining: K[200]lambda[0.06]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2285910697812816]iterations[1]SecIter[374.8846106529236]SecBegin[451.03969073295593]SVDpp[True]
+lastRMSE [1.2285910697812816]currentRMSE[1.2192944530184606]iterations[2]SecIter[342.9259548187256]SecBegin[793.9676427841187]SVDpp[True]
+lastRMSE [1.2192944530184606]currentRMSE[1.2178271869775834]iterations[3]SecIter[341.57670497894287]SecBegin[1135.5453474521637]SVDpp[True]
+lastRMSE [1.2178271869775834]currentRMSE[1.2179745815784355]iterations[4]SecIter[337.9837942123413]SecBegin[1473.53013920784]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2178271869775834]RMSE on Test[1.217761985001913]K[200]lambda[0.06]delta[0.07]mu[3.727890002184941]learningTime[1473.5311388969421]PredictTime[112.84589862823486]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[61.11526584625244]
+items init took[1.2542879581451416]
+Beggining: K[200]lambda[0.07]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.24171440713324]iterations[1]SecIter[336.46366715431213]SecBegin[337.24621200561523]SVDpp[True]
+lastRMSE [1.24171440713324]currentRMSE[1.2227138162517313]iterations[2]SecIter[337.0822994709015]SecBegin[674.3285114765167]SVDpp[True]
+lastRMSE [1.2227138162517313]currentRMSE[1.2149036774026607]iterations[3]SecIter[336.4686689376831]SecBegin[1010.7971804141998]SVDpp[True]
+lastRMSE [1.2149036774026607]currentRMSE[1.2110973613080653]iterations[4]SecIter[337.514066696167]SecBegin[1348.3112471103668]SVDpp[True]
+lastRMSE [1.2110973613080653]currentRMSE[1.2091440802564402]iterations[5]SecIter[336.4992046356201]SecBegin[1684.810451745987]SVDpp[True]
+lastRMSE [1.2091440802564402]currentRMSE[1.208160122521667]iterations[6]SecIter[337.6569802761078]SecBegin[2022.4684138298035]SVDpp[True]
+lastRMSE [1.208160122521667]currentRMSE[1.2077181433225859]iterations[7]SecIter[336.9614055156708]SecBegin[2359.4298193454742]SVDpp[True]
+lastRMSE [1.2077181433225859]currentRMSE[1.2075899229274487]iterations[8]SecIter[337.6249809265137]SecBegin[2697.054800271988]SVDpp[True]
+lastRMSE [1.2075899229274487]currentRMSE[1.207645469804664]iterations[9]SecIter[336.99738216400146]SecBegin[3034.0521824359894]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2075899229274487]RMSE on Test[1.207554944923828]K[200]lambda[0.07]delta[0.03]mu[3.727890002184941]learningTime[3034.0521824359894]PredictTime[90.96245980262756]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[9]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[60.27221369743347]
+items init took[1.2522759437561035]
+Beggining: K[200]lambda[0.07]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2345950606707108]iterations[1]SecIter[343.80243134498596]SecBegin[344.6209599971771]SVDpp[True]
+lastRMSE [1.2345950606707108]currentRMSE[1.2183679894866082]iterations[2]SecIter[342.06044030189514]SecBegin[686.6814002990723]SVDpp[True]
+lastRMSE [1.2183679894866082]currentRMSE[1.2126089780323972]iterations[3]SecIter[341.740642786026]SecBegin[1028.4220430850983]SVDpp[True]
+lastRMSE [1.2126089780323972]currentRMSE[1.2103530565386993]iterations[4]SecIter[342.8200011253357]SecBegin[1371.242044210434]SVDpp[True]
+lastRMSE [1.2103530565386993]currentRMSE[1.2095988837555098]iterations[5]SecIter[340.68420147895813]SecBegin[1711.9272594451904]SVDpp[True]
+lastRMSE [1.2095988837555098]currentRMSE[1.209553638223672]iterations[6]SecIter[342.5371618270874]SecBegin[2054.464421272278]SVDpp[True]
+lastRMSE [1.209553638223672]currentRMSE[1.2098493730823014]iterations[7]SecIter[342.4982008934021]SecBegin[2396.9636268615723]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.209553638223672]RMSE on Test[1.2096850467782492]K[200]lambda[0.07]delta[0.04]mu[3.727890002184941]learningTime[2396.9636268615723]PredictTime[101.96311020851135]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[7]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[63.81615662574768]
+items init took[1.2452919483184814]
+Beggining: K[200]lambda[0.07]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2306471101392389]iterations[1]SecIter[341.2419114112854]SecBegin[342.0374336242676]SVDpp[True]
+lastRMSE [1.2306471101392389]currentRMSE[1.2169626918300314]iterations[2]SecIter[341.10399079322815]SecBegin[683.1414244174957]SVDpp[True]
+lastRMSE [1.2169626918300314]currentRMSE[1.2129362260881786]iterations[3]SecIter[341.2379150390625]SecBegin[1024.3803396224976]SVDpp[True]
+lastRMSE [1.2129362260881786]currentRMSE[1.2119085159378]iterations[4]SecIter[341.40083837509155]SecBegin[1365.781177997589]SVDpp[True]
+lastRMSE [1.2119085159378]currentRMSE[1.2120231204671148]iterations[5]SecIter[341.1069703102112]SecBegin[1706.8881483078003]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2119085159378]RMSE on Test[1.2118942849986205]K[200]lambda[0.07]delta[0.05]mu[3.727890002184941]learningTime[1706.8881483078003]PredictTime[98.85690379142761]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[64.18394804000854]
+items init took[1.2582547664642334]
+Beggining: K[200]lambda[0.07]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2288218995694193]iterations[1]SecIter[342.6091024875641]SecBegin[343.42465114593506]SVDpp[True]
+lastRMSE [1.2288218995694193]currentRMSE[1.2174120395137233]iterations[2]SecIter[341.30089807510376]SecBegin[684.7255492210388]SVDpp[True]
+lastRMSE [1.2174120395137233]currentRMSE[1.21482267090843]iterations[3]SecIter[342.3012328147888]SecBegin[1027.0267820358276]SVDpp[True]
+lastRMSE [1.21482267090843]currentRMSE[1.2147030230371887]iterations[4]SecIter[345.70747566223145]SecBegin[1372.734257698059]SVDpp[True]
+lastRMSE [1.2147030230371887]currentRMSE[1.2153197356811207]iterations[5]SecIter[348.25830817222595]SecBegin[1720.9935455322266]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2147030230371887]RMSE on Test[1.2150660487590705]K[200]lambda[0.07]delta[0.06]mu[3.727890002184941]learningTime[1720.9935455322266]PredictTime[127.52193188667297]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[68.64096069335938]
+items init took[1.319260597229004]
+Beggining: K[200]lambda[0.07]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.228547642607578]iterations[1]SecIter[343.344375371933]SecBegin[344.38878655433655]SVDpp[True]
+lastRMSE [1.228547642607578]currentRMSE[1.2191552376696333]iterations[2]SecIter[337.38483142852783]SecBegin[681.7736179828644]SVDpp[True]
+lastRMSE [1.2191552376696333]currentRMSE[1.2177142338269644]iterations[3]SecIter[337.3014316558838]SecBegin[1019.0750496387482]SVDpp[True]
+lastRMSE [1.2177142338269644]currentRMSE[1.2181110143238907]iterations[4]SecIter[344.26516485214233]SecBegin[1363.3402144908905]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2177142338269644]RMSE on Test[1.2178659847376172]K[200]lambda[0.07]delta[0.07]mu[3.727890002184941]learningTime[1363.3402144908905]PredictTime[104.88342380523682]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[60.96290850639343]
+items init took[1.2472803592681885]
+Beggining: K[100]lambda[0.03]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.241457397056635]iterations[1]SecIter[319.8212823867798]SecBegin[323.0324275493622]SVDpp[True]
+lastRMSE [1.241457397056635]currentRMSE[1.222609102961478]iterations[2]SecIter[320.89168524742126]SecBegin[643.9251120090485]SVDpp[True]
+lastRMSE [1.222609102961478]currentRMSE[1.2149294817466423]iterations[3]SecIter[319.17363929748535]SecBegin[963.0987513065338]SVDpp[True]
+lastRMSE [1.2149294817466423]currentRMSE[1.2112049335829125]iterations[4]SecIter[319.86425948143005]SecBegin[1282.9630107879639]SVDpp[True]
+lastRMSE [1.2112049335829125]currentRMSE[1.2092851013553958]iterations[5]SecIter[320.3309898376465]SecBegin[1603.2949991226196]SVDpp[True]
+lastRMSE [1.2092851013553958]currentRMSE[1.208324107015169]iterations[6]SecIter[320.31501817703247]SecBegin[1923.610017299652]SVDpp[True]
+lastRMSE [1.208324107015169]currentRMSE[1.2079554261156844]iterations[7]SecIter[319.6753487586975]SecBegin[2243.2853660583496]SVDpp[True]
+lastRMSE [1.2079554261156844]currentRMSE[1.207988713762195]iterations[8]SecIter[319.9826123714447]SecBegin[2563.2679784297943]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2079554261156844]RMSE on Test[1.2080046274565226]K[100]lambda[0.03]delta[0.03]mu[3.727890002184941]learningTime[2563.2679784297943]PredictTime[93.85356163978577]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[8]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[35.39666962623596]
+items init took[1.0819799900054932]
+Beggining: K[100]lambda[0.03]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2344349539745363]iterations[1]SecIter[312.1143448352814]SecBegin[313.01351380348206]SVDpp[True]
+lastRMSE [1.2344349539745363]currentRMSE[1.2184513175539247]iterations[2]SecIter[312.13060092926025]SecBegin[625.1441147327423]SVDpp[True]
+lastRMSE [1.2184513175539247]currentRMSE[1.2128615631657007]iterations[3]SecIter[311.333123922348]SecBegin[936.4772386550903]SVDpp[True]
+lastRMSE [1.2128615631657007]currentRMSE[1.210650040336692]iterations[4]SecIter[310.62792110443115]SecBegin[1247.1051597595215]SVDpp[True]
+lastRMSE [1.210650040336692]currentRMSE[1.2099218842022208]iterations[5]SecIter[311.88448882102966]SecBegin[1558.9906482696533]SVDpp[True]
+lastRMSE [1.2099218842022208]currentRMSE[1.2101186935496104]iterations[6]SecIter[311.0903763771057]SecBegin[1870.081024646759]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2099218842022208]RMSE on Test[1.2100208014420755]K[100]lambda[0.03]delta[0.04]mu[3.727890002184941]learningTime[1870.081024646759]PredictTime[67.20483565330505]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[6]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[29.749670028686523]
+items init took[1.0444059371948242]
+Beggining: K[100]lambda[0.03]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.230673916131847]iterations[1]SecIter[309.80127787590027]SecBegin[310.6857430934906]SVDpp[True]
+lastRMSE [1.230673916131847]currentRMSE[1.2173034278170118]iterations[2]SecIter[309.2388958930969]SecBegin[619.9246389865875]SVDpp[True]
+lastRMSE [1.2173034278170118]currentRMSE[1.2134037233705472]iterations[3]SecIter[309.27386593818665]SecBegin[929.1985049247742]SVDpp[True]
+lastRMSE [1.2134037233705472]currentRMSE[1.2123454488341041]iterations[4]SecIter[309.93024158477783]SecBegin[1239.128746509552]SVDpp[True]
+lastRMSE [1.2123454488341041]currentRMSE[1.2128651327473208]iterations[5]SecIter[308.72484254837036]SecBegin[1547.8545684814453]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2123454488341041]RMSE on Test[1.2130508223526761]K[100]lambda[0.03]delta[0.05]mu[3.727890002184941]learningTime[1547.8545684814453]PredictTime[58.273831367492676]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[30.641427993774414]
+items init took[0.9969899654388428]
+Beggining: K[100]lambda[0.03]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2290325724669278]iterations[1]SecIter[308.0443046092987]SecBegin[308.94040989875793]SVDpp[True]
+lastRMSE [1.2290325724669278]currentRMSE[1.217994891605836]iterations[2]SecIter[307.54043555259705]SecBegin[616.480845451355]SVDpp[True]
+lastRMSE [1.217994891605836]currentRMSE[1.2154922246758537]iterations[3]SecIter[308.1876037120819]SecBegin[924.6684491634369]SVDpp[True]
+lastRMSE [1.2154922246758537]currentRMSE[1.2157837936503073]iterations[4]SecIter[313.0463364124298]SecBegin[1237.7147855758667]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2154922246758537]RMSE on Test[1.2159304453464448]K[100]lambda[0.03]delta[0.06]mu[3.727890002184941]learningTime[1237.7157855033875]PredictTime[56.864057302474976]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[28.43502902984619]
+items init took[1.0143930912017822]
+Beggining: K[100]lambda[0.03]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.228909903379796]iterations[1]SecIter[319.59425377845764]SecBegin[320.48073744773865]SVDpp[True]
+lastRMSE [1.228909903379796]currentRMSE[1.2198435795659237]iterations[2]SecIter[318.9638545513153]SecBegin[639.444591999054]SVDpp[True]
+lastRMSE [1.2198435795659237]currentRMSE[1.218616641672614]iterations[3]SecIter[317.44913601875305]SecBegin[956.893728017807]SVDpp[True]
+lastRMSE [1.218616641672614]currentRMSE[1.220855635670157]iterations[4]SecIter[309.6798324584961]SecBegin[1266.573560476303]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.218616641672614]RMSE on Test[1.2212114100647067]K[100]lambda[0.03]delta[0.07]mu[3.727890002184941]learningTime[1266.573560476303]PredictTime[55.622464418411255]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.05385446548462]
+items init took[1.0093903541564941]
+Beggining: K[100]lambda[0.04]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2415090760210747]iterations[1]SecIter[308.12826108932495]SecBegin[309.0137436389923]SVDpp[True]
+lastRMSE [1.2415090760210747]currentRMSE[1.222630917987068]iterations[2]SecIter[309.8528871536255]SecBegin[618.8666307926178]SVDpp[True]
+lastRMSE [1.222630917987068]currentRMSE[1.2149470109229004]iterations[3]SecIter[309.0166413784027]SecBegin[927.8832721710205]SVDpp[True]
+lastRMSE [1.2149470109229004]currentRMSE[1.2112536054732876]iterations[4]SecIter[309.4493432044983]SecBegin[1237.3326153755188]SVDpp[True]
+lastRMSE [1.2112536054732876]currentRMSE[1.2093912227571522]iterations[5]SecIter[309.54524755477905]SecBegin[1546.8778629302979]SVDpp[True]
+lastRMSE [1.2093912227571522]currentRMSE[1.208470987315757]iterations[6]SecIter[309.2521107196808]SecBegin[1856.1299736499786]SVDpp[True]
+lastRMSE [1.208470987315757]currentRMSE[1.208069100979978]iterations[7]SecIter[308.39552998542786]SecBegin[2164.5255036354065]SVDpp[True]
+lastRMSE [1.208069100979978]currentRMSE[1.2079722687743166]iterations[8]SecIter[309.85753083229065]SecBegin[2474.383034467697]SVDpp[True]
+lastRMSE [1.2079722687743166]currentRMSE[1.2080703759466218]iterations[9]SecIter[308.95865869522095]SecBegin[2783.341693162918]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2079722687743166]RMSE on Test[1.208005914583223]K[100]lambda[0.04]delta[0.03]mu[3.727890002184941]learningTime[2783.341693162918]PredictTime[57.453006744384766]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[9]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.204094409942627]
+items init took[1.0094056129455566]
+Beggining: K[100]lambda[0.04]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2344581796264538]iterations[1]SecIter[309.74985003471375]SecBegin[310.63736057281494]SVDpp[True]
+lastRMSE [1.2344581796264538]currentRMSE[1.2184196655693147]iterations[2]SecIter[308.65343737602234]SecBegin[619.2907979488373]SVDpp[True]
+lastRMSE [1.2184196655693147]currentRMSE[1.212831972982194]iterations[3]SecIter[309.2381179332733]SecBegin[928.5289158821106]SVDpp[True]
+lastRMSE [1.212831972982194]currentRMSE[1.210705635367754]iterations[4]SecIter[309.58543515205383]SecBegin[1238.1143510341644]SVDpp[True]
+lastRMSE [1.210705635367754]currentRMSE[1.210019810848277]iterations[5]SecIter[309.0866768360138]SecBegin[1547.2010278701782]SVDpp[True]
+lastRMSE [1.210019810848277]currentRMSE[1.2100148341720847]iterations[6]SecIter[308.52610659599304]SecBegin[1855.7271344661713]SVDpp[True]
+lastRMSE [1.2100148341720847]currentRMSE[1.210428460143985]iterations[7]SecIter[309.5048780441284]SecBegin[2165.2320125102997]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2100148341720847]RMSE on Test[1.210260741368543]K[100]lambda[0.04]delta[0.04]mu[3.727890002184941]learningTime[2165.2320125102997]PredictTime[57.53055000305176]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[7]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.745466947555542]
+items init took[1.0253677368164062]
+Beggining: K[100]lambda[0.04]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.230646328084592]iterations[1]SecIter[308.9105706214905]SecBegin[309.8019926548004]SVDpp[True]
+lastRMSE [1.230646328084592]currentRMSE[1.2172049974176318]iterations[2]SecIter[308.4137473106384]SecBegin[618.2157399654388]SVDpp[True]
+lastRMSE [1.2172049974176318]currentRMSE[1.213358989258166]iterations[3]SecIter[309.72498393058777]SecBegin[927.9407238960266]SVDpp[True]
+lastRMSE [1.213358989258166]currentRMSE[1.2123661777137937]iterations[4]SecIter[308.05140018463135]SecBegin[1235.9931335449219]SVDpp[True]
+lastRMSE [1.2123661777137937]currentRMSE[1.2124872280510344]iterations[5]SecIter[309.1957666873932]SecBegin[1545.188900232315]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2123661777137937]RMSE on Test[1.2123660041828472]K[100]lambda[0.04]delta[0.05]mu[3.727890002184941]learningTime[1545.188900232315]PredictTime[56.64472150802612]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[30.91684055328369]
+items init took[1.031379222869873]
+Beggining: K[100]lambda[0.04]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2289518905173558]iterations[1]SecIter[309.146625995636]SecBegin[310.0361032485962]SVDpp[True]
+lastRMSE [1.2289518905173558]currentRMSE[1.2178201865991185]iterations[2]SecIter[309.27098631858826]SecBegin[619.3070895671844]SVDpp[True]
+lastRMSE [1.2178201865991185]currentRMSE[1.2152961185865976]iterations[3]SecIter[309.5546238422394]SecBegin[928.8617134094238]SVDpp[True]
+lastRMSE [1.2152961185865976]currentRMSE[1.2150528098690114]iterations[4]SecIter[309.60803747177124]SecBegin[1238.469750881195]SVDpp[True]
+lastRMSE [1.2150528098690114]currentRMSE[1.2161865534365168]iterations[5]SecIter[308.82585406303406]SecBegin[1547.2956049442291]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2150528098690114]RMSE on Test[1.2161716002695229]K[100]lambda[0.04]delta[0.06]mu[3.727890002184941]learningTime[1547.2956049442291]PredictTime[57.3410758972168]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[30.814311027526855]
+items init took[1.0144307613372803]
+Beggining: K[100]lambda[0.04]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.228791744271265]iterations[1]SecIter[308.6606457233429]SecBegin[309.5471384525299]SVDpp[True]
+lastRMSE [1.228791744271265]currentRMSE[1.2196840853516446]iterations[2]SecIter[308.9027318954468]SecBegin[618.4498703479767]SVDpp[True]
+lastRMSE [1.2196840853516446]currentRMSE[1.2181184814483528]iterations[3]SecIter[308.58639574050903]SecBegin[927.0362660884857]SVDpp[True]
+lastRMSE [1.2181184814483528]currentRMSE[1.21885489041407]iterations[4]SecIter[310.6289150714874]SecBegin[1237.6651811599731]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2181184814483528]RMSE on Test[1.2189701040720664]K[100]lambda[0.04]delta[0.07]mu[3.727890002184941]learningTime[1237.6651811599731]PredictTime[56.87301206588745]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[30.963041305541992]
+items init took[1.0164299011230469]
+Beggining: K[100]lambda[0.05]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2415462766039405]iterations[1]SecIter[308.8336434364319]SecBegin[309.71712493896484]SVDpp[True]
+lastRMSE [1.2415462766039405]currentRMSE[1.2226260153813748]iterations[2]SecIter[309.0733368396759]SecBegin[618.7904617786407]SVDpp[True]
+lastRMSE [1.2226260153813748]currentRMSE[1.2149020612195411]iterations[3]SecIter[309.1656959056854]SecBegin[927.9561576843262]SVDpp[True]
+lastRMSE [1.2149020612195411]currentRMSE[1.211176626753469]iterations[4]SecIter[308.82587122917175]SecBegin[1236.783028125763]SVDpp[True]
+lastRMSE [1.211176626753469]currentRMSE[1.2092954026898777]iterations[5]SecIter[308.60336899757385]SecBegin[1545.3863971233368]SVDpp[True]
+lastRMSE [1.2092954026898777]currentRMSE[1.2083725061385069]iterations[6]SecIter[308.90921688079834]SecBegin[1854.2956140041351]SVDpp[True]
+lastRMSE [1.2083725061385069]currentRMSE[1.2079791797576154]iterations[7]SecIter[308.32809352874756]SecBegin[2162.624706029892]SVDpp[True]
+lastRMSE [1.2079791797576154]currentRMSE[1.2078874386321379]iterations[8]SecIter[309.32751178741455]SecBegin[2471.9522178173065]SVDpp[True]
+lastRMSE [1.2078874386321379]currentRMSE[1.207970195421957]iterations[9]SecIter[309.11051201820374]SecBegin[2781.0627298355103]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2078874386321379]RMSE on Test[1.2078660258195937]K[100]lambda[0.05]delta[0.03]mu[3.727890002184941]learningTime[2781.0637233257294]PredictTime[56.88201689720154]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[9]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.143425703048706]
+items init took[1.0303707122802734]
+Beggining: K[100]lambda[0.05]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2344829095294465]iterations[1]SecIter[314.93043398857117]SecBegin[315.8548970222473]SVDpp[True]
+lastRMSE [1.2344829095294465]currentRMSE[1.2183766972006034]iterations[2]SecIter[309.282568693161]SecBegin[625.1374657154083]SVDpp[True]
+lastRMSE [1.2183766972006034]currentRMSE[1.2127322479762772]iterations[3]SecIter[308.437548160553]SecBegin[933.5750138759613]SVDpp[True]
+lastRMSE [1.2127322479762772]currentRMSE[1.2105720123339763]iterations[4]SecIter[309.7542440891266]SecBegin[1243.329257965088]SVDpp[True]
+lastRMSE [1.2105720123339763]currentRMSE[1.209883413878189]iterations[5]SecIter[308.8666923046112]SecBegin[1552.195950269699]SVDpp[True]
+lastRMSE [1.209883413878189]currentRMSE[1.2098688888835658]iterations[6]SecIter[309.5172002315521]SecBegin[1861.7131505012512]SVDpp[True]
+lastRMSE [1.2098688888835658]currentRMSE[1.2101791525619117]iterations[7]SecIter[308.15313029289246]SecBegin[2169.8662807941437]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2098688888835658]RMSE on Test[1.2100564275963999]K[100]lambda[0.05]delta[0.04]mu[3.727890002184941]learningTime[2169.8662807941437]PredictTime[57.345548152923584]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[7]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.15282964706421]
+items init took[1.0194189548492432]
+Beggining: K[100]lambda[0.05]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2306306947877201]iterations[1]SecIter[309.9250113964081]SecBegin[310.8155071735382]SVDpp[True]
+lastRMSE [1.2306306947877201]currentRMSE[1.217098815333396]iterations[2]SecIter[309.49515199661255]SecBegin[620.3106591701508]SVDpp[True]
+lastRMSE [1.217098815333396]currentRMSE[1.2132103608030864]iterations[3]SecIter[310.46083211898804]SecBegin[930.7714912891388]SVDpp[True]
+lastRMSE [1.2132103608030864]currentRMSE[1.2122651488571698]iterations[4]SecIter[309.13026189804077]SecBegin[1239.9017531871796]SVDpp[True]
+lastRMSE [1.2122651488571698]currentRMSE[1.2123805774470586]iterations[5]SecIter[309.44128608703613]SecBegin[1549.3430392742157]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2122651488571698]RMSE on Test[1.2122857275757895]K[100]lambda[0.05]delta[0.05]mu[3.727890002184941]learningTime[1549.3430392742157]PredictTime[56.5147430896759]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.326586484909058]
+items init took[1.0433719158172607]
+Beggining: K[100]lambda[0.05]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2289005768645267]iterations[1]SecIter[309.51810240745544]SecBegin[310.4046025276184]SVDpp[True]
+lastRMSE [1.2289005768645267]currentRMSE[1.2176831672876534]iterations[2]SecIter[309.1438875198364]SecBegin[619.5484900474548]SVDpp[True]
+lastRMSE [1.2176831672876534]currentRMSE[1.2152336422046544]iterations[3]SecIter[309.80075907707214]SecBegin[929.349249124527]SVDpp[True]
+lastRMSE [1.2152336422046544]currentRMSE[1.2151315515399983]iterations[4]SecIter[309.61377716064453]SecBegin[1238.9630262851715]SVDpp[True]
+lastRMSE [1.2151315515399983]currentRMSE[1.2158529391208721]iterations[5]SecIter[309.2357325553894]SecBegin[1548.1997537612915]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2151315515399983]RMSE on Test[1.2156176163521535]K[100]lambda[0.05]delta[0.06]mu[3.727890002184941]learningTime[1548.1997537612915]PredictTime[56.93581175804138]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.639557123184204]
+items init took[1.0244028568267822]
+Beggining: K[100]lambda[0.05]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2286719590678354]iterations[1]SecIter[309.08883595466614]SecBegin[310.0143129825592]SVDpp[True]
+lastRMSE [1.2286719590678354]currentRMSE[1.2195037076323756]iterations[2]SecIter[310.903391122818]SecBegin[620.9177041053772]SVDpp[True]
+lastRMSE [1.2195037076323756]currentRMSE[1.2181219444997569]iterations[3]SecIter[308.87596440315247]SecBegin[929.7936685085297]SVDpp[True]
+lastRMSE [1.2181219444997569]currentRMSE[1.2184957032539343]iterations[4]SecIter[309.8571078777313]SecBegin[1239.650776386261]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2181219444997569]RMSE on Test[1.21838534723931]K[100]lambda[0.05]delta[0.07]mu[3.727890002184941]learningTime[1239.650776386261]PredictTime[58.18944978713989]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.354019165039062]
+items init took[1.0013306140899658]
+Beggining: K[100]lambda[0.06]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2416154312020753]iterations[1]SecIter[309.1957628726959]SecBegin[310.0831489562988]SVDpp[True]
+lastRMSE [1.2416154312020753]currentRMSE[1.22264894961325]iterations[2]SecIter[307.9554717540741]SecBegin[618.0386207103729]SVDpp[True]
+lastRMSE [1.22264894961325]currentRMSE[1.2148791797293241]iterations[3]SecIter[309.8855414390564]SecBegin[927.9251616001129]SVDpp[True]
+lastRMSE [1.2148791797293241]currentRMSE[1.2111128573147767]iterations[4]SecIter[308.61819076538086]SecBegin[1236.5433523654938]SVDpp[True]
+lastRMSE [1.2111128573147767]currentRMSE[1.209197343085746]iterations[5]SecIter[309.6139681339264]SecBegin[1546.1573204994202]SVDpp[True]
+lastRMSE [1.209197343085746]currentRMSE[1.2082481222315795]iterations[6]SecIter[308.86150789260864]SecBegin[1855.0188283920288]SVDpp[True]
+lastRMSE [1.2082481222315795]currentRMSE[1.2078373860708753]iterations[7]SecIter[309.61733508110046]SecBegin[2164.6361634731293]SVDpp[True]
+lastRMSE [1.2078373860708753]currentRMSE[1.2077366718647629]iterations[8]SecIter[308.5449376106262]SecBegin[2473.1811010837555]SVDpp[True]
+lastRMSE [1.2077366718647629]currentRMSE[1.207816047251429]iterations[9]SecIter[309.54668951034546]SecBegin[2782.727790594101]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2077366718647629]RMSE on Test[1.2077406428870074]K[100]lambda[0.06]delta[0.03]mu[3.727890002184941]learningTime[2782.727790594101]PredictTime[56.51412749290466]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[9]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.18254041671753]
+items init took[1.0184471607208252]
+Beggining: K[100]lambda[0.06]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2345189352318007]iterations[1]SecIter[308.9425106048584]SecBegin[309.82506489753723]SVDpp[True]
+lastRMSE [1.2345189352318007]currentRMSE[1.2183510818117493]iterations[2]SecIter[310.15903210639954]SecBegin[619.9840970039368]SVDpp[True]
+lastRMSE [1.2183510818117493]currentRMSE[1.212651958628768]iterations[3]SecIter[309.50944423675537]SecBegin[929.4935412406921]SVDpp[True]
+lastRMSE [1.212651958628768]currentRMSE[1.2104530774109559]iterations[4]SecIter[309.2110311985016]SecBegin[1238.7045724391937]SVDpp[True]
+lastRMSE [1.2104530774109559]currentRMSE[1.2097519333605946]iterations[5]SecIter[310.1271319389343]SecBegin[1548.831704378128]SVDpp[True]
+lastRMSE [1.2097519333605946]currentRMSE[1.2097546740590284]iterations[6]SecIter[309.34041476249695]SecBegin[1858.172119140625]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2097519333605946]RMSE on Test[1.209658620109955]K[100]lambda[0.06]delta[0.04]mu[3.727890002184941]learningTime[1858.1731140613556]PredictTime[57.390629291534424]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[6]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.324307203292847]
+items init took[1.013427495956421]
+Beggining: K[100]lambda[0.06]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2306232418183307]iterations[1]SecIter[309.4809949398041]SecBegin[310.3694932460785]SVDpp[True]
+lastRMSE [1.2306232418183307]currentRMSE[1.2170167074151248]iterations[2]SecIter[308.70965051651]SecBegin[619.0791437625885]SVDpp[True]
+lastRMSE [1.2170167074151248]currentRMSE[1.2130722742799849]iterations[3]SecIter[308.98480892181396]SecBegin[928.0639526844025]SVDpp[True]
+lastRMSE [1.2130722742799849]currentRMSE[1.2121262013779388]iterations[4]SecIter[308.25467348098755]SecBegin[1236.3196198940277]SVDpp[True]
+lastRMSE [1.2121262013779388]currentRMSE[1.2123199948658914]iterations[5]SecIter[309.1068117618561]SecBegin[1545.4264316558838]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2121262013779388]RMSE on Test[1.2121650219122455]K[100]lambda[0.06]delta[0.05]mu[3.727890002184941]learningTime[1545.4264316558838]PredictTime[57.86269783973694]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.35938024520874]
+items init took[1.0004067420959473]
+Beggining: K[100]lambda[0.06]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2288572432149798]iterations[1]SecIter[309.10400438308716]SecBegin[309.98248267173767]SVDpp[True]
+lastRMSE [1.2288572432149798]currentRMSE[1.217545625575972]iterations[2]SecIter[309.94900155067444]SecBegin[619.9314842224121]SVDpp[True]
+lastRMSE [1.217545625575972]currentRMSE[1.215054981636483]iterations[3]SecIter[309.4865849018097]SecBegin[929.4180691242218]SVDpp[True]
+lastRMSE [1.215054981636483]currentRMSE[1.2150263798844059]iterations[4]SecIter[310.4553236961365]SecBegin[1239.8743925094604]SVDpp[True]
+lastRMSE [1.2150263798844059]currentRMSE[1.2157532736765913]iterations[5]SecIter[309.1243724822998]SecBegin[1548.9987649917603]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2150263798844059]RMSE on Test[1.215497710177619]K[100]lambda[0.06]delta[0.06]mu[3.727890002184941]learningTime[1548.9987649917603]PredictTime[57.75408315658569]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.53350329399109]
+items init took[1.0243995189666748]
+Beggining: K[100]lambda[0.06]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2285959885229942]iterations[1]SecIter[308.79188656806946]SecBegin[309.68736124038696]SVDpp[True]
+lastRMSE [1.2285959885229942]currentRMSE[1.2193325979009761]iterations[2]SecIter[309.4206762313843]SecBegin[619.1080374717712]SVDpp[True]
+lastRMSE [1.2193325979009761]currentRMSE[1.2180324314834794]iterations[3]SecIter[308.8957312107086]SecBegin[928.0037686824799]SVDpp[True]
+lastRMSE [1.2180324314834794]currentRMSE[1.2186040079562288]iterations[4]SecIter[309.47699069976807]SecBegin[1237.480759382248]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2180324314834794]RMSE on Test[1.2183394272163406]K[100]lambda[0.06]delta[0.07]mu[3.727890002184941]learningTime[1237.480759382248]PredictTime[58.63973522186279]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.50858187675476]
+items init took[1.0104095935821533]
+Beggining: K[100]lambda[0.07]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2417005439615127]iterations[1]SecIter[309.9279110431671]SecBegin[310.81739115715027]SVDpp[True]
+lastRMSE [1.2417005439615127]currentRMSE[1.2226981422711063]iterations[2]SecIter[310.6603968143463]SecBegin[621.4777879714966]SVDpp[True]
+lastRMSE [1.2226981422711063]currentRMSE[1.2148888633346693]iterations[3]SecIter[309.71061515808105]SecBegin[931.1894028186798]SVDpp[True]
+lastRMSE [1.2148888633346693]currentRMSE[1.211085601637731]iterations[4]SecIter[310.07122802734375]SecBegin[1241.2616300582886]SVDpp[True]
+lastRMSE [1.211085601637731]currentRMSE[1.2091375689688328]iterations[5]SecIter[310.2626769542694]SecBegin[1551.524307012558]SVDpp[True]
+lastRMSE [1.2091375689688328]currentRMSE[1.2081611960083876]iterations[6]SecIter[310.07233810424805]SecBegin[1861.596645116806]SVDpp[True]
+lastRMSE [1.2081611960083876]currentRMSE[1.2077292660067251]iterations[7]SecIter[309.81001687049866]SecBegin[2171.4066619873047]SVDpp[True]
+lastRMSE [1.2077292660067251]currentRMSE[1.2076135482711066]iterations[8]SecIter[310.54189825057983]SecBegin[2481.9485602378845]SVDpp[True]
+lastRMSE [1.2076135482711066]currentRMSE[1.207683828569215]iterations[9]SecIter[309.58485674858093]SecBegin[2791.5334169864655]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2076135482711066]RMSE on Test[1.20759321637778]K[100]lambda[0.07]delta[0.03]mu[3.727890002184941]learningTime[2791.5334169864655]PredictTime[58.298213720321655]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[9]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.88028359413147]
+items init took[1.00441575050354]
+Beggining: K[100]lambda[0.07]delta[0.04]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2345568892658236]iterations[1]SecIter[308.528799533844]SecBegin[309.424293756485]SVDpp[True]
+lastRMSE [1.2345568892658236]currentRMSE[1.2183374917703778]iterations[2]SecIter[309.0177640914917]SecBegin[618.4420578479767]SVDpp[True]
+lastRMSE [1.2183374917703778]currentRMSE[1.212587101834445]iterations[3]SecIter[308.76004242897034]SecBegin[927.202100276947]SVDpp[True]
+lastRMSE [1.212587101834445]currentRMSE[1.2103441050829862]iterations[4]SecIter[309.1925973892212]SecBegin[1236.3946976661682]SVDpp[True]
+lastRMSE [1.2103441050829862]currentRMSE[1.209610548875021]iterations[5]SecIter[308.39015674591064]SecBegin[1544.7848544120789]SVDpp[True]
+lastRMSE [1.209610548875021]currentRMSE[1.2095967528713156]iterations[6]SecIter[309.00853157043457]SecBegin[1853.7933859825134]SVDpp[True]
+lastRMSE [1.2095967528713156]currentRMSE[1.2099361557449604]iterations[7]SecIter[309.3898437023163]SecBegin[2163.184229373932]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2095967528713156]RMSE on Test[1.2097735186839766]K[100]lambda[0.07]delta[0.04]mu[3.727890002184941]learningTime[2163.184229373932]PredictTime[56.316808223724365]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[7]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.219047784805298]
+items init took[1.0233778953552246]
+Beggining: K[100]lambda[0.07]delta[0.05]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2306464391358916]iterations[1]SecIter[308.79762625694275]SecBegin[309.6690971851349]SVDpp[True]
+lastRMSE [1.2306464391358916]currentRMSE[1.2169650964395229]iterations[2]SecIter[308.2508952617645]SecBegin[617.9199924468994]SVDpp[True]
+lastRMSE [1.2169650964395229]currentRMSE[1.2129552615257895]iterations[3]SecIter[309.2042443752289]SecBegin[927.1242368221283]SVDpp[True]
+lastRMSE [1.2129552615257895]currentRMSE[1.2119653780171618]iterations[4]SecIter[309.0529634952545]SecBegin[1236.1772003173828]SVDpp[True]
+lastRMSE [1.2119653780171618]currentRMSE[1.2121513750252186]iterations[5]SecIter[309.3194580078125]SecBegin[1545.4966583251953]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2119653780171618]RMSE on Test[1.2120140349880744]K[100]lambda[0.07]delta[0.05]mu[3.727890002184941]learningTime[1545.4966583251953]PredictTime[57.01922965049744]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[30.82875108718872]
+items init took[1.029405117034912]
+Beggining: K[100]lambda[0.07]delta[0.06]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2288255117871276]iterations[1]SecIter[309.05424427986145]SecBegin[309.9237291812897]SVDpp[True]
+lastRMSE [1.2288255117871276]currentRMSE[1.2174277957800657]iterations[2]SecIter[308.7657678127289]SecBegin[618.6894969940186]SVDpp[True]
+lastRMSE [1.2174277957800657]currentRMSE[1.2148838476365926]iterations[3]SecIter[309.51608991622925]SecBegin[928.2055869102478]SVDpp[True]
+lastRMSE [1.2148838476365926]currentRMSE[1.2148779037210888]iterations[4]SecIter[308.10615038871765]SecBegin[1236.3117372989655]SVDpp[True]
+lastRMSE [1.2148779037210888]currentRMSE[1.2157012576121775]iterations[5]SecIter[309.1587381362915]SecBegin[1545.470475435257]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.2148779037210888]RMSE on Test[1.2154107701340788]K[100]lambda[0.07]delta[0.06]mu[3.727890002184941]learningTime[1545.470475435257]PredictTime[58.40478038787842]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[5]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+users init took[31.60595464706421]
+items init took[0.9963843822479248]
+Beggining: K[100]lambda[0.07]delta[0.07]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.727890002184941]P len[1112899]Q len [174282]SVDpp[True]
+lastRMSE [9223372036854775806]currentRMSE[1.2285314322815342]iterations[1]SecIter[309.2270791530609]SecBegin[310.1195409297943]SVDpp[True]
+lastRMSE [1.2285314322815342]currentRMSE[1.2191577380649148]iterations[2]SecIter[309.29186964035034]SecBegin[619.4114105701447]SVDpp[True]
+lastRMSE [1.2191577380649148]currentRMSE[1.217807249653534]iterations[3]SecIter[308.80145502090454]SecBegin[928.2128655910492]SVDpp[True]
+lastRMSE [1.217807249653534]currentRMSE[1.2184562171245508]iterations[4]SecIter[309.66106128692627]SecBegin[1237.8739268779755]SVDpp[True]
+********************************************************
+SVD RMSE on Train[1.217807249653534]RMSE on Test[1.2182659022322355]K[100]lambda[0.07]delta[0.07]mu[3.727890002184941]learningTime[1237.8739268779755]PredictTime[55.81286954879761]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]users[1112899]trainAndValidaiton Size[4209334]train Size[3830767]validation Size[306806]test Orig Size[1052334]Test Size[879334]missingUsers[159819]missingProducts[63852]learn iterations[4]SVDpp[True]YInitialValuePlusMinusInterval[0.01]host[dev-gils-lt]
+********************************************************
+ ---- Done ----
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1\runDevGilsLt.bat
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>cd C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>C:\pycharmEnv\pythin37x64Env\Scripts\python.exe SVD.py
+LOAD: chunksNum[211]took[43.64862537384033]data[4209336]
+LOAD: chunksNum[53]took[8.763704538345337]data[1052334]
+users init took[63.38623332977295]
+items init took[3.853581190109253]
+Beggining: K[400]lambda[0.07]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.7270217974208095]P len[1112823]Q len [174282]SVDpp[True]
+lastMAE[9223372036854775806]currentMAE[1.006668638770671]iterations[1]SecIter[539.3055856227875]SecBegin[539.3105807304382]SVDpp[True]
+
+^CTerminate batch job (Y/N)?
+^C
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1\runDevGilsLt.bat
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>cd C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>C:\pycharmEnv\pythin37x64Env\Scripts\python.exe SVD.py
+LOAD: chunksNum[211]took[43.82876706123352]data[4209336]
+LOAD: chunksNum[53]took[8.423957109451294]data[1052334]
+users init took[59.845396757125854]
+items init took[4.407889127731323]
+Beggining: K[400]lambda[0.07]delta[0.03]PQInitialInterval[+-0.01]BInitialInterval[+-0.01]mu[3.7272608614045954]P len[1112728]Q len [174282]SVDpp[True]
+lastMAE[9223372036854775806]currentMAE[1.0062101921775037]iterations[1]SecIter[485.6240530014038]SecBegin[485.6270658969879]SVDpp[True]
+lastMAE[1.0062101921775037]currentMAE[0.9822380526003937]iterations[2]SecIter[630.5680706501007]SecBegin[1116.205105304718]SVDpp[True]
+lastMAE[0.9822380526003937]currentMAE[0.9708936996171225]iterations[3]SecIter[694.9500794410706]SecBegin[1811.1691749095917]SVDpp[True]
+lastMAE[0.9708936996171225]currentMAE[0.9643109248237103]iterations[4]SecIter[684.8025848865509]SecBegin[2495.986752510071]SVDpp[True]
+lastMAE[0.9643109248237103]currentMAE[0.960112144592395]iterations[5]SecIter[668.8460173606873]SecBegin[3164.8487606048584]SVDpp[True]
+lastMAE[0.960112144592395]currentMAE[0.9572689552766447]iterations[6]SecIter[482.7215328216553]SecBegin[3647.5812702178955]SVDpp[True]
+lastMAE[0.9572689552766447]currentMAE[0.9552628122931454]iterations[7]SecIter[332.775194644928]SecBegin[3980.3574748039246]SVDpp[True]
+lastMAE[0.9552628122931454]currentMAE[0.9537997027739803]iterations[8]SecIter[334.0307779312134]SecBegin[4314.389252662659]SVDpp[True]
+lastMAE[0.9537997027739803]currentMAE[0.9527096413147246]iterations[9]SecIter[332.98585414886475]SecBegin[4647.376104593277]SVDpp[True]
+lastMAE[0.9527096413147246]currentMAE[0.9518896803980531]iterations[10]SecIter[333.61799907684326]SecBegin[4980.99410367012]SVDpp[True]
+lastMAE[0.9518896803980531]currentMAE[0.9512707528254052]iterations[11]SecIter[444.1034104824066]SecBegin[5425.098513364792]SVDpp[True]
+lastMAE[0.9512707528254052]currentMAE[0.950799187385735]iterations[12]SecIter[846.5185947418213]SecBegin[6271.622106552124]SVDpp[True]
+lastMAE[0.950799187385735]currentMAE[0.950435380909845]iterations[13]SecIter[884.319629907608]SecBegin[7155.946747303009]SVDpp[True]
+lastMAE[0.950435380909845]currentMAE[0.9501542839736683]iterations[14]SecIter[541.300276517868]SecBegin[7697.2579979896545]SVDpp[True]
+lastMAE[0.9501542839736683]currentMAE[0.9499368454389799]iterations[15]SecIter[334.35059094429016]SecBegin[8031.610609531403]SVDpp[True]
+lastMAE[0.9499368454389799]currentMAE[0.9497678950961427]iterations[16]SecIter[334.2781980037689]SecBegin[8365.889811754227]SVDpp[True]
+lastMAE[0.9497678950961427]currentMAE[0.9496365126863516]iterations[17]SecIter[333.11619663238525]SecBegin[8699.007992982864]SVDpp[True]
+lastMAE[0.9496365126863516]currentMAE[0.9495336079339035]iterations[18]SecIter[334.1412823200226]SecBegin[9033.149275302887]SVDpp[True]
+lastMAE[0.9495336079339035]currentMAE[0.949454737399433]iterations[19]SecIter[332.69576716423035]SecBegin[9365.845042467117]SVDpp[True]
+lastMAE[0.949454737399433]currentMAE[0.9493939833599704]iterations[20]SecIter[333.14478731155396]SecBegin[9698.990828990936]SVDpp[True]
+lastMAE[0.9493939833599704]currentMAE[0.9493473162106096]iterations[21]SecIter[332.809152841568]SecBegin[10031.799981832504]SVDpp[True]
+lastMAE[0.9493473162106096]currentMAE[0.9493115938485479]iterations[22]SecIter[333.34198784828186]SecBegin[10365.142953395844]SVDpp[True]
+lastMAE[0.9493115938485479]currentMAE[0.9492834720758031]iterations[23]SecIter[332.2607750892639]SecBegin[10697.404710054398]SVDpp[True]
+lastMAE[0.9492834720758031]currentMAE[0.9492617627393742]iterations[24]SecIter[335.07725286483765]SecBegin[11032.48294377327]SVDpp[True]
+lastMAE[0.9492617627393742]currentMAE[0.949245340841171]iterations[25]SecIter[333.8479733467102]SecBegin[11366.331990718842]SVDpp[True]
+lastMAE[0.949245340841171]currentMAE[0.9492326506375541]iterations[26]SecIter[335.55372738838196]SecBegin[11701.88670015335]SVDpp[True]
+lastMAE[0.9492326506375541]currentMAE[0.9492231014317503]iterations[27]SecIter[333.22153544425964]SecBegin[12035.110215902328]SVDpp[True]
+lastMAE[0.9492231014317503]currentMAE[0.949215671429233]iterations[28]SecIter[334.6208710670471]SecBegin[12369.732103824615]SVDpp[True]
+lastMAE[0.949215671429233]currentMAE[0.9492100194400357]iterations[29]SecIter[333.7043836116791]SecBegin[12703.437485933304]SVDpp[True]
+lastMAE[0.9492100194400357]currentMAE[0.9492056294240566]iterations[30]SecIter[333.4120557308197]SecBegin[13036.849541664124]SVDpp[True]
+lastMAE[0.9492056294240566]currentMAE[0.9492020940719517]iterations[31]SecIter[331.7341125011444]SecBegin[13368.583654165268]SVDpp[True]
+lastMAE[0.9492020940719517]currentMAE[0.9491995345590274]iterations[32]SecIter[334.54355549812317]SecBegin[13703.127209663391]SVDpp[True]
+lastMAE[0.9491995345590274]currentMAE[0.9491976337599458]iterations[33]SecIter[332.4299466609955]SecBegin[14035.55815577507]SVDpp[True]
+lastMAE[0.9491976337599458]currentMAE[0.9491962219019721]iterations[34]SecIter[333.08369064331055]SecBegin[14368.643845319748]SVDpp[True]
+lastMAE[0.9491962219019721]currentMAE[0.949195146556407]iterations[35]SecIter[333.06875944137573]SecBegin[14701.713604450226]SVDpp[True]
+lastMAE[0.949195146556407]currentMAE[0.9491943307915148]iterations[36]SecIter[333.2967298030853]SecBegin[15035.011333227158]SVDpp[True]
+lastMAE[0.9491943307915148]currentMAE[0.9491936745075512]iterations[37]SecIter[333.3357594013214]SecBegin[15368.347092628479]SVDpp[True]
+lastMAE[0.9491936745075512]currentMAE[0.9491931858848797]iterations[38]SecIter[333.5007939338684]SecBegin[15701.848866462708]SVDpp[True]
+lastMAE[0.9491931858848797]currentMAE[0.9491928184538987]iterations[39]SecIter[331.9297013282776]SecBegin[16033.778567790985]SVDpp[True]
+lastMAE[0.9491928184538987]currentMAE[0.9491925366486434]iterations[40]SecIter[333.6022095680237]SecBegin[16367.381776332855]SVDpp[True]
+lastMAE[0.9491925366486434]currentMAE[0.9491922950812797]iterations[41]SecIter[332.2114498615265]SecBegin[16699.594207525253]SVDpp[True]
+lastMAE[0.9491922950812797]currentMAE[0.949192082420495]iterations[42]SecIter[333.44841146469116]SecBegin[17033.043635606766]SVDpp[True]
+lastMAE[0.949192082420495]currentMAE[0.9491919186707841]iterations[43]SecIter[332.1588840484619]SecBegin[17365.20349907875]SVDpp[True]
+lastMAE[0.9491919186707841]currentMAE[0.9491917955973568]iterations[44]SecIter[333.16337609291077]SecBegin[17698.36687517166]SVDpp[True]
+lastMAE[0.9491917955973568]currentMAE[0.9491917171375188]iterations[45]SecIter[332.88049817085266]SecBegin[18031.247373342514]SVDpp[True]
+lastMAE[0.9491917171375188]currentMAE[0.9491916579106289]iterations[46]SecIter[333.14949893951416]SecBegin[18364.39687228203]SVDpp[True]
+lastMAE[0.9491916579106289]currentMAE[0.9491915867518324]iterations[47]SecIter[332.8715696334839]SecBegin[18697.268441915512]SVDpp[True]
+lastMAE[0.9491915867518324]currentMAE[0.949191502938463]iterations[48]SecIter[333.1014361381531]SecBegin[19030.369878053665]SVDpp[True]
+lastMAE[0.949191502938463]currentMAE[0.9491914151776712]iterations[49]SecIter[332.24780321121216]SecBegin[19362.617681264877]SVDpp[True]
+lastMAE[0.9491914151776712]currentMAE[0.9491913287876832]iterations[50]SecIter[332.74480986595154]SecBegin[19695.36249113083]SVDpp[True]
+lastMAE[0.9491913287876832]currentMAE[0.9491912426020256]iterations[51]SecIter[332.4985980987549]SecBegin[20027.861089229584]SVDpp[True]
+lastMAE[0.9491912426020256]currentMAE[0.9491911579495669]iterations[52]SecIter[333.5352032184601]SecBegin[20361.396292448044]SVDpp[True]
+lastMAE[0.9491911579495669]currentMAE[0.9491910746842129]iterations[53]SecIter[331.49519443511963]SecBegin[20692.891486883163]SVDpp[True]
+lastMAE[0.9491910746842129]currentMAE[0.9491909916338265]iterations[54]SecIter[332.7621946334839]SecBegin[21025.653681516647]SVDpp[True]
+lastMAE[0.9491909916338265]currentMAE[0.9491909130303322]iterations[55]SecIter[336.0228850841522]SecBegin[21361.6765666008]SVDpp[True]
+lastMAE[0.9491909130303322]currentMAE[0.9491908360395093]iterations[56]SecIter[362.4815752506256]SecBegin[21724.159120559692]SVDpp[True]
+lastMAE[0.9491908360395093]currentMAE[0.9491907634638084]iterations[57]SecIter[351.52872347831726]SecBegin[22075.68784403801]SVDpp[True]
+lastMAE[0.9491907634638084]currentMAE[0.94919069597866]iterations[58]SecIter[347.397691488266]SecBegin[22423.086525917053]SVDpp[True]
+lastMAE[0.94919069597866]currentMAE[0.9491906320020819]iterations[59]SecIter[342.41211915016174]SecBegin[22765.50064253807]SVDpp[True]
+lastMAE[0.9491906320020819]currentMAE[0.9491905730210614]iterations[60]SecIter[341.00139260292053]SecBegin[23106.50203514099]SVDpp[True]
+lastMAE[0.9491905730210614]currentMAE[0.9491905191865224]iterations[61]SecIter[340.479877948761]SecBegin[23446.982913970947]SVDpp[True]
+lastMAE[0.9491905191865224]currentMAE[0.9491904704268649]iterations[62]SecIter[341.2008259296417]SecBegin[23788.184719085693]SVDpp[True]
+lastMAE[0.9491904704268649]currentMAE[0.9491904268460549]iterations[63]SecIter[339.7563569545746]SecBegin[24127.94209265709]SVDpp[True]
+lastMAE[0.9491904268460549]currentMAE[0.9491903894601276]iterations[64]SecIter[341.75888323783875]SecBegin[24469.700975894928]SVDpp[True]
+lastMAE[0.9491903894601276]currentMAE[0.9491903580381048]iterations[65]SecIter[339.98011088371277]SecBegin[24809.682084083557]SVDpp[True]
+lastMAE[0.9491903580381048]currentMAE[0.9491903306269966]iterations[66]SecIter[340.04216170310974]SecBegin[25149.725244998932]SVDpp[True]
+lastMAE[0.9491903306269966]currentMAE[0.9491903068105821]iterations[67]SecIter[334.003821849823]SecBegin[25483.730047225952]SVDpp[True]
+lastMAE[0.9491903068105821]currentMAE[0.9491902860890994]iterations[68]SecIter[334.79227805137634]SecBegin[25818.526339292526]SVDpp[True]
+lastMAE[0.9491902860890994]currentMAE[0.949190268182671]iterations[69]SecIter[332.765016078949]SecBegin[26151.29335474968]SVDpp[True]
+lastMAE[0.949190268182671]currentMAE[0.9491902528642092]iterations[70]SecIter[333.19017791748047]SecBegin[26484.485511541367]SVDpp[True]
+lastMAE[0.9491902528642092]currentMAE[0.9491902396499604]iterations[71]SecIter[332.2900724411011]SecBegin[26816.777582883835]SVDpp[True]
+lastMAE[0.9491902396499604]currentMAE[0.9491902285229377]iterations[72]SecIter[333.0829646587372]SecBegin[27149.864540338516]SVDpp[True]
+lastMAE[0.9491902285229377]currentMAE[0.9491902191940559]iterations[73]SecIter[333.05629658699036]SecBegin[27482.92283630371]SVDpp[True]
+lastMAE[0.9491902191940559]currentMAE[0.9491902111512902]iterations[74]SecIter[332.604877948761]SecBegin[27815.529712677002]SVDpp[True]
+lastMAE[0.9491902111512902]currentMAE[0.9491902043006486]iterations[75]SecIter[333.048522233963]SecBegin[28148.580233335495]SVDpp[True]
+lastMAE[0.9491902043006486]currentMAE[0.9491901983896385]iterations[76]SecIter[333.87258076667786]SecBegin[28482.454793214798]SVDpp[True]
+lastMAE[0.9491901983896385]currentMAE[0.9491901932860138]iterations[77]SecIter[333.18272376060486]SecBegin[28815.640513896942]SVDpp[True]
+lastMAE[0.9491901932860138]currentMAE[0.9491901888156616]iterations[78]SecIter[332.65172815322876]SecBegin[29148.29526758194]SVDpp[True]
+lastMAE[0.9491901888156616]currentMAE[0.9491901849239004]iterations[79]SecIter[331.93635654449463]SecBegin[29480.234622001648]SVDpp[True]
+lastMAE[0.9491901849239004]currentMAE[0.9491901815403172]iterations[80]SecIter[333.48261427879333]SecBegin[29813.71823334694]SVDpp[True]
+lastMAE[0.9491901815403172]currentMAE[0.9491901785370164]iterations[81]SecIter[331.9596128463745]SecBegin[30145.67885327339]SVDpp[True]
+lastMAE[0.9491901785370164]currentMAE[0.9491901758618181]iterations[82]SecIter[333.1910710334778]SecBegin[30478.87193250656]SVDpp[True]
+lastMAE[0.9491901758618181]currentMAE[0.949190173471907]iterations[83]SecIter[331.6404047012329]SecBegin[30810.513323307037]SVDpp[True]
+lastMAE[0.949190173471907]currentMAE[0.9491901713437241]iterations[84]SecIter[333.31316661834717]SecBegin[31143.82848882675]SVDpp[True]
+lastMAE[0.9491901713437241]currentMAE[0.9491901694414718]iterations[85]SecIter[331.3644540309906]SecBegin[31475.194925546646]SVDpp[True]
+lastMAE[0.9491901694414718]currentMAE[0.9491901677325664]iterations[86]SecIter[333.6032745838165]SecBegin[31808.800198078156]SVDpp[True]
+lastMAE[0.9491901677325664]currentMAE[0.94919016619571]iterations[87]SecIter[332.3882968425751]SecBegin[32141.190492153168]SVDpp[True]
+lastMAE[0.94919016619571]currentMAE[0.9491901648124957]iterations[88]SecIter[333.1518757343292]SecBegin[32474.34334874153]SVDpp[True]
+lastMAE[0.9491901648124957]currentMAE[0.9491901635668708]iterations[89]SecIter[332.4934310913086]SecBegin[32806.83875870705]SVDpp[True]
+lastMAE[0.9491901635668708]currentMAE[0.9491901624447181]iterations[90]SecIter[332.6585237979889]SecBegin[33139.4982984066]SVDpp[True]
+lastMAE[0.9491901624447181]currentMAE[0.9491901614404162]iterations[91]SecIter[332.5026926994324]SecBegin[33472.00298976898]SVDpp[True]
+lastMAE[0.9491901614404162]currentMAE[0.949190160557269]iterations[92]SecIter[332.71424627304077]SecBegin[33804.71823596954]SVDpp[True]
+lastMAE[0.949190160557269]currentMAE[0.9491901597667097]iterations[93]SecIter[332.2671568393707]SecBegin[34136.98838496208]SVDpp[True]
+lastMAE[0.9491901597667097]currentMAE[0.9491901590690994]iterations[94]SecIter[334.8347706794739]SecBegin[34471.825165748596]SVDpp[True]
+lastMAE[0.9491901590690994]currentMAE[0.9491901584402737]iterations[95]SecIter[332.4473135471344]SecBegin[34804.27547264099]SVDpp[True]
+lastMAE[0.9491901584402737]currentMAE[0.9491901578734784]iterations[96]SecIter[333.0880992412567]SecBegin[35137.36556816101]SVDpp[True]
+lastMAE[0.9491901578734784]currentMAE[0.9491901573626287]iterations[97]SecIter[332.1097013950348]SecBegin[35469.476268053055]SVDpp[True]
+lastMAE[0.9491901573626287]currentMAE[0.949190156902239]iterations[98]SecIter[332.36571073532104]SecBegin[35801.843987464905]SVDpp[True]
+lastMAE[0.949190156902239]currentMAE[0.9491901564873605]iterations[99]SecIter[332.5906593799591]SecBegin[36134.43763923645]SVDpp[True]
+lastMAE[0.9491901564873605]currentMAE[0.9491901561135258]iterations[100]SecIter[333.243346452713]SecBegin[36467.68098568916]SVDpp[True]
+lastMAE[0.9491901561135258]currentMAE[0.9491901557767051]iterations[101]SecIter[331.7243402004242]SecBegin[36799.40732526779]SVDpp[True]
+lastMAE[0.9491901557767051]currentMAE[0.9491901554732584]iterations[102]SecIter[333.5063419342041]SecBegin[37132.91566109657]SVDpp[True]
+lastMAE[0.9491901554732584]currentMAE[0.9491901551999022]iterations[103]SecIter[331.2428183555603]SecBegin[37464.16249585152]SVDpp[True]
+lastMAE[0.9491901551999022]currentMAE[0.9491901549536711]iterations[104]SecIter[333.5854995250702]SecBegin[37797.75099349022]SVDpp[True]
+lastMAE[0.9491901549536711]currentMAE[0.9491901547318898]iterations[105]SecIter[332.14748549461365]SecBegin[38129.90147590637]SVDpp[True]
+lastMAE[0.9491901547318898]currentMAE[0.9491901545321446]iterations[106]SecIter[333.0007882118225]SecBegin[38462.90324854851]SVDpp[True]
+lastMAE[0.9491901545321446]currentMAE[0.9491901543522567]iterations[107]SecIter[332.3524224758148]SecBegin[38795.25865674019]SVDpp[True]
+lastMAE[0.9491901543522567]currentMAE[0.9491901541902621]iterations[108]SecIter[333.24407982826233]SecBegin[39128.50474405289]SVDpp[True]
+lastMAE[0.9491901541902621]currentMAE[0.9491901540443883]iterations[109]SecIter[333.3153336048126]SecBegin[39461.82108640671]SVDpp[True]
+lastMAE[0.9491901540443883]currentMAE[0.9491901539130384]iterations[110]SecIter[333.344539642334]SecBegin[39795.166645526886]SVDpp[True]
+lastMAE[0.9491901539130384]currentMAE[0.9491901537947713]iterations[111]SecIter[332.32232093811035]SecBegin[40127.488966464996]SVDpp[True]
+lastMAE[0.9491901537947713]currentMAE[0.9491901536882884]iterations[112]SecIter[332.8511564731598]SecBegin[40460.34212183952]SVDpp[True]
+lastMAE[0.9491901536882884]currentMAE[0.9491901535924189]iterations[113]SecIter[331.7950448989868]SecBegin[40792.138164281845]SVDpp[True]
+lastMAE[0.9491901535924189]currentMAE[0.9491901535061081]iterations[114]SecIter[333.1674008369446]SecBegin[41125.30956482887]SVDpp[True]
+lastMAE[0.9491901535061081]currentMAE[0.9491901534284061]iterations[115]SecIter[332.84964299201965]SecBegin[41458.16020703316]SVDpp[True]
+lastMAE[0.9491901534284061]currentMAE[0.9491901533584549]iterations[116]SecIter[333.749543428421]SecBegin[41791.91174316406]SVDpp[True]
+lastMAE[0.9491901533584549]currentMAE[0.949190153295484]iterations[117]SecIter[332.02819871902466]SecBegin[42123.940923929214]SVDpp[True]
+lastMAE[0.949190153295484]currentMAE[0.9491901532387974]iterations[118]SecIter[333.7103612422943]SecBegin[42457.65128517151]SVDpp[True]
+lastMAE[0.9491901532387974]currentMAE[0.9491901531877702]iterations[119]SecIter[331.9007122516632]SecBegin[42789.55299639702]SVDpp[True]
+lastMAE[0.9491901531877702]currentMAE[0.949190153141837]iterations[120]SecIter[333.84166526794434]SecBegin[43123.39466166496]SVDpp[True]
+lastMAE[0.949190153141837]currentMAE[0.9491901531004904]iterations[121]SecIter[333.3682327270508]SecBegin[43456.763894081116]SVDpp[True]
+lastMAE[0.9491901531004904]currentMAE[0.9491901530632734]iterations[122]SecIter[333.88007712364197]SecBegin[43790.646975278854]SVDpp[True]
+lastMAE[0.9491901530632734]currentMAE[0.9491901530297739]iterations[123]SecIter[332.64800453186035]SecBegin[44123.295978069305]SVDpp[True]
+lastMAE[0.9491901530297739]currentMAE[0.9491901529996207]iterations[124]SecIter[333.71253538131714]SecBegin[44457.01049184799]SVDpp[True]
+lastMAE[0.9491901529996207]currentMAE[0.9491901529724799]iterations[125]SecIter[349.54727816581726]SecBegin[44806.55975198746]SVDpp[True]
+lastMAE[0.9491901529724799]currentMAE[0.9491901529480505]iterations[126]SecIter[335.52274346351624]SecBegin[45142.08449554443]SVDpp[True]
+lastMAE[0.9491901529480505]currentMAE[0.9491901529260626]iterations[127]SecIter[331.8670721054077]SecBegin[45473.95255255699]SVDpp[True]
+lastMAE[0.9491901529260626]currentMAE[0.9491901529062717]iterations[128]SecIter[332.94460105895996]SecBegin[45806.898151397705]SVDpp[True]
+lastMAE[0.9491901529062717]currentMAE[0.9491901528884586]iterations[129]SecIter[331.5624442100525]SecBegin[46138.4615752697]SVDpp[True]
+lastMAE[0.9491901528884586]currentMAE[0.9491901528724261]iterations[130]SecIter[332.9829349517822]SecBegin[46471.44652509689]SVDpp[True]
+lastMAE[0.9491901528724261]currentMAE[0.949190152857996]iterations[131]SecIter[331.41114377975464]SecBegin[46802.85966730118]SVDpp[True]
+lastMAE[0.949190152857996]currentMAE[0.9491901528450084]iterations[132]SecIter[332.86345911026]SecBegin[47135.7251060009]SVDpp[True]
+lastMAE[0.9491901528450084]currentMAE[0.9491901528333184]iterations[133]SecIter[332.18813490867615]SecBegin[47467.91424059868]SVDpp[True]
+lastMAE[0.9491901528333184]currentMAE[0.9491901528227977]iterations[134]SecIter[332.2612421512604]SecBegin[47800.17748236656]SVDpp[True]
+lastMAE[0.9491901528227977]currentMAE[0.9491901528133281]iterations[135]SecIter[331.58581590652466]SecBegin[48131.76531100273]SVDpp[True]
+lastMAE[0.9491901528133281]currentMAE[0.9491901528048053]iterations[136]SecIter[333.18215584754944]SecBegin[48464.94746685028]SVDpp[True]
+lastMAE[0.9491901528048053]currentMAE[0.9491901527971348]iterations[137]SecIter[332.22789001464844]SecBegin[48797.17735624313]SVDpp[True]
+lastMAE[0.9491901527971348]currentMAE[0.9491901527902312]iterations[138]SecIter[332.2499668598175]SecBegin[49129.42935323715]SVDpp[True]
+lastMAE[0.9491901527902312]currentMAE[0.9491901527840175]iterations[139]SecIter[331.22285509109497]SecBegin[49460.65320801735]SVDpp[True]
+lastMAE[0.9491901527840175]currentMAE[0.9491901527784251]iterations[140]SecIter[334.21274995803833]SecBegin[49794.86595797539]SVDpp[True]
+lastMAE[0.9491901527784251]currentMAE[0.9491901527733919]iterations[141]SecIter[331.6870493888855]SecBegin[50126.55300736427]SVDpp[True]
+lastMAE[0.9491901527733919]currentMAE[0.9491901527688623]iterations[142]SecIter[332.4648153781891]SecBegin[50459.01782274246]SVDpp[True]
+lastMAE[0.9491901527688623]currentMAE[0.9491901527647855]iterations[143]SecIter[331.74036979675293]SecBegin[50790.758192539215]SVDpp[True]
+lastMAE[0.9491901527647855]currentMAE[0.9491901527611162]iterations[144]SecIter[332.3721742630005]SecBegin[51123.130366802216]SVDpp[True]
+lastMAE[0.9491901527611162]currentMAE[0.9491901527578134]iterations[145]SecIter[332.67212080955505]SecBegin[51455.80349230766]SVDpp[True]
+lastMAE[0.9491901527578134]currentMAE[0.9491901527548414]iterations[146]SecIter[332.6843032836914]SecBegin[51788.48879504204]SVDpp[True]
+lastMAE[0.9491901527548414]currentMAE[0.9491901527521661]iterations[147]SecIter[331.74550127983093]SecBegin[52120.23429632187]SVDpp[True]
+lastMAE[0.9491901527521661]currentMAE[0.9491901527497588]iterations[148]SecIter[333.2242434024811]SecBegin[52453.45853972435]SVDpp[True]
+lastMAE[0.9491901527497588]currentMAE[0.9491901527475919]iterations[149]SecIter[331.77530097961426]SecBegin[52785.233840703964]SVDpp[True]
+lastMAE[0.9491901527475919]currentMAE[0.9491901527456416]iterations[150]SecIter[332.60791993141174]SecBegin[53117.841760635376]SVDpp[True]
+lastMAE[0.9491901527456416]currentMAE[0.9491901527438864]iterations[151]SecIter[332.21422266960144]SecBegin[53450.05598330498]SVDpp[True]
+lastMAE[0.9491901527438864]currentMAE[0.9491901527423068]iterations[152]SecIter[332.8893210887909]SecBegin[53782.94530439377]SVDpp[True]
+lastMAE[0.9491901527423068]currentMAE[0.9491901527408849]iterations[153]SecIter[331.89507722854614]SecBegin[54114.840381622314]SVDpp[True]
+lastMAE[0.9491901527408849]currentMAE[0.9491901527396054]iterations[154]SecIter[332.74684405326843]SecBegin[54447.58722567558]SVDpp[True]
+lastMAE[0.9491901527396054]currentMAE[0.9491901527384543]iterations[155]SecIter[331.7126317024231]SecBegin[54779.299857378006]SVDpp[True]
+lastMAE[0.9491901527384543]currentMAE[0.9491901527374172]iterations[156]SecIter[333.1349711418152]SecBegin[55112.43482851982]SVDpp[True]
+lastMAE[0.9491901527374172]currentMAE[0.9491901527364848]iterations[157]SecIter[332.32672023773193]SecBegin[55444.76154875755]SVDpp[True]
+lastMAE[0.9491901527364848]currentMAE[0.949190152735645]iterations[158]SecIter[331.7142150402069]SecBegin[55776.47576379776]SVDpp[True]
+lastMAE[0.949190152735645]currentMAE[0.9491901527348898]iterations[159]SecIter[332.6687903404236]SecBegin[56109.14455413818]SVDpp[True]
+lastMAE[0.9491901527348898]currentMAE[0.9491901527342096]iterations[160]SecIter[333.7033369541168]SecBegin[56442.8478910923]SVDpp[True]
+lastMAE[0.9491901527342096]currentMAE[0.9491901527335976]iterations[161]SecIter[332.68708419799805]SecBegin[56775.5349752903]SVDpp[True]
+lastMAE[0.9491901527335976]currentMAE[0.9491901527330467]iterations[162]SecIter[333.1099648475647]SecBegin[57108.64494013786]SVDpp[True]
+lastMAE[0.9491901527330467]currentMAE[0.9491901527325509]iterations[163]SecIter[332.608464717865]SecBegin[57441.25340485573]SVDpp[True]
+lastMAE[0.9491901527325509]currentMAE[0.9491901527321047]iterations[164]SecIter[333.0403392314911]SecBegin[57774.29472613335]SVDpp[True]
+lastMAE[0.9491901527321047]currentMAE[0.9491901527317036]iterations[165]SecIter[331.8122375011444]SecBegin[58106.10696363449]SVDpp[True]
+lastMAE[0.9491901527317036]currentMAE[0.949190152731342]iterations[166]SecIter[332.562926530838]SecBegin[58438.66989016533]SVDpp[True]
+lastMAE[0.949190152731342]currentMAE[0.9491901527310168]iterations[167]SecIter[332.2852141857147]SecBegin[58770.955104351044]SVDpp[True]
+lastMAE[0.9491901527310168]currentMAE[0.9491901527307242]iterations[168]SecIter[332.37934923171997]SecBegin[59103.334453582764]SVDpp[True]
+lastMAE[0.9491901527307242]currentMAE[0.9491901527304605]iterations[169]SecIter[332.10852909088135]SecBegin[59435.442982673645]SVDpp[True]
+lastMAE[0.9491901527304605]currentMAE[0.9491901527302233]iterations[170]SecIter[332.84324979782104]SecBegin[59768.28723216057]SVDpp[True]
+lastMAE[0.9491901527302233]currentMAE[0.94919015273001]iterations[171]SecIter[330.9615013599396]SecBegin[60099.24973273277]SVDpp[True]
+lastMAE[0.94919015273001]currentMAE[0.949190152729818]iterations[172]SecIter[333.6826386451721]SecBegin[60432.93336844444]SVDpp[True]
+lastMAE[0.949190152729818]currentMAE[0.9491901527296452]iterations[173]SecIter[332.1731905937195]SecBegin[60765.107538461685]SVDpp[True]
+lastMAE[0.9491901527296452]currentMAE[0.9491901527294895]iterations[174]SecIter[332.46133303642273]SecBegin[61097.56887149811]SVDpp[True]
+lastMAE[0.9491901527294895]currentMAE[0.9491901527293495]iterations[175]SecIter[331.68009638786316]SecBegin[61429.24995613098]SVDpp[True]
+lastMAE[0.9491901527293495]currentMAE[0.9491901527292235]iterations[176]SecIter[332.76075315475464]SecBegin[61762.01168894768]SVDpp[True]
+lastMAE[0.9491901527292235]currentMAE[0.9491901527291101]iterations[177]SecIter[332.7099688053131]SecBegin[62094.72165775299]SVDpp[True]
+lastMAE[0.9491901527291101]currentMAE[0.9491901527290082]iterations[178]SecIter[332.025639295578]SecBegin[62426.74729704857]SVDpp[True]
+lastMAE[0.9491901527290082]currentMAE[0.9491901527289162]iterations[179]SecIter[331.8499426841736]SecBegin[62758.59723973274]SVDpp[True]
+lastMAE[0.9491901527289162]currentMAE[0.9491901527288336]iterations[180]SecIter[333.3433096408844]SecBegin[63091.94054937363]SVDpp[True]
+lastMAE[0.9491901527288336]currentMAE[0.9491901527287592]iterations[181]SecIter[332.05927753448486]SecBegin[63423.99982690811]SVDpp[True]
+lastMAE[0.9491901527287592]currentMAE[0.9491901527286919]iterations[182]SecIter[331.89004135131836]SecBegin[63755.89085173607]SVDpp[True]
+lastMAE[0.9491901527286919]currentMAE[0.9491901527286322]iterations[183]SecIter[332.1632516384125]SecBegin[64088.05410337448]SVDpp[True]
+lastMAE[0.9491901527286322]currentMAE[0.9491901527285774]iterations[184]SecIter[333.50239276885986]SecBegin[64421.55649614334]SVDpp[True]
+lastMAE[0.9491901527285774]currentMAE[0.949190152728529]iterations[185]SecIter[331.7557396888733]SecBegin[64753.312235832214]SVDpp[True]
+lastMAE[0.949190152728529]currentMAE[0.9491901527284851]iterations[186]SecIter[332.8613040447235]SecBegin[65086.17454004288]SVDpp[True]
+lastMAE[0.9491901527284851]currentMAE[0.9491901527284452]iterations[187]SecIter[332.1359932422638]SecBegin[65418.31053328514]SVDpp[True]
+lastMAE[0.9491901527284452]currentMAE[0.9491901527284097]iterations[188]SecIter[333.1705365180969]SecBegin[65751.48106980324]SVDpp[True]
+lastMAE[0.9491901527284097]currentMAE[0.9491901527283779]iterations[189]SecIter[332.32723116874695]SecBegin[66083.80830097198]SVDpp[True]
+lastMAE[0.9491901527283779]currentMAE[0.9491901527283491]iterations[190]SecIter[332.7392246723175]SecBegin[66416.5475256443]SVDpp[True]
+lastMAE[0.9491901527283491]currentMAE[0.949190152728323]iterations[191]SecIter[332.57551097869873]SecBegin[66749.123036623]SVDpp[True]
+lastMAE[0.949190152728323]currentMAE[0.9491901527283]iterations[192]SecIter[333.055376291275]SecBegin[67082.1794128418]SVDpp[True]
+lastMAE[0.9491901527283]currentMAE[0.9491901527282787]iterations[193]SecIter[331.57045340538025]SecBegin[67413.75086593628]SVDpp[True]
+lastMAE[0.9491901527282787]currentMAE[0.9491901527282595]iterations[194]SecIter[332.43920040130615]SecBegin[67746.19006633759]SVDpp[True]
+lastMAE[0.9491901527282595]currentMAE[0.9491901527282426]iterations[195]SecIter[332.0375475883484]SecBegin[68078.22761392593]SVDpp[True]
+lastMAE[0.9491901527282426]currentMAE[0.9491901527282273]iterations[196]SecIter[332.4254877567291]SecBegin[68410.65310168266]SVDpp[True]
+lastMAE[0.9491901527282273]currentMAE[0.9491901527282134]iterations[197]SecIter[332.65952157974243]SecBegin[68743.3126232624]SVDpp[True]
+lastMAE[0.9491901527282134]currentMAE[0.9491901527282011]iterations[198]SecIter[332.85752868652344]SecBegin[69076.17015194893]SVDpp[True]
+lastMAE[0.9491901527282011]currentMAE[0.9491901527281902]iterations[199]SecIter[332.3658308982849]SecBegin[69408.53598284721]SVDpp[True]
+lastMAE[0.9491901527281902]currentMAE[0.9491901527281797]iterations[200]SecIter[333.9190797805786]SecBegin[69742.45706057549]SVDpp[True]
+lastMAE[0.9491901527281797]currentMAE[0.9491901527281706]iterations[201]SecIter[332.025349855423]SecBegin[70074.48241043091]SVDpp[True]
+lastMAE[0.9491901527281706]currentMAE[0.9491901527281627]iterations[202]SecIter[331.7576792240143]SecBegin[70406.24008965492]SVDpp[True]
+lastMAE[0.9491901527281627]currentMAE[0.9491901527281553]iterations[203]SecIter[331.59888458251953]SecBegin[70737.83897423744]SVDpp[True]
+lastMAE[0.9491901527281553]currentMAE[0.949190152728149]iterations[204]SecIter[332.71034812927246]SecBegin[71070.54932236671]SVDpp[True]
+lastMAE[0.949190152728149]currentMAE[0.9491901527281428]iterations[205]SecIter[331.963050365448]SecBegin[71402.51237273216]SVDpp[True]
+lastMAE[0.9491901527281428]currentMAE[0.9491901527281374]iterations[206]SecIter[332.6875309944153]SecBegin[71735.19990372658]SVDpp[True]
+lastMAE[0.9491901527281374]currentMAE[0.9491901527281326]iterations[207]SecIter[333.98472118377686]SecBegin[72069.18462491035]SVDpp[True]
+lastMAE[0.9491901527281326]currentMAE[0.9491901527281281]iterations[208]SecIter[333.2807641029358]SecBegin[72402.46538901329]SVDpp[True]
+lastMAE[0.9491901527281281]currentMAE[0.9491901527281246]iterations[209]SecIter[331.6704375743866]SecBegin[72734.13682556152]SVDpp[True]
+lastMAE[0.9491901527281246]currentMAE[0.9491901527281209]iterations[210]SecIter[333.034193277359]SecBegin[73067.17101883888]SVDpp[True]
+lastMAE[0.9491901527281209]currentMAE[0.9491901527281177]iterations[211]SecIter[331.4438052177429]SecBegin[73398.61482405663]SVDpp[True]
+lastMAE[0.9491901527281177]currentMAE[0.949190152728115]iterations[212]SecIter[332.30284881591797]SecBegin[73730.91767287254]SVDpp[True]
+lastMAE[0.949190152728115]currentMAE[0.9491901527281126]iterations[213]SecIter[332.5392196178436]SecBegin[74063.45689249039]SVDpp[True]
+lastMAE[0.9491901527281126]currentMAE[0.9491901527281101]iterations[214]SecIter[333.06643629074097]SecBegin[74396.52332878113]SVDpp[True]
+lastMAE[0.9491901527281101]currentMAE[0.9491901527281078]iterations[215]SecIter[331.6853277683258]SecBegin[74728.20865654945]SVDpp[True]
+Traceback (most recent call last):
+  File "C:/Program Files/JetBrains/PyCharm Community Edition 2019.3.4/plugins/python-ce/helpers/pydev/pydevd_attach_to_process\attach_script.py", line 228, in attach
+    py_db.dispose_and_kill_all_pydevd_threads(wait=False)
+Traceback (most recent call last):
+AttributeError: 'PyDB' object has no attribute 'dispose_and_kill_all_pydevd_threads'
+  File "C:/Program Files/JetBrains/PyCharm Community Edition 2019.3.4/plugins/python-ce/helpers/pydev/pydevd_attach_to_process\attach_script.py", line 228, in attach
+    py_db.dispose_and_kill_all_pydevd_threads(wait=False)
+AttributeError: 'PyDB' object has no attribute 'dispose_and_kill_all_pydevd_threads'
+Could not connect to 127.0.0.1: 50435
+Traceback (most recent call last):
+  File "C:/Program Files/JetBrains/PyCharm Community Edition 2019.3.4/plugins/python-ce/helpers/pydev\_pydevd_bundle\pydevd_comm.py", line 449, in start_client
+    s.connect((host, port))
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+Traceback (most recent call last):
+  File "C:/Program Files/JetBrains/PyCharm Community Edition 2019.3.4/plugins/python-ce/helpers/pydev/pydevd_attach_to_process\attach_script.py", line 241, in attach
+    patch_multiprocessing=False,
+  File "C:/Program Files/JetBrains/PyCharm Community Edition 2019.3.4/plugins/python-ce/helpers/pydev\pydevd.py", line 1631, in settrace
+    stop_at_frame,
+  File "C:/Program Files/JetBrains/PyCharm Community Edition 2019.3.4/plugins/python-ce/helpers/pydev\pydevd.py", line 1678, in _locked_settrace
+    debugger.connect(host, port)  # Note: connect can raise error.
+  File "C:/Program Files/JetBrains/PyCharm Community Edition 2019.3.4/plugins/python-ce/helpers/pydev\pydevd.py", line 607, in connect
+    s = start_client(host, port)
+  File "C:/Program Files/JetBrains/PyCharm Community Edition 2019.3.4/plugins/python-ce/helpers/pydev\_pydevd_bundle\pydevd_comm.py", line 449, in start_client
+    s.connect((host, port))
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+lastMAE[0.9491901527281078]currentMAE[0.9491901527281059]iterations[216]SecIter[353.16587710380554]SecBegin[75081.37453365326]SVDpp[True]
+Traceback (most recent call last):
+  File "C:\pycharmEnv\pythin37x64Env\lib\site-packages\pandas\core\apply.py", line 296, in apply_standard
+    values, self.f, axis=self.axis, dummy=dummy, labels=labels
+  File "pandas\_libs\reduction.pyx", line 620, in pandas._libs.reduction.compute_reduction
+  File "pandas\_libs\reduction.pyx", line 128, in pandas._libs.reduction.Reducer.get_result
+  File "SVD.py", line 166, in handleRatingLine
+
+  File "C:\pycharmEnv\pythin37x64Env\lib\site-packages\pandas\core\series.py", line 871, in __getitem__
+    result = self.index.get_value(self, key)
+  File "C:\pycharmEnv\pythin37x64Env\lib\site-packages\pandas\core\indexes\base.py", line 4404, in get_value
+    return self._engine.get_value(s, k, tz=getattr(series.dtype, "tz", None))
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "SVD.py", line 231, in <module>
+  File "C:\pycharmEnv\pythin37x64Env\lib\site-packages\pandas\core\frame.py", line 6878, in apply
+    return op.get_result()
+  File "C:\pycharmEnv\pythin37x64Env\lib\site-packages\pandas\core\apply.py", line 186, in get_result
+    return self.apply_standard()
+  File "C:\pycharmEnv\pythin37x64Env\lib\site-packages\pandas\core\apply.py", line 296, in apply_standard
+    values, self.f, axis=self.axis, dummy=dummy, labels=labels
+KeyboardInterrupt
+^CTerminate batch job (Y/N)?
+^C
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>
+
+C:\bgu\svn\ADAD\Project3\gitRep\ex1\ex1>
