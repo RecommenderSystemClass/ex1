@@ -8,7 +8,7 @@ import pandas as pd
 
 def processDataChunk(dataChunk):
     # we need for the main process onl;y user_id,business_id,stars - we can drop all the rest to save mem
-    dataChunk.drop(['text'], axis=1, inplace=True)
+    #dataChunk.drop(['text'], axis=1, inplace=True)
     dataChunk.drop(dataChunk.columns[[0]], axis=1, inplace=True)
     return dataChunk
 
