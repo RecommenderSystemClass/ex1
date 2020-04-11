@@ -131,29 +131,30 @@ for SVDpp in SVDppOptions:
                                     YInitialValueInterval  # = 0.01
                                     )
 
-                        ########   Predict SVD/SVD++ on Test   ########
+                        printDebug("***** Predict SVD/SVD++ on Test *****")
                         predictBeginTime = time.time()
                         calculatedTestRates = mySvd.predictRates(testDataDF)
                         PredictTime = time.time() - predictBeginTime
 
                         if (ensamble):
-                            ### sentiment prediciton
+                            printDebug("***** build sentiment prediciton *****")
                             # build Sentiment Predictor using the same tarin data
                             x, y_train, y_test = prepareDataForSemantic(trainDataDF_all, testDataDF)
                             x = extract_features(x)
                             x_train, x_test = split_and_reduce(x)
                             x_train, x_test = apply_target_encoder(x_train, x_test, y_train, 'user_id', 1)
                             classifier = train_classifier(x_train, y_train)
-                            ########   Predict using the semantic Predictor on Test   ########
+
+                            printDebug("***** Predict using the semantic Predictor on Test *****")
                             sentimentModelRatesPrediction = classifier.predict(x_test)
 
-                            ### Ensamble
+                            printDebug("***** calc Ensamble *****")
                             ensamblePrediciton = (sentimentModelRatesPrediction + calculatedTestRates) / 2
 
                         ######## Calc Errors  ########
-                        actuaTestRaes = testDataDF['stars'].to_list()
-                        testRMSE = RMSE(actuaTestRaes, calculatedTestRates)
-                        testMAE = MAE(actuaTestRaes, calculatedTestRates)
+                        actuaTestRates = testDataDF['stars'].to_list()
+                        testRMSE = RMSE(actuaTestRates, calculatedTestRates)
+                        testMAE = MAE(actuaTestRates, calculatedTestRates)
 
                         testSentimentRMSE = None
                         testSentimentMAE = None
@@ -162,16 +163,16 @@ for SVDpp in SVDppOptions:
                         ensambleStringResults = ""
 
                         if (ensamble):
-                            testSentimentRMSE = RMSE(actuaTestRaes, sentimentModelRatesPrediction)
-                            testSentimentMAE = MAE(actuaTestRaes, sentimentModelRatesPrediction)
-                            testEnsambleRMSE = RMSE(actuaTestRaes, ensamblePrediciton)
-                            testEnsambleMAE = MAE(actuaTestRaes, ensamblePrediciton)
-                            ensambleStringResults = "testSentimentRMSE[" + str(testSentimentRMSE) + "]" \
-                                                    + "testSentimentMAE[" + str(testSentimentMAE) + "]" \
-                                                    + "testEnsambleRMSE[" + str(testEnsambleRMSE) + "]" \
-                                                    + "testEnsambleMAE[" + str(testEnsambleMAE) + "]"
+                            testSentimentRMSE = RMSE(actuaTestRates, sentimentModelRatesPrediction)
+                            testSentimentMAE = MAE(actuaTestRates, sentimentModelRatesPrediction)
+                            testEnsambleRMSE = RMSE(actuaTestRates, ensamblePrediciton)
+                            testEnsambleMAE = MAE(actuaTestRates, ensamblePrediciton)
+                            ensambleStringResults = "S_RMSE[" + str("%.5f" % testSentimentRMSE) + "]" \
+                                                    + "S_MAE[" + str("%.5f" % testSentimentMAE) + "]" \
+                                                    + "EnRMSE[" + str("%.5f" % testEnsambleRMSE) + "]" \
+                                                    + "EnMAE[" + str("%.5f" % testEnsambleMAE) + "]"
 
-                        ########Print results and save log to file  ########
+                        ######## Print results and save log to file  ########
                         printDebug("********************************************************")
                         strFinalResult = ("SVD "
                                           + errorCalculation + "OnTrain[" + str(mySvd.lastError) + "]"
@@ -202,17 +203,14 @@ for SVDpp in SVDppOptions:
                         printDebug(strFinalResult)
                         printDebug("********************************************************")
                         fileBaseName = errorCalculation + "Train[" + str("%.5f" % mySvd.lastError) + "]" \
-                                       + "RMSEOnTest[" + str(testRMSE) + "]" \
-                                       + "MAEOnTest[" + str(testMAE) + "]" \
+                                       + "RMSEOnTest[" + str("%.5f" % testRMSE) + "]" \
+                                       + "MAEOnTest[" + str("%.5f" % testMAE) + "]" \
                                        + "K[" + str(K) + "]" \
                                        + "lambda[" + str(lam) + "]" \
                                        + "delta[" + str(delta) + "]" \
                                        + "learnSec[" + str("%.2f" % mySvd.learningTime) + "]" \
                                        + "PredictSec[" + str("%.2f" % PredictTime) + "]" \
-                                       + "PQ[" + str(PQInitialValuePlusMinusInterval) + "]" \
-                                       + "B[" + str(BInitialValuePlusMinusInterval) + "]" \
                                        + "SVDpp[" + str(SVDpp) + "]" \
-                                       + "Y[" + str(YInitialValueInterval) + "]" \
                                        + ensambleStringResults \
                                        + 'host[' + socket.gethostname() + "]"
                         printToFile(".\\results\\" + fileBaseName + ".log")

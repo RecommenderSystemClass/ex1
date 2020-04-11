@@ -89,12 +89,15 @@ def apply_target_encoder(x_train, x_test, y_train, column, smoothing_param):
     return x_train, x_test
 
 
-beginTime = time.time()
-x, y_train, y_test = prepare_data()
-###########################
-x = extract_features(x)
-x_train, x_test = split_and_reduce(x)
-x_train, x_test = apply_target_encoder(x_train, x_test, y_train, 'user_id', 1)
-classifier = train_classifier(x_train, y_train)
-test_classifier(classifier, x_test, y_test)
-print("time=" + str(time.time() - beginTime))
+def runSemantic():
+    beginTime = time.time()
+    x, y_train, y_test = prepare_data()
+    ###########################
+    x = extract_features(x)
+    x_train, x_test = split_and_reduce(x)
+    x_train, x_test = apply_target_encoder(x_train, x_test, y_train, 'user_id', 1)
+    classifier = train_classifier(x_train, y_train)
+    test_classifier(classifier, x_test, y_test)
+    print("time=" + str(time.time() - beginTime))
+
+# runSemantic()

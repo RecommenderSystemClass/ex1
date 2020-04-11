@@ -82,6 +82,7 @@ class SVD:
         this.SVDpp = SVDpp
         this.lam2 = SVDpp
         this.YInitialValueInterval = YInitialValueInterval
+        trainDataDF.drop(['text'], axis=1, inplace=True)
         trainUsers = trainDataDF['user_id'].unique()
         products = trainDataDF['business_id'].unique()
 
@@ -157,7 +158,7 @@ class SVD:
         lastError = sys.maxsize
         if (accuracy > 0):
             lastError = sys.maxsize / (accuracy * 10)  # avoid overflow in the while
-        currentError = lastError - 0.1
+        currentError = lastError - 1
 
         beginTime = time.time()
         printDebug("Beggining: "
@@ -176,9 +177,7 @@ class SVD:
         lastQ = []
 
         deltaOrig = delta
-        while (accuracy > 0) and (int(currentError * accuracy) < int(lastError * accuracy)) \
-                or ((accuracy <= 0) and (currentError < lastError)):
-
+        while (accuracy > 0) and (int(currentError * accuracy) < int(lastError * accuracy)) or ((accuracy <= 0) and (currentError < lastError)):
             iterationBeginTime = time.time()
             iterations += 1
             # keep last P and Q and use them -->keep the one with better error rate
@@ -198,6 +197,7 @@ class SVD:
                        + "SVDpp[" + str(SVDpp) + "]"
                        )
             ########   End Of learn   ########
+
 
         this.P = lastP
         this.Q = lastQ
