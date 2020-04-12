@@ -76,7 +76,7 @@ def train_classifier(x_train, training_labels):
 
 
 def test_classifier(classifier, x_test, testing_labels):
-    print("Test ElasticNet")
+    print("Test LinearRegression")
     testing_predictions = classifier.predict(x_test)
     print('Testing RMSE score: {}'.format(RMSE(testing_labels, testing_predictions)))
     print('Testing MAE score: {}'.format(MAE(testing_labels, testing_predictions)))
