@@ -9,6 +9,7 @@
 #   nltk,
 #   sklearn,
 #   category-encoders
+#   train and data and test are expected to be @ './data/trainData.csv' and './data/testData.csv' respectively
 
 
 from builtins import print
@@ -31,7 +32,7 @@ seed = 80
 random.seed(seed)
 #################################
 # Parameters
-SVDppOptions = [True]  # SVD++
+SVDppOptions = [False]  # SVD++
 Ks = [400]  # 400 # [100, 200, 300, 400, 500]
 deltas = [0.03]  # 0.03 # [0.03, 0.04, 0.05, 0.06, 0.07]  # learning rate
 lams = [0.07]  # 0.07 # [0.03, 0.04, 0.05, 0.06, 0.07]  # regularization
@@ -92,6 +93,128 @@ def cleanColdStarts(trainProducts, trainUsers, data_orig):
     return retData, missingProducts, missingUsers
 
 
+def trainSVDorSVDpp():
+    global mySvd
+    printDebug("***** train SVD or SVDpp *****")
+    mySvd = SVD(trainDataDF,
+                validationDataDF,
+                K,  # = 400
+                lam,  # = 0.07
+                delta,  # = 0.03
+                errorCalculation,  # = 'RMSE' / 'MAE'
+                PQInitialValuePlusMinusInterval,  # = 0.01
+                BInitialValuePlusMinusInterval,  # = 0.01
+                SVDpp,  # = False/True
+                lam2,  # = 0.07
+                YInitialValueInterval  # = 0.01
+                )
+
+
+def predictSVD():
+    global calculatedTestRates, PredictTime
+    printDebug("***** Predict SVD/SVD++ on Test *****")
+    predictBeginTime = time.time()
+    calculatedTestRates = mySvd.predictRates(testDataDF)
+    PredictTime = time.time() - predictBeginTime
+
+
+def trainSentiment():
+    global x_test, classifier
+    printDebug("***** build sentiment prediciton *****")
+    # build Sentiment Predictor using the same tarin data
+    x, y_train, y_test = prepareDataForSemantic(trainDataDF_all, testDataDF)
+    x = extract_features(x)
+    x_train, x_test = split_and_reduce(x)
+    x_train, x_test = apply_target_encoder(x_train, x_test, y_train, 'user_id', 1)
+    classifier = train_classifier(x_train, y_train)
+
+
+def predictSentiment():
+    global sentimentModelRatesPrediction
+    printDebug("***** Predict using the semantic Predictor on Test *****")
+    sentimentModelRatesPrediction = classifier.predict(x_test)
+
+
+def trainCombinedModel():
+    trainSVDorSVDpp()
+    trainSentiment()
+
+
+def predictCombinedModel():
+    global ensamblePrediciton
+    predictSVD()
+    predictSentiment()
+    printDebug("***** calc Ensamble *****")
+    ensamblePrediciton = (sentimentModelRatesPrediction + calculatedTestRates) / 2
+
+
+def calculatErrors():
+    global testRMSE, testMAE, ensambleStringResults
+    ######## Calc Errors  ########
+    actuaTestRates = testDataDF['stars'].to_list()
+    testRMSE = RMSE(actuaTestRates, calculatedTestRates)
+    testMAE = MAE(actuaTestRates, calculatedTestRates)
+    testSentimentRMSE = None
+    testSentimentMAE = None
+    testEnsambleRMSE = None
+    testEnsambleMAE = None
+    ensambleStringResults = ""
+    if (ensamble):
+        testSentimentRMSE = RMSE(actuaTestRates, sentimentModelRatesPrediction)
+        testSentimentMAE = MAE(actuaTestRates, sentimentModelRatesPrediction)
+        testEnsambleRMSE = RMSE(actuaTestRates, ensamblePrediciton)
+        testEnsambleMAE = MAE(actuaTestRates, ensamblePrediciton)
+        ensambleStringResults = "S_RMSE[" + str("%.5f" % testSentimentRMSE) + "]" \
+                                + "S_MAE[" + str("%.5f" % testSentimentMAE) + "]" \
+                                + "EnRMSE[" + str("%.5f" % testEnsambleRMSE) + "]" \
+                                + "EnMAE[" + str("%.5f" % testEnsambleMAE) + "]"
+
+
+def printResults():
+    ######## Print results and save log to file  ########
+    printDebug("********************************************************")
+    strFinalResult = ("SVD "
+                      + errorCalculation + "OnTrain[" + str(mySvd.lastError) + "]"
+                      + "RMSEOnTest[" + str(testRMSE) + "]"
+                      + "MAEOnTest[" + str(testMAE) + "]"
+                      + "K[" + str(K) + "]"
+                      + "lambda[" + str(lam) + "]"
+                      + "delta[" + str(delta) + "]"
+                      + "mu[" + str(mySvd.mu) + "]"
+                      + "learningTime[" + str(mySvd.learningTime) + "]"
+                      + "PredictTime[" + str(PredictTime) + "]"
+                      + "PQInitialInterval[+-" + str(PQInitialValuePlusMinusInterval) + "]"
+                      + "BInitialInterval[+-" + str(BInitialValuePlusMinusInterval) + "]"
+                      + "users[" + str(len(mySvd.P)) + "]"
+                      + "trainAndValidaiton Size[" + str(len(trainDataDF_all)) + "]"
+                      + "train Size[" + str(len(trainDataDF)) + "]"
+                      + "validation Size[" + str(len(validationDataDF)) + "]"
+                      + "test Orig Size[" + str(len(testDataDF_orig)) + "]"
+                      + "Test Size[" + str(len(testDataDF)) + "]"
+                      + "missingUsers[" + str(len(missingUsers)) + "]"
+                      + "missingProducts[" + str(len(missingProducts)) + "]"
+                      + "learn iterations[" + str(mySvd.iterations) + "]"
+                      + "SVDpp[" + str(SVDpp) + "]"
+                      + "YInitialValuePlusMinusInterval[" + str(YInitialValueInterval) + "]"
+                      + 'host[' + socket.gethostname() + "]"
+                      + ensambleStringResults
+                      )
+    printDebug(strFinalResult)
+    printDebug("********************************************************")
+    fileBaseName = errorCalculation + "Train[" + str("%.5f" % mySvd.lastError) + "]" \
+                   + "RMSEOnTest[" + str("%.5f" % testRMSE) + "]" \
+                   + "MAEOnTest[" + str("%.5f" % testMAE) + "]" \
+                   + "K[" + str(K) + "]" \
+                   + "lambda[" + str(lam) + "]" \
+                   + "delta[" + str(delta) + "]" \
+                   + "learnSec[" + str("%.2f" % mySvd.learningTime) + "]" \
+                   + "PredictSec[" + str("%.2f" % PredictTime) + "]" \
+                   + "SVDpp[" + str(SVDpp) + "]" \
+                   + ensambleStringResults \
+                   + 'host[' + socket.gethostname() + "]"
+    printToFile(".\\results\\" + fileBaseName + ".log")
+
+
 ################################
 # load train data
 trainDataDF_all = load(trainData)
@@ -102,6 +225,24 @@ validationDataDF, trainDataDF, trainProducts, trainUsers = splitTrainValidation(
 testDataDF_orig = load(testData)
 # Clean test from cold start
 testDataDF, missingProducts, missingUsers = cleanColdStarts(trainProducts, trainUsers, testDataDF_orig)
+printDebug("testDataDF after clean size[" + str(len(testDataDF))
+           + "]testDataDF_orig[" + str(len(testDataDF_orig)) + "]")
+
+
+def saveModelToFile():
+    pass
+    ##########################################
+    # Save the Model to be reused if needed
+    # dumpFileFullPath = ".\\dumps\\" + fileBaseName + ".dump"
+    # with open(dumpFileFullPath, 'wb') as fp:
+    #     pickle.dump(mySvd, fp)
+    ##########################################
+    # Load the Model to be reused - sample code
+    # mySvdload = None
+    # with open(dumpFileFullPath, 'rb') as fp:
+    #     mySvdload = pickle.load(fp)
+
+
 ################################
 # run
 # We add an option to run a few options - to have multiple parameters tests
@@ -114,116 +255,18 @@ for SVDpp in SVDppOptions:
                 for lam in lams:
                     lam2 = lam  # used for SVD++; can get a different value then lam
                     for delta in deltas:
-                        #####################################
-                        # Build Model
-                        #####################################
-                        ## SVD and SVD++ ##
-                        mySvd = SVD(trainDataDF,
-                                    validationDataDF,
-                                    K,  # = 400
-                                    lam,  # = 0.07
-                                    delta,  # = 0.03
-                                    errorCalculation,  # = 'RMSE' / 'MAE'
-                                    PQInitialValuePlusMinusInterval,  # = 0.01
-                                    BInitialValuePlusMinusInterval,  # = 0.01
-                                    SVDpp,  # = False/True
-                                    lam2,  # = 0.07
-                                    YInitialValueInterval  # = 0.01
-                                    )
-
-                        printDebug("***** Predict SVD/SVD++ on Test *****")
-                        predictBeginTime = time.time()
-                        calculatedTestRates = mySvd.predictRates(testDataDF)
-                        PredictTime = time.time() - predictBeginTime
-
+                        printDebug(" ---- Build Model and Predict ---- ")
                         if (ensamble):
-                            printDebug("***** build sentiment prediciton *****")
-                            # build Sentiment Predictor using the same tarin data
-                            x, y_train, y_test = prepareDataForSemantic(trainDataDF_all, testDataDF)
-                            x = extract_features(x)
-                            x_train, x_test = split_and_reduce(x)
-                            x_train, x_test = apply_target_encoder(x_train, x_test, y_train, 'user_id', 1)
-                            classifier = train_classifier(x_train, y_train)
+                            trainCombinedModel()
+                            predictCombinedModel()
+                        else:
+                            trainSVDorSVDpp()
+                            predictSVD()
 
-                            printDebug("***** Predict using the semantic Predictor on Test *****")
-                            sentimentModelRatesPrediction = classifier.predict(x_test)
-
-                            printDebug("***** calc Ensamble *****")
-                            ensamblePrediciton = (sentimentModelRatesPrediction + calculatedTestRates) / 2
-
-                        ######## Calc Errors  ########
-                        actuaTestRates = testDataDF['stars'].to_list()
-                        testRMSE = RMSE(actuaTestRates, calculatedTestRates)
-                        testMAE = MAE(actuaTestRates, calculatedTestRates)
-
-                        testSentimentRMSE = None
-                        testSentimentMAE = None
-                        testEnsambleRMSE = None
-                        testEnsambleMAE = None
-                        ensambleStringResults = ""
-
-                        if (ensamble):
-                            testSentimentRMSE = RMSE(actuaTestRates, sentimentModelRatesPrediction)
-                            testSentimentMAE = MAE(actuaTestRates, sentimentModelRatesPrediction)
-                            testEnsambleRMSE = RMSE(actuaTestRates, ensamblePrediciton)
-                            testEnsambleMAE = MAE(actuaTestRates, ensamblePrediciton)
-                            ensambleStringResults = "S_RMSE[" + str("%.5f" % testSentimentRMSE) + "]" \
-                                                    + "S_MAE[" + str("%.5f" % testSentimentMAE) + "]" \
-                                                    + "EnRMSE[" + str("%.5f" % testEnsambleRMSE) + "]" \
-                                                    + "EnMAE[" + str("%.5f" % testEnsambleMAE) + "]"
-
-                        ######## Print results and save log to file  ########
-                        printDebug("********************************************************")
-                        strFinalResult = ("SVD "
-                                          + errorCalculation + "OnTrain[" + str(mySvd.lastError) + "]"
-                                          + "RMSEOnTest[" + str(testRMSE) + "]"
-                                          + "MAEOnTest[" + str(testMAE) + "]"
-                                          + "K[" + str(K) + "]"
-                                          + "lambda[" + str(lam) + "]"
-                                          + "delta[" + str(delta) + "]"
-                                          + "mu[" + str(mySvd.mu) + "]"
-                                          + "learningTime[" + str(mySvd.learningTime) + "]"
-                                          + "PredictTime[" + str(PredictTime) + "]"
-                                          + "PQInitialInterval[+-" + str(PQInitialValuePlusMinusInterval) + "]"
-                                          + "BInitialInterval[+-" + str(BInitialValuePlusMinusInterval) + "]"
-                                          + "users[" + str(len(mySvd.P)) + "]"
-                                          + "trainAndValidaiton Size[" + str(len(trainDataDF_all)) + "]"
-                                          + "train Size[" + str(len(trainDataDF)) + "]"
-                                          + "validation Size[" + str(len(validationDataDF)) + "]"
-                                          + "test Orig Size[" + str(len(testDataDF_orig)) + "]"
-                                          + "Test Size[" + str(len(testDataDF)) + "]"
-                                          + "missingUsers[" + str(len(missingUsers)) + "]"
-                                          + "missingProducts[" + str(len(missingProducts)) + "]"
-                                          + "learn iterations[" + str(mySvd.iterations) + "]"
-                                          + "SVDpp[" + str(SVDpp) + "]"
-                                          + "YInitialValuePlusMinusInterval[" + str(YInitialValueInterval) + "]"
-                                          + 'host[' + socket.gethostname() + "]"
-                                          + ensambleStringResults
-                                          )
-                        printDebug(strFinalResult)
-                        printDebug("********************************************************")
-                        fileBaseName = errorCalculation + "Train[" + str("%.5f" % mySvd.lastError) + "]" \
-                                       + "RMSEOnTest[" + str("%.5f" % testRMSE) + "]" \
-                                       + "MAEOnTest[" + str("%.5f" % testMAE) + "]" \
-                                       + "K[" + str(K) + "]" \
-                                       + "lambda[" + str(lam) + "]" \
-                                       + "delta[" + str(delta) + "]" \
-                                       + "learnSec[" + str("%.2f" % mySvd.learningTime) + "]" \
-                                       + "PredictSec[" + str("%.2f" % PredictTime) + "]" \
-                                       + "SVDpp[" + str(SVDpp) + "]" \
-                                       + ensambleStringResults \
-                                       + 'host[' + socket.gethostname() + "]"
-                        printToFile(".\\results\\" + fileBaseName + ".log")
-                        ##########################################
-                        # Save the Model to be reused if needed
-                        # dumpFileFullPath = ".\\dumps\\" + fileBaseName + ".dump"
-                        # with open(dumpFileFullPath, 'wb') as fp:
-                        #     pickle.dump(mySvd, fp)
-                        ##########################################
-                        # Load the Model to be reused - sample code
-                        # mySvdload = None
-                        # with open(dumpFileFullPath, 'rb') as fp:
-                        #     mySvdload = pickle.load(fp)
+                        printDebug(" ---- Calculate Errors and Print  ---- ")
+                        calculatErrors()
+                        printResults()
+                        saveModelToFile()
 
 printDebug(" ---- Done ---- ")
 exit(0)
